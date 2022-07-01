@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "152166275320",
+    "project_id": "tithe-box",
+    "storage_bucket": "tithe-box.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152166275320:android:5c5ba45042bd1af89ac30d",
+        "android_client_info": {
+          "package_name": "com.morpheus.tithe_box"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152166275320-52atoltn6hln1mos8clu4obd9p0tos6r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.morpheus.tithe_box",
+            "certificate_hash": "9676cd1abf04b6d51e46250ffdf8cd570dab44fd"
+          }
+        },
+        {
+          "client_id": "152166275320-k1hfrnvpiscuifrepl8pkv7ill79tbag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZA7JNBd84t5dr0SR8PrELNYLii7jqAaw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152166275320-k1hfrnvpiscuifrepl8pkv7ill79tbag.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "152166275320-c4kalgagblabcti678itdmicm5ocidth.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.morpheus.titheBox"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
