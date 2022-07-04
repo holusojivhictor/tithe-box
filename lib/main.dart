@@ -1,21 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tithe_box/application/bloc.dart';
+import 'package:tithe_box/domain/services/services.dart';
 import 'package:tithe_box/firebase_options.dart';
+import 'package:tithe_box/session_wrapper.dart';
+
+import 'injection.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  await Injection.init();
+  runApp(const TitheBox());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class TitheBox extends StatelessWidget {
+  const TitheBox({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Tithe box',
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (ctx) {
+            final authService = getIt<AuthService>();
+            return SessionBloc(authService)..add(const SessionEvent.appStarted(init: true));
+          },
+        ),
+      ],
+      child: BlocBuilder<SessionBloc, SessionState>(
+        builder: (ctx, state) => const SessionWrapper(),
+      ),
     );
   }
 }
+
