@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
+import 'package:tithe_box/presentation/animated_splash/animated_splash.dart';
 import 'package:tithe_box/theme.dart';
 
 class SessionWrapper extends StatelessWidget {
@@ -18,8 +19,8 @@ class SessionWrapper extends StatelessWidget {
     }
     return BlocBuilder<SessionBloc, SessionState>(
       builder: (context, state) => state.map(
-        unInitialized: (_) => materialApp(Container()),
-        unAuthenticated: (_) => materialApp(Container()),
+        unInitialized: (_) => materialApp(const AnimatedSplash()),
+        unAuthenticated: (_) => materialApp(const AnimatedSplash()),
         signUpState: (_) => materialApp(Container()),
         signInState: (_) => materialApp(Container()),
         authenticated: (_) => Container(),
