@@ -6,6 +6,10 @@ class SessionEvent with _$SessionEvent {
 
   const factory SessionEvent.logOutRequested() = _LogOut;
 
+  const factory SessionEvent.selectAccountType() = _SelectAccountType;
+
+  const factory SessionEvent.startAuthState() = _StartAuthState;
+
   const factory SessionEvent.signUpRequested() = _SignUp;
 
   const factory SessionEvent.signInRequested() = _SignIn;

@@ -13,7 +13,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
   SessionBloc(this._authService) : super(const SessionState.unInitialized()) {
     on<_AppStarted>((event, emit) async {
       if (event.init) {
-        await Future.delayed(const Duration(milliseconds: 3000));
+        await Future.delayed(const Duration(milliseconds: 2000));
       }
       await for (final userState in FirebaseAuth.instance.authStateChanges()) {
         if (userState != null) {
@@ -23,6 +23,14 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
         break;
       }
       emit(const SessionState.unAuthenticated());
+    });
+
+    on<_SelectAccountType>((event, emit) async {
+      emit(const SessionState.accountTypeSelection());
+    });
+
+    on<_StartAuthState>((event, emit) async {
+      emit(const SessionState.authSession());
     });
 
     on<_LogOut>((event, emit) async {

@@ -8,6 +8,7 @@ class SvgImage extends StatelessWidget {
   final double? height;
   final BoxFit fit;
   final Color? color;
+  final AlignmentGeometry alignment;
 
   const SvgImage({
     Key? key,
@@ -17,6 +18,7 @@ class SvgImage extends StatelessWidget {
     this.height,
     this.color,
     this.fit = BoxFit.contain,
+    this.alignment = Alignment.center,
   }) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class SvgImage extends StatelessWidget {
       height: height,
       fit: fit,
       color: color,
+      alignment: alignment,
       semanticsLabel: label,
     );
   }
