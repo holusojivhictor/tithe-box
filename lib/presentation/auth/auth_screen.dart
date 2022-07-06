@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/domain/assets.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
@@ -57,7 +59,9 @@ class AuthScreen extends StatelessWidget {
                 isPrimary: true,
                 text: 'Log In',
                 elevation: 0,
-                onPressed: () {},
+                onPressed: () {
+                  context.read<SessionBloc>().add(const SessionEvent.signInRequested());
+                },
               ),
               const SizedBox(height: 10),
               DefaultButton(
@@ -65,7 +69,9 @@ class AuthScreen extends StatelessWidget {
                 hasBorder: true,
                 elevation: 0,
                 backgroundColor: kWhite,
-                onPressed: () {},
+                onPressed: () {
+                  context.read<SessionBloc>().add(const SessionEvent.signUpRequested());
+                },
               ),
             ],
           ),

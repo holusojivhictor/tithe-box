@@ -28,6 +28,18 @@ class TitheBox extends StatelessWidget {
             return SessionBloc(authService)..add(const SessionEvent.appStarted(init: true));
           },
         ),
+        BlocProvider(
+          create: (ctx) {
+            final authService = getIt<AuthService>();
+            return SignInBloc(authService, ctx.read<SessionBloc>());
+          },
+        ),
+        BlocProvider(
+          create: (ctx) {
+            final authService = getIt<AuthService>();
+            return SignUpBloc(authService, ctx.read<SessionBloc>());
+          },
+        ),
       ],
       child: BlocBuilder<SessionBloc, SessionState>(
         builder: (ctx, state) => const SessionWrapper(),
