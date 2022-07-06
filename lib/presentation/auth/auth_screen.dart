@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/domain/assets.dart';
+import 'package:tithe_box/presentation/shared/auth_app_bar.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/start/bottom_portrait_layout.dart';
 import 'package:tithe_box/presentation/shared/start/top_portrait_layout.dart';
@@ -21,10 +22,8 @@ class AuthScreen extends StatelessWidget {
         fit: StackFit.passthrough,
         children: [
           TopPortraitLayout(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0.0,
-              iconTheme: IconThemeData(color: theme.indicatorColor),
+            appBar: AuthAppBar(
+              onTap: () => context.read<SessionBloc>().add(const SessionEvent.selectAccountType()),
             ),
             children: [
               Padding(
