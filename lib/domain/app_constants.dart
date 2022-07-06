@@ -21,3 +21,21 @@ class Data {
 }
 
 const String defaultText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.';
+
+/// Validator strings
+final RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+final RegExp phoneNumberValidatorRegExp = RegExp(r"^[0-9]");
+const String kEmailNullError = "Please enter your email.";
+const String kFullNameNullError = "Please enter your full name.";
+const String kOccupationNullError = "Please enter your current occupation.";
+const String kNameOfChurchNullError = "Please enter your place of worship";
+const String kFirstNameNullError = "Please enter your first name.";
+const String kAddressNullError = "Please enter your address.";
+const String kLastNameNullError = "Please enter your last name.";
+const String kPhoneNumberNullError = "Please enter your phone number.";
+const String kInvalidPhoneNumberError = "Please enter a valid phone number. Signs not necessary.";
+const String kInvalidEmailError = "Please enter a valid email.";
+const String kPassNullError = "Please enter your password.";
+const String kPassMatchNullError = "Password does not match.";
+const String kShortPassError = "Password should be longer than 8 characters.";
+const String kConfirmPassNullError = "Please confirm your password.";

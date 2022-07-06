@@ -39,7 +39,7 @@ class Styles {
 
   static const double smallButtonSplashRadius = 18;
 
-  static const formFieldMargin = EdgeInsets.all(16);
+  static const formFieldMargin = EdgeInsets.symmetric(vertical: 10, horizontal: 12);
 
   static const modalBottomSheetShape = RoundedRectangleBorder(
     borderRadius: BorderRadius.only(
@@ -80,8 +80,8 @@ class Styles {
   );
 
   static const formFieldBorder = OutlineInputBorder(
-    borderSide: BorderSide(),
-    borderRadius: BorderRadius.all(Radius.circular(10)),
+    borderSide: BorderSide.none,
+    borderRadius: BorderRadius.all(Radius.circular(30)),
   );
 
   static const editFormFieldBorder = UnderlineInputBorder(

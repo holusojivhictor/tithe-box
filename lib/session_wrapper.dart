@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
+import 'package:tithe_box/presentation/sign_in/sign_in_page.dart';
+import 'package:tithe_box/presentation/sign_up/sign_up_page.dart';
 import 'package:tithe_box/theme.dart';
 
 import 'presentation/account_selection/account_selection_page.dart';
@@ -27,8 +29,8 @@ class SessionWrapper extends StatelessWidget {
         unAuthenticated: (_) => materialApp(const OnboardingPage()),
         accountTypeSelection: (_) => materialApp(const AccountSelectionPage()),
         authSession: (_) => materialApp(const AuthScreen()),
-        signUpState: (_) => materialApp(Container()),
-        signInState: (_) => materialApp(Container()),
+        signUpState: (_) => materialApp(const SignUpPage()),
+        signInState: (_) => materialApp(const SignInPage()),
         authenticated: (_) => Container(),
       ),
     );
