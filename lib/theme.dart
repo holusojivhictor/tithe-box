@@ -55,14 +55,6 @@ class Styles {
     return forDefaultIcons ? 24 : 18;
   }
 
-  static OutlineInputBorder outlineInputBorder(BuildContext context) {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(13),
-      borderSide: BorderSide(color: Theme.of(context).primaryColor),
-      gapPadding: 5,
-    );
-  }
-
   static BorderRadius homeCardItemBorderRadius = BorderRadius.circular(15);
 
   static const double mediumButtonSplashRadius = 25;
