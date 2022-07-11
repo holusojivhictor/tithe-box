@@ -13,9 +13,9 @@ class SignUpBloc extends Bloc<SignUpEvent, ResultState<String>> {
   final SessionBloc _sessionBloc;
 
   SignUpBloc(this._authService, this._sessionBloc) : super(const ResultState.idle()) {
-    on<_SignUp>((event, emit) async {
+    on<_SignUp>((e, emit) async {
       emit(const ResultState.loading());
-      ApiResult<String> apiResult = await _authService.signUp(event.emailAddress, event.password);
+      ApiResult<String> apiResult = await _authService.signUp(e.fullName, e.emailAddress, e.password, e.occupation, e.churchName, e.city, e.country);
       apiResult.when(
         success: (String response) async {
           _sessionBloc.add(const SessionEvent.initStartup());

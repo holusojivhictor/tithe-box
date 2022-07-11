@@ -4,12 +4,25 @@ import 'package:tithe_box/domain/models/models.dart';
 import 'package:tithe_box/domain/services/services.dart';
 
 class AuthServiceImpl implements AuthService {
+  final FirebaseService _firebaseService;
   final _firebaseAuth = FirebaseAuth.instance;
 
+  AuthServiceImpl(this._firebaseService);
+
   @override
-  Future<ApiResult<String>> signUp(String email, String password) async {
+  Future<ApiResult<String>> signUp(
+    String fullName,
+    String email,
+    String password,
+    String occupation,
+    String churchName,
+    String city,
+    String country,
+  ) async {
+    final user = UserModel(uid: "", fullName: fullName, emailAddress: email, occupation: occupation, churchName: churchName, city: city, country: country);
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+      await _firebaseService.saveUserCredentials(user);
       return const ApiResult.success(data: "Sign up successful");
     } catch (e) {
       return ApiResult.failure(error: NetworkExceptions.getDioException(e));
