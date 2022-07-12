@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
+import 'package:tithe_box/application/result/result_state.dart';
 import 'package:tithe_box/domain/app_constants.dart';
+import 'package:tithe_box/domain/models/network/network_exceptions.dart';
+import 'package:tithe_box/presentation/shared/custom_alert_dialog.dart';
 import 'package:tithe_box/presentation/shared/custom_form_field.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/row_text.dart';
@@ -15,20 +18,14 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late TextEditingController fullNameController = TextEditingController();
-  late TextEditingController occupationController = TextEditingController();
   late TextEditingController emailAddressController = TextEditingController();
-  late TextEditingController nameOfChurchController = TextEditingController();
   late TextEditingController passwordController = TextEditingController();
   late TextEditingController confirmPasswordController = TextEditingController();
   late bool obscurePassword = true;
   late bool obscureConfirmPassword = true;
   bool submitted = false;
 
-  String? fullNameErrorText;
-  String? occupationErrorText;
   String? emailErrorText;
-  String? nameOfChurchErrorText;
   String? passwordErrorText;
   String? confirmPasswordErrorText;
 
@@ -38,21 +35,6 @@ class _SignUpFormState extends State<SignUpForm> {
       key: _formKey,
       child: Column(
         children: [
-          CustomFormField(
-            text: "Full Name",
-            hintText: "e.g Steven Mark",
-            textEditingController: fullNameController,
-            textInputType: TextInputType.name,
-            errorText: fullNameErrorText,
-            isSubmitted: submitted,
-            onChanged: (_) => setState(() {}),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return kFullNameNullError;
-              }
-              return null;
-            },
-          ),
           CustomFormField(
             text: "Email",
             hintText: "e.g steven@gmail.com",
@@ -66,36 +48,6 @@ class _SignUpFormState extends State<SignUpForm> {
                 return kEmailNullError;
               } else if (!emailValidatorRegExp.hasMatch(value)) {
                 return kInvalidEmailError;
-              }
-              return null;
-            },
-          ),
-          CustomFormField(
-            text: "Occupation",
-            hintText: "e.g Civil Engineer",
-            textEditingController: occupationController,
-            textInputType: TextInputType.name,
-            errorText: occupationErrorText,
-            isSubmitted: submitted,
-            onChanged: (_) => setState(() {}),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return kOccupationNullError;
-              }
-              return null;
-            },
-          ),
-          CustomFormField(
-            text: "Name of Church",
-            hintText: "e.g Assemblies of God.",
-            textEditingController: nameOfChurchController,
-            textInputType: TextInputType.name,
-            errorText: nameOfChurchErrorText,
-            isSubmitted: submitted,
-            onChanged: (_) => setState(() {}),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return kNameOfChurchNullError;
               }
               return null;
             },
@@ -157,6 +109,24 @@ class _SignUpFormState extends State<SignUpForm> {
     setState(() => submitted = true);
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+
+      final bloc = context.read<SignUpBloc>();
+      bloc.add(SignUpEvent.signUp(emailAddress: emailAddressController.text, password: passwordController.text));
+
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (ctx) => BlocBuilder<SignUpBloc, ResultState>(
+          builder: (ctx, state) => state.when(
+            idle: () => const CustomAlertDialog(text: 'Idling...'),
+            loading: () => const CustomAlertDialog(text: 'Creating account...'),
+            data: (_) {
+              return const CustomAlertDialog(text: 'Account created successfully');
+            },
+            error: (e) => CustomAlertDialog(title: Text('Sign up failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
+          ),
+        ),
+      );
     }
   }
 }

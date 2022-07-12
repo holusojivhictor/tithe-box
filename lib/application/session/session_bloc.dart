@@ -42,6 +42,10 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
       emit(const SessionState.signUpState());
     });
 
+    on<_CreateProfile>((event, emit) async {
+      emit(const SessionState.userProfileState());
+    });
+
     on<_SignIn>((event, emit) async {
       emit(const SessionState.signInState());
     });

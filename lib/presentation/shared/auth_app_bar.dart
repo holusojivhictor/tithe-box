@@ -6,11 +6,13 @@ class AuthAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final OnTap? onTap;
   final bool hasTitle;
+  final bool hasLeading;
 
   const AuthAppBar({
     Key? key,
     this.title = "",
     this.hasTitle = true,
+    this.hasLeading = true,
     this.onTap,
   }) : super(key: key);
 
@@ -24,7 +26,7 @@ class AuthAppBar extends StatelessWidget implements PreferredSizeWidget {
         title,
         style: theme.textTheme.bodyLarge!.copyWith(color: Colors.grey),
       ) : null,
-      leading: InkWell(
+      leading: hasLeading ? InkWell(
         onTap: onTap,
         child: RotatedBox(
           quarterTurns: 2,
@@ -33,7 +35,7 @@ class AuthAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: theme.indicatorColor,
           ),
         ),
-      ),
+      ) : const SizedBox.shrink(),
       centerTitle: true,
     );
   }

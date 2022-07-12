@@ -19,7 +19,7 @@ class SignInPage extends StatelessWidget {
       body: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: Styles.edgeInsetAll10,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

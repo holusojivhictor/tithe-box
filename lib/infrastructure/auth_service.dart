@@ -10,20 +10,29 @@ class AuthServiceImpl implements AuthService {
   AuthServiceImpl(this._firebaseService);
 
   @override
-  Future<ApiResult<String>> signUp(
+  Future<ApiResult<String>> signUp(String email, String password) async {
+    try {
+      await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
+      return const ApiResult.success(data: "Sign up successful");
+    } catch (e) {
+      return ApiResult.failure(error: NetworkExceptions.getDioException(e));
+    }
+  }
+
+  @override
+  Future<ApiResult<String>> createUserProfile(
     String fullName,
     String email,
-    String password,
     String occupation,
     String churchName,
     String city,
     String country,
   ) async {
-    final user = UserModel(uid: "", fullName: fullName, emailAddress: email, occupation: occupation, churchName: churchName, city: city, country: country);
+    final email = _firebaseAuth.currentUser!.email;
+    final user = UserModel(uid: "", fullName: fullName, emailAddress: email!, occupation: occupation, churchName: churchName, city: city, country: country);
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
       await _firebaseService.saveUserCredentials(user);
-      return const ApiResult.success(data: "Sign up successful");
+      return const ApiResult.success(data: "User profile created successfully");
     } catch (e) {
       return ApiResult.failure(error: NetworkExceptions.getDioException(e));
     }

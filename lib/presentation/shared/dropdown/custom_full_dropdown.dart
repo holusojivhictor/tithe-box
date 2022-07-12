@@ -34,8 +34,8 @@ class CustomFullDropdownButton<T> extends StatelessWidget {
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(),
+        color: const Color(0xFFE5E5E5),
+        borderRadius: BorderRadius.circular(30),
       ),
       child: isTranslated
           ? TranslatedDropdown<T>(

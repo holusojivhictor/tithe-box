@@ -42,7 +42,7 @@ class CustomFormField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: Styles.edgeInsetHorizontal10,
             child: RowText(text: text),
           ),
           const SizedBox(height: 10),

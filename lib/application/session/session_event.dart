@@ -12,6 +12,8 @@ class SessionEvent with _$SessionEvent {
 
   const factory SessionEvent.signUpRequested() = _SignUp;
 
+  const factory SessionEvent.createProfile() = _CreateProfile;
+
   const factory SessionEvent.signInRequested() = _SignIn;
 
   const factory SessionEvent.initStartup() = _InitStartup;

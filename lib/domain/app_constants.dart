@@ -29,6 +29,7 @@ const String kEmailNullError = "Please enter your email.";
 const String kFullNameNullError = "Please enter your full name.";
 const String kOccupationNullError = "Please enter your current occupation.";
 const String kNameOfChurchNullError = "Please enter your place of worship";
+const String cityNullError = "Please enter your city of residence";
 const String kFirstNameNullError = "Please enter your first name.";
 const String kAddressNullError = "Please enter your address.";
 const String kLastNameNullError = "Please enter your last name.";

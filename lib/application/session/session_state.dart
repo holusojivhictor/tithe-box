@@ -12,6 +12,8 @@ class SessionState with _$SessionState {
 
   const factory SessionState.signUpState() = _SignUpState;
 
+  const factory SessionState.userProfileState() = _UserProfileState;
+
   const factory SessionState.signInState() = _SignInState;
 
   const factory SessionState.authenticated() = _AuthenticatedState;
