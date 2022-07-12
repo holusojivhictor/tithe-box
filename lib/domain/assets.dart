@@ -1,4 +1,5 @@
 class Assets {
+  static String dbPath = 'assets/db';
   static String imageBasePath = 'assets/images';
   static String svgsBasePath = 'assets/svgs';
 
