@@ -25,7 +25,11 @@ class CustomAlertDialog extends StatelessWidget {
           children: [
             if (!isError) const CircularProgressIndicator(),
             SizedBox(width: isError ? 0 : 20),
-            Text(text),
+            Text(
+              text,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
+            ),
           ],
         ),
       ),
@@ -100,6 +104,8 @@ class CommonAlertDialog extends StatelessWidget {
         width: mediaQuery.getWidthForDialogs(),
         child: Text(
           contentText,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 3,
         ),
       ),
       contentPadding: Styles.alertContentPadding,

@@ -54,7 +54,7 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           CustomFormField(
             text: "Password",
-            hintText: "enter your password",
+            hintText: "Enter your password",
             obscureText: obscurePassword,
             textEditingController: passwordController,
             textInputType: TextInputType.text,
@@ -73,6 +73,31 @@ class _SignUpFormState extends State<SignUpForm> {
                 return kPassNullError;
               } else if (value.length < 8) {
                 return kShortPassError;
+              }
+              return null;
+            },
+          ),
+          CustomFormField(
+            text: "Confirm password",
+            hintText: "Re-enter your password",
+            obscureText: obscureConfirmPassword,
+            textEditingController: confirmPasswordController,
+            textInputType: TextInputType.text,
+            errorText: confirmPasswordErrorText,
+            isSubmitted: submitted,
+            suffixIcon: InkWell(
+              onTap: () => setState(() => obscureConfirmPassword = !obscureConfirmPassword),
+              child: Icon(
+                !obscureConfirmPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                size: 20,
+              ),
+            ),
+            onChanged: (_) => setState(() {}),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return kConfirmPassNullError;
+              } else if (value != passwordController.text) {
+                return kPassMatchNullError;
               }
               return null;
             },

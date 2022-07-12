@@ -29,7 +29,8 @@ class AuthServiceImpl implements AuthService {
     String country,
   ) async {
     final email = _firebaseAuth.currentUser!.email;
-    final user = UserModel(uid: "", fullName: fullName, emailAddress: email!, occupation: occupation, churchName: churchName, city: city, country: country);
+    final uid = _firebaseAuth.currentUser!.uid;
+    final user = UserModel(uid: uid, fullName: fullName, emailAddress: email!, occupation: occupation, churchName: churchName, city: city, country: country);
     try {
       await _firebaseService.saveUserCredentials(user);
       return const ApiResult.success(data: "User profile created successfully");

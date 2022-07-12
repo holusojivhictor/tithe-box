@@ -108,7 +108,7 @@ class _ProfileFormState extends State<ProfileForm> {
               ),
               CustomFullDropdownButton<String>(
                 margin: Styles.formFieldMargin,
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 3),
                 title: 'Country',
                 currentValue: selectedCountryValue,
                 items: countries.map((e) => e["name"]!).toList(),
@@ -145,7 +145,7 @@ class _ProfileFormState extends State<ProfileForm> {
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (ctx) => BlocBuilder<SignInBloc, ResultState>(
+        builder: (ctx) => BlocBuilder<UserProfileBloc, ResultState>(
           builder: (ctx, state) => state.when(
             idle: () => const CustomAlertDialog(text: 'Idling...'),
             loading: () => const CustomAlertDialog(text: 'Creating profile...'),

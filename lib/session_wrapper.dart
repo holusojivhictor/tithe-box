@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
+import 'package:tithe_box/application/result/result_state.dart';
 import 'package:tithe_box/presentation/create_profile/create_profile_page.dart';
 import 'package:tithe_box/presentation/sign_in/sign_in_page.dart';
 import 'package:tithe_box/presentation/sign_up/sign_up_page.dart';
@@ -31,7 +32,11 @@ class SessionWrapper extends StatelessWidget {
         accountTypeSelection: (_) => materialApp(const AccountSelectionPage()),
         authSession: (_) => materialApp(const AuthScreen()),
         signUpState: (_) => materialApp(const SignUpPage()),
-        userProfileState: (_) => materialApp(const CreateProfilePage()),
+        userProfileState: (_) {
+          return BlocBuilder<UserProfileBloc, ResultState>(
+            builder: (ctx, state) => materialApp(const CreateProfilePage()),
+          );
+        },
         signInState: (_) => materialApp(const SignInPage()),
         authenticated: (_) => Container(),
       ),

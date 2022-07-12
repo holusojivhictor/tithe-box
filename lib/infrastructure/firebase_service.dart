@@ -10,7 +10,7 @@ class FirebaseServiceImpl implements FirebaseService {
   @override
   Future<void> saveUserCredentials(UserModel userModel) async {
     final uid = auth.currentUser!.uid;
-    await collection.doc(uid).set(userModel.toJson().update("uid", (value) => uid));
+    await collection.doc(uid).set(userModel.toJson());
   }
 
   @override
