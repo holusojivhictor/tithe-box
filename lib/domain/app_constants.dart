@@ -1,7 +1,10 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tithe_box/domain/models/models.dart';
 
 const kPadding = 10.0;
 const kAnimationDuration = Duration(milliseconds: 200);
+
+const baseUrl = 'https://tithe22.herokuapp.com/api/v1/users';
 
 class Data {
   static List<StartVerseModel> startVerseData = [
@@ -20,7 +23,18 @@ class Data {
   ];
 }
 
-const String defaultText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.';
+/// SharedPreferences operations
+Future<void> saveString({required String key, required String value}) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString(key, value);
+}
+
+Future<String> getSavedString({required String key}) async {
+  final prefs = await SharedPreferences.getInstance();
+  final value = prefs.getString(key);
+
+  return value ?? '';
+}
 
 /// Validator strings
 final RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -40,6 +54,10 @@ const String kPassNullError = "Please enter your password.";
 const String kPassMatchNullError = "Password does not match.";
 const String kShortPassError = "Password should be longer than 8 characters.";
 const String kConfirmPassNullError = "Please confirm your password.";
+
+/// Keys
+const String tokenStorageKey = 'TokenStorageKey';
+const String userIdStorageKey = 'UserIdStorageKey';
 
 /// Countries map list
 List<Map<String, String>> countries = [
@@ -288,3 +306,5 @@ List<Map<String, String>> countries = [
   {"name": "Zambia", "code": "ZM"},
   {"name": "Zimbabwe", "code": "ZW"}
 ];
+
+const String defaultText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.';
