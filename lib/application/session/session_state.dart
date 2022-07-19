@@ -6,6 +6,8 @@ class SessionState with _$SessionState {
 
   const factory SessionState.unAuthenticated() = _UnAuthenticatedState;
 
+  const factory SessionState.loading() = _LoadingState;
+
   const factory SessionState.accountTypeSelection() = _AccountTypeSelectionState;
 
   const factory SessionState.authSession() = _AuthSessionState;

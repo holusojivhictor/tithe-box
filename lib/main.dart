@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/services/services.dart';
 import 'package:tithe_box/firebase_options.dart';
+import 'package:tithe_box/presentation/app_widget.dart';
 import 'package:tithe_box/session_wrapper.dart';
 
 import 'injection.dart';
@@ -25,8 +26,9 @@ class TitheBox extends StatelessWidget {
         BlocProvider(
           create: (ctx) {
             final titheBoxService = getIt<TitheBoxService>();
+            final settingsService = getIt<SettingsService>();
             final loggingService = getIt<LoggingService>();
-            return SessionBloc(titheBoxService, loggingService)..add(const SessionEvent.appStarted(init: true));
+            return SessionBloc(titheBoxService, settingsService, loggingService)..add(const SessionEvent.appStarted(init: true));
           },
         ),
         BlocProvider(
@@ -73,8 +75,8 @@ class TitheBox extends StatelessWidget {
           },
         ),
       ],
-      child: BlocBuilder<SessionBloc, SessionState>(
-        builder: (ctx, state) => const SessionWrapper(),
+      child: BlocBuilder<MainBloc, MainState>(
+        builder: (ctx, state) => const AppWidget(),
       ),
     );
   }

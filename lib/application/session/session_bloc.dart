@@ -8,13 +8,20 @@ part 'session_state.dart';
 
 class SessionBloc extends Bloc<SessionEvent, SessionState> {
   final TitheBoxService _titheBoxService;
+  final SettingsService _settingsService;
   final LoggingService _logger;
 
-  SessionBloc(this._titheBoxService, this._logger) : super(const SessionState.unInitialized()) {
+  SessionBloc(this._titheBoxService, this._settingsService, this._logger) : super(const SessionState.unInitialized()) {
     on<_AppStarted>((event, emit) async {
       if (event.init) {
         await Future.delayed(const Duration(milliseconds: 2000));
       }
+      final settings = _settingsService.appSettings;
+      if (!settings.isFirstInstall) {
+        emit(const SessionState.accountTypeSelection());
+        return;
+      }
+
       emit(const SessionState.unAuthenticated());
     });
 
@@ -23,6 +30,16 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     });
 
     on<_StartAuthState>((event, emit) async {
+      final hasToken = await checkToken();
+
+      if (hasToken) {
+        emit(const SessionState.loading());
+        await initialize();
+
+        emit(const SessionState.authenticated());
+        return;
+      }
+
       emit(const SessionState.authSession());
     });
 
@@ -50,10 +67,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
         emit(const SessionState.unAuthenticated());
         return;
       }
-      await _titheBoxService.getTokenAndId();
-      await _titheBoxService.init();
-      final userData = _titheBoxService.getProfile();
-      _logger.info(runtimeType, 'User ${userData.email} signing in...');
+      await initialize();
 
       emit(const SessionState.authenticated());
     });
@@ -63,5 +77,12 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     final tokenCheck = await _titheBoxService.isTokenActive();
 
     return tokenCheck;
+  }
+
+  Future<void> initialize() async {
+    await _titheBoxService.getTokenAndId();
+    await _titheBoxService.init();
+    final userData = _titheBoxService.getProfile();
+    _logger.info(runtimeType, 'User ${userData.email} signing in...');
   }
 }

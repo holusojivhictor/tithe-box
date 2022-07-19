@@ -84,6 +84,8 @@ class SettingsServiceImpl extends SettingsService {
     if (_prefs.get(_isFirstInstallKey) == null) {
       _logger.info(runtimeType, 'This is the first install of the app');
       isFirstInstall = true;
+    } else {
+      isFirstInstall = false;
     }
 
     if (_prefs.get(_appThemeKey) == null) {
