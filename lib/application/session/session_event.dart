@@ -12,7 +12,12 @@ class SessionEvent with _$SessionEvent {
 
   const factory SessionEvent.signUpRequested() = _SignUp;
 
-  const factory SessionEvent.createProfile() = _CreateProfile;
+  const factory SessionEvent.createProfile({
+    required String email,
+    required String phoneNumber,
+    required String password,
+    required String confirmPassword,
+  }) = _CreateProfile;
 
   const factory SessionEvent.signInRequested() = _SignIn;
 

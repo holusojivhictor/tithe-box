@@ -1,6 +1,8 @@
 import 'package:tithe_box/domain/models/models.dart';
 
 abstract class TitheBoxService {
+  Future<bool> isTokenActive();
+
   Future<void> getTokenAndId();
   Future<void> init();
 
@@ -9,4 +11,6 @@ abstract class TitheBoxService {
 
   /// User account
   UserProfileModel getProfile();
+
+  Future<void> signOut();
 }

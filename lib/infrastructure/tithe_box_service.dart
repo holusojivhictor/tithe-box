@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/domain/models/models.dart';
 import 'package:tithe_box/domain/services/services.dart';
@@ -35,5 +36,22 @@ class TitheBoxServiceImpl implements TitheBoxService {
   @override
   UserProfileModel getProfile() {
     return _userProfileFile.user;
+  }
+
+  @override
+  Future<bool> isTokenActive() async {
+    final prefs = await SharedPreferences.getInstance();
+    final value = prefs.getString(tokenStorageKey);
+
+    if (value != null) {
+      return true;
+    }
+    return false;
+  }
+
+  @override
+  Future<void> signOut() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
   }
 }

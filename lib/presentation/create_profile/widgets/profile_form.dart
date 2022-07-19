@@ -12,7 +12,18 @@ import 'package:tithe_box/presentation/shared/row_text.dart';
 import 'package:tithe_box/theme.dart';
 
 class ProfileForm extends StatefulWidget {
-  const ProfileForm({Key? key}) : super(key: key);
+  final String email;
+  final String phoneNumber;
+  final String password;
+  final String confirmPassword;
+
+  const ProfileForm({
+    Key? key,
+    required this.email,
+    required this.phoneNumber,
+    required this.password,
+    required this.confirmPassword,
+  }) : super(key: key);
 
   @override
   State<ProfileForm> createState() => _ProfileFormState();
@@ -20,14 +31,16 @@ class ProfileForm extends StatefulWidget {
 
 class _ProfileFormState extends State<ProfileForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late TextEditingController fullNameController = TextEditingController();
+  late TextEditingController firstNameController = TextEditingController();
+  late TextEditingController lastNameController = TextEditingController();
   late TextEditingController occupationController = TextEditingController();
   late TextEditingController nameOfChurchController = TextEditingController();
   late TextEditingController cityController = TextEditingController();
   String selectedCountryValue = 'Nigeria';
   bool submitted = false;
 
-  String? fullNameErrorText;
+  String? firstNameErrorText;
+  String? lastNameErrorText;
   String? occupationErrorText;
   String? nameOfChurchErrorText;
   String? cityErrorText;
@@ -39,16 +52,31 @@ class _ProfileFormState extends State<ProfileForm> {
       child: Column(
         children: [
           CustomFormField(
-            text: "Full Name",
-            hintText: "e.g Steven Mark",
-            textEditingController: fullNameController,
+            text: "First Name",
+            hintText: "e.g Steven",
+            textEditingController: firstNameController,
             textInputType: TextInputType.name,
-            errorText: fullNameErrorText,
+            errorText: firstNameErrorText,
             isSubmitted: submitted,
             onChanged: (_) => setState(() {}),
             validator: (value) {
               if (value!.isEmpty) {
-                return kFullNameNullError;
+                return kFirstNameNullError;
+              }
+              return null;
+            },
+          ),
+          CustomFormField(
+            text: "Last Name",
+            hintText: "e.g Peterson",
+            textEditingController: lastNameController,
+            textInputType: TextInputType.name,
+            errorText: lastNameErrorText,
+            isSubmitted: submitted,
+            onChanged: (_) => setState(() {}),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return kLastNameNullError;
               }
               return null;
             },
@@ -125,7 +153,7 @@ class _ProfileFormState extends State<ProfileForm> {
             padding: const EdgeInsets.all(15),
             child: DefaultButton(
               isPrimary: true,
-              text: 'Complete Profile',
+              text: 'Sign Up',
               onPressed: () => _completeProfile(context),
             ),
           ),
@@ -140,7 +168,7 @@ class _ProfileFormState extends State<ProfileForm> {
       _formKey.currentState!.save();
 
       final bloc = context.read<UserProfileBloc>();
-      bloc.add(UserProfileEvent.createProfile(fullName: fullNameController.text, emailAddress: "", occupation: occupationController.text, churchName: nameOfChurchController.text, city: cityController.text, country: selectedCountryValue));
+      bloc.add(UserProfileEvent.createProfile(emailAddress: widget.email, firstName: firstNameController.text, lastName: lastNameController.text, occupation: occupationController.text, churchName: nameOfChurchController.text, city: cityController.text, country: selectedCountryValue, phoneNumber: widget.phoneNumber, serviceDays: ["Sunday"], password: widget.password, passwordConfirmation: widget.confirmPassword));
 
       showDialog(
         context: context,
@@ -148,11 +176,11 @@ class _ProfileFormState extends State<ProfileForm> {
         builder: (ctx) => BlocBuilder<UserProfileBloc, ResultState>(
           builder: (ctx, state) => state.when(
             idle: () => const CustomAlertDialog(text: 'Idling...'),
-            loading: () => const CustomAlertDialog(text: 'Creating profile...'),
+            loading: () => const CustomAlertDialog(text: 'Creating account...'),
             data: (_) {
               return const CustomAlertDialog(text: 'Initializing data...');
             },
-            error: (e) => CustomAlertDialog(title: Text('Profile creation failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
+            error: (e) => CustomAlertDialog(title: Text('Account creation failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
           ),
         ),
       );

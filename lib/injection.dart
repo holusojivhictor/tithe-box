@@ -6,10 +6,15 @@ final GetIt getIt = GetIt.instance;
 
 class Injection {
   static Future<void> init() async {
+    final loggingService = LoggingServiceImpl();
+    getIt.registerSingleton<LoggingService>(loggingService);
+
     final firebaseService = FirebaseServiceImpl();
     getIt.registerSingleton<FirebaseService>(firebaseService);
 
     final authService = AuthServiceImpl(firebaseService);
     getIt.registerSingleton<AuthService>(authService);
+    
+    getIt.registerSingleton<TitheBoxService>(TitheBoxServiceImpl(authService));
   }
 }

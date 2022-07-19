@@ -32,9 +32,9 @@ class SessionWrapper extends StatelessWidget {
         accountTypeSelection: (_) => materialApp(const AccountSelectionPage()),
         authSession: (_) => materialApp(const AuthScreen()),
         signUpState: (_) => materialApp(const SignUpPage()),
-        userProfileState: (_) {
+        userProfileState: (s) {
           return BlocBuilder<UserProfileBloc, ResultState>(
-            builder: (ctx, state) => materialApp(const CreateProfilePage()),
+            builder: (ctx, state) => materialApp(CreateProfilePage(email: s.email, phoneNumber: s.phoneNumber, password: s.password, confirmPassword: s.confirmPassword)),
           );
         },
         signInState: (_) => materialApp(const SignInPage()),

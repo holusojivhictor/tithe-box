@@ -24,8 +24,9 @@ class TitheBox extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (ctx) {
-            final authService = getIt<AuthService>();
-            return SessionBloc(authService)..add(const SessionEvent.appStarted(init: true));
+            final titheBoxService = getIt<TitheBoxService>();
+            final loggingService = getIt<LoggingService>();
+            return SessionBloc(titheBoxService, loggingService)..add(const SessionEvent.appStarted(init: true));
           },
         ),
         BlocProvider(
@@ -36,8 +37,7 @@ class TitheBox extends StatelessWidget {
         ),
         BlocProvider(
           create: (ctx) {
-            final authService = getIt<AuthService>();
-            return SignUpBloc(authService, ctx.read<SessionBloc>());
+            return SignUpBloc(ctx.read<SessionBloc>());
           },
         ),
         BlocProvider(

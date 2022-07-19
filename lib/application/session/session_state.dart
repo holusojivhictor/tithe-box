@@ -12,7 +12,12 @@ class SessionState with _$SessionState {
 
   const factory SessionState.signUpState() = _SignUpState;
 
-  const factory SessionState.userProfileState() = _UserProfileState;
+  const factory SessionState.userProfileState({
+    required String email,
+    required String phoneNumber,
+    required String password,
+    required String confirmPassword,
+  }) = _UserProfileState;
 
   const factory SessionState.signInState() = _SignInState;
 

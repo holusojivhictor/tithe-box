@@ -19,6 +19,7 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TextEditingController emailAddressController = TextEditingController();
+  late TextEditingController phoneNumberController = TextEditingController();
   late TextEditingController passwordController = TextEditingController();
   late TextEditingController confirmPasswordController = TextEditingController();
   late bool obscurePassword = true;
@@ -26,6 +27,7 @@ class _SignUpFormState extends State<SignUpForm> {
   bool submitted = false;
 
   String? emailErrorText;
+  String? phoneErrorText;
   String? passwordErrorText;
   String? confirmPasswordErrorText;
 
@@ -48,6 +50,23 @@ class _SignUpFormState extends State<SignUpForm> {
                 return kEmailNullError;
               } else if (!emailValidatorRegExp.hasMatch(value)) {
                 return kInvalidEmailError;
+              }
+              return null;
+            },
+          ),
+          CustomFormField(
+            text: "Phone number",
+            hintText: "e.g 08012345678",
+            textEditingController: phoneNumberController,
+            textInputType: TextInputType.number,
+            errorText: phoneErrorText,
+            isSubmitted: submitted,
+            onChanged: (_) => setState(() {}),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return kPhoneNumberNullError;
+              } else if (!phoneNumberValidatorRegExp.hasMatch(value)) {
+                return kInvalidPhoneNumberError;
               }
               return null;
             },
@@ -107,7 +126,7 @@ class _SignUpFormState extends State<SignUpForm> {
             padding: const EdgeInsets.all(15),
             child: DefaultButton(
               isPrimary: true,
-              text: 'Sign Up',
+              text: 'Next',
               onPressed: () => _signUp(context),
             ),
           ),
@@ -136,7 +155,7 @@ class _SignUpFormState extends State<SignUpForm> {
       _formKey.currentState!.save();
 
       final bloc = context.read<SignUpBloc>();
-      bloc.add(SignUpEvent.signUp(emailAddress: emailAddressController.text, password: passwordController.text));
+      bloc.add(SignUpEvent.signUp(emailAddress: emailAddressController.text, phoneNumber: phoneNumberController.text, password: passwordController.text, confirmPassword: confirmPasswordController.text));
 
       showDialog(
         context: context,
@@ -144,9 +163,9 @@ class _SignUpFormState extends State<SignUpForm> {
         builder: (ctx) => BlocBuilder<SignUpBloc, ResultState>(
           builder: (ctx, state) => state.when(
             idle: () => const CustomAlertDialog(text: 'Idling...'),
-            loading: () => const CustomAlertDialog(text: 'Creating account...'),
+            loading: () => const CustomAlertDialog(text: 'Adding information...'),
             data: (_) {
-              return const CustomAlertDialog(text: 'Account created successfully');
+              return const CustomAlertDialog(text: 'Details added successfully');
             },
             error: (e) => CustomAlertDialog(title: Text('Sign up failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
           ),
