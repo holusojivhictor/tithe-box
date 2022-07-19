@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/presentation/shared/extensions/focus_scope_node_extensions.dart';
 
+import 'home/home_page.dart';
+
 class MobileScaffold extends StatefulWidget {
   final int defaultIndex;
   final TabController tabController;
@@ -41,7 +43,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
             controller: widget.tabController,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              Container(),
+              const HomePage(),
               Container(),
               Container(),
               Container(),

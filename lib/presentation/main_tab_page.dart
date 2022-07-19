@@ -33,6 +33,7 @@ class _MainTabPageState extends State<MainTabPage> with SingleTickerProviderStat
     super.didChangeDependencies();
     if (_didChangeDependencies) return;
     _didChangeDependencies = true;
+    context.read<HomeBloc>().add(const HomeEvent.init());
     context.read<SettingsBloc>().add(const SettingsEvent.init());
   }
 
