@@ -4,3 +4,4 @@ export 'sign_in/sign_in_bloc.dart';
 export 'user_profile/user_profile_bloc.dart';
 export 'main/main_bloc.dart';
 export 'settings/settings_bloc.dart';
+export 'main_tab/main_tab_bloc.dart';

@@ -9,6 +9,7 @@ import 'package:tithe_box/theme.dart';
 
 import 'presentation/account_selection/account_selection_page.dart';
 import 'presentation/animated_splash/animated_splash.dart';
+import 'presentation/app_widget.dart';
 import 'presentation/auth/auth_screen.dart';
 import 'presentation/onboarding/onboarding_page.dart';
 
@@ -38,7 +39,11 @@ class SessionWrapper extends StatelessWidget {
           );
         },
         signInState: (_) => materialApp(const SignInPage()),
-        authenticated: (_) => Container(),
+        authenticated: (_) {
+          return BlocBuilder<MainBloc, MainState>(
+            builder: (ctx, state) => const AppWidget(),
+          );
+        },
       ),
     );
   }

@@ -46,6 +46,7 @@ class TitheBox extends StatelessWidget {
             return UserProfileBloc(authService, ctx.read<SessionBloc>());
           },
         ),
+        BlocProvider(create: (ctx) => MainTabBloc()),
         BlocProvider(
           create: (ctx) {
             final loggingService = getIt<LoggingService>();

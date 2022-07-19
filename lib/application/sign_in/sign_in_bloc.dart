@@ -18,7 +18,7 @@ class SignInBloc extends Bloc<SignInEvent, ResultState<Response>> {
     on<_SignIn>((event, emit) async {
       emit(const ResultState.loading());
       ApiResult<Response> apiResult = await _authService.login(event.emailAddress, event.password);
-      apiResult.when(
+      await apiResult.when(
         success: (Response response) async {
           final json = response.data as Map<String, dynamic>;
           final token = json["token"] as String;
