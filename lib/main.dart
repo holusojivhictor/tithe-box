@@ -46,6 +46,25 @@ class TitheBox extends StatelessWidget {
             return UserProfileBloc(authService, ctx.read<SessionBloc>());
           },
         ),
+        BlocProvider(
+          create: (ctx) {
+            final loggingService = getIt<LoggingService>();
+            final settingsService = getIt<SettingsService>();
+            final deviceInfoService = getIt<DeviceInfoService>();
+            return MainBloc(
+              loggingService,
+              settingsService,
+              deviceInfoService,
+            )..add(const MainEvent.init());
+          },
+        ),
+        BlocProvider(
+          create: (ctx) {
+            final settingsService = getIt<SettingsService>();
+            final deviceInfoService = getIt<DeviceInfoService>();
+            return SettingsBloc(settingsService, deviceInfoService, ctx.read<MainBloc>());
+          },
+        ),
       ],
       child: BlocBuilder<SessionBloc, SessionState>(
         builder: (ctx, state) => const SessionWrapper(),
