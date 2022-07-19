@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tithe_box/domain/enums/enums.dart';
 import 'package:tithe_box/domain/models/models.dart';
 
 const kPadding = 10.0;
@@ -58,6 +59,11 @@ const String kConfirmPassNullError = "Please confirm your password.";
 /// Keys
 const String tokenStorageKey = 'TokenStorageKey';
 const String userIdStorageKey = 'UserIdStorageKey';
+
+/// Languages map
+const languagesMap = {
+  AppLanguageType.english: LanguageModel('en', 'US'),
+};
 
 /// Countries map list
 List<Map<String, String>> countries = [
