@@ -42,9 +42,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
     final state = _loadedState(settings.appTheme, settings.themeMode, isInitialized: init);
 
-    if (init) {
-      await Future.delayed(const Duration(milliseconds: 50));
-    }
     emit(state);
   }
 

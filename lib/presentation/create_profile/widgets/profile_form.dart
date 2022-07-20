@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
-import 'package:tithe_box/application/result/result_state.dart';
 import 'package:tithe_box/domain/app_constants.dart';
-import 'package:tithe_box/domain/models/models.dart';
-import 'package:tithe_box/presentation/shared/custom_alert_dialog.dart';
 import 'package:tithe_box/presentation/shared/custom_form_field.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/dropdown/custom_full_dropdown.dart';
@@ -167,23 +164,10 @@ class _ProfileFormState extends State<ProfileForm> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
+      context.read<SessionBloc>().add(SessionEvent.createProfile(hasDialog: true, email: widget.email, phoneNumber: widget.phoneNumber, password: widget.password, confirmPassword: widget.confirmPassword));
+
       final bloc = context.read<UserProfileBloc>();
       bloc.add(UserProfileEvent.createProfile(emailAddress: widget.email, firstName: firstNameController.text, lastName: lastNameController.text, occupation: occupationController.text, churchName: nameOfChurchController.text, city: cityController.text, country: selectedCountryValue, phoneNumber: widget.phoneNumber, serviceDays: ["Sunday"], password: widget.password, passwordConfirmation: widget.confirmPassword));
-
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (ctx) => BlocBuilder<UserProfileBloc, ResultState>(
-          builder: (ctx, state) => state.when(
-            idle: () => const CustomAlertDialog(text: 'Idling...'),
-            loading: () => const CustomAlertDialog(text: 'Creating account...'),
-            data: (_) {
-              return const CustomAlertDialog(text: 'Initializing data...');
-            },
-            error: (e) => CustomAlertDialog(title: Text('Account creation failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
-          ),
-        ),
-      );
     }
   }
 }

@@ -4,6 +4,7 @@ import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/presentation/shared/extensions/focus_scope_node_extensions.dart';
 
 import 'home/home_page.dart';
+import 'settings/settings_page.dart';
 
 class MobileScaffold extends StatefulWidget {
   final int defaultIndex;
@@ -46,7 +47,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
               const HomePage(),
               Container(),
               Container(),
-              Container(),
+              const SettingsPage(),
             ],
           ),
         ),

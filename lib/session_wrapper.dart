@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
-import 'package:tithe_box/application/result/result_state.dart';
 import 'package:tithe_box/presentation/create_profile/create_profile_page.dart';
 import 'package:tithe_box/presentation/main_tab_page.dart';
 import 'package:tithe_box/presentation/sign_in/sign_in_page.dart';
@@ -21,16 +20,11 @@ class SessionWrapper extends StatelessWidget {
       builder: (context, state) => state.map(
         unInitialized: (_) => const AnimatedSplash(),
         unAuthenticated: (_) => const OnboardingPage(),
-        loading: (_) => Container(color: Colors.red),
-        accountTypeSelection: (_) => const AccountSelectionPage(),
+        accountTypeSelection: (s) => AccountSelectionPage(isInitialize: s.isInitialize),
         authSession: (_) => const AuthScreen(),
         signUpState: (_) => const SignUpPage(),
-        userProfileState: (s) {
-          return BlocBuilder<UserProfileBloc, ResultState>(
-            builder: (ctx, state) => CreateProfilePage(email: s.email, phoneNumber: s.phoneNumber, password: s.password, confirmPassword: s.confirmPassword),
-          );
-        },
-        signInState: (_) => const SignInPage(),
+        userProfileState: (s) => CreateProfilePage(hasDialog: s.hasDialog, email: s.email, phoneNumber: s.phoneNumber, password: s.password, confirmPassword: s.confirmPassword),
+        signInState: (s) => SignInPage(hasDialog: s.hasDialog),
         authenticated: (_) => const MainTabPage(),
       ),
     );

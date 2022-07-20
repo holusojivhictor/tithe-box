@@ -52,6 +52,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
   @override
   Future<void> signOut() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
+    await prefs.remove(tokenStorageKey);
+    await prefs.remove(userIdStorageKey);
   }
 }

@@ -59,7 +59,7 @@ class AuthScreen extends StatelessWidget {
                 text: 'Log In',
                 elevation: 0,
                 onPressed: () {
-                  context.read<SessionBloc>().add(const SessionEvent.signInRequested());
+                  context.read<SessionBloc>().add(const SessionEvent.signInRequested(hasDialog: false));
                 },
               ),
               const SizedBox(height: 10),

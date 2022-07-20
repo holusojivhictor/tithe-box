@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
-import 'package:tithe_box/application/result/result_state.dart';
 import 'package:tithe_box/domain/app_constants.dart';
-import 'package:tithe_box/domain/models/models.dart';
-import 'package:tithe_box/presentation/shared/custom_alert_dialog.dart';
 import 'package:tithe_box/presentation/shared/custom_form_field.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/row_text.dart';
@@ -107,23 +104,10 @@ class _SignInFormState extends State<SignInForm> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
+      context.read<SessionBloc>().add(const SessionEvent.signInRequested(hasDialog: true));
+
       final bloc = context.read<SignInBloc>();
       bloc.add(SignInEvent.signIn(emailAddress: emailAddressController.text, password: passwordController.text));
-
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (ctx) => BlocBuilder<SignInBloc, ResultState>(
-          builder: (ctx, state) => state.when(
-            idle: () => const CustomAlertDialog(text: 'Idling...'),
-            loading: () => const CustomAlertDialog(text: 'Signing in...'),
-            data: (_) {
-              return const CustomAlertDialog(text: 'Initializing data...');
-            },
-            error: (e) => CustomAlertDialog(title: Text('Log in failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
-          ),
-        ),
-      );
     }
   }
 }

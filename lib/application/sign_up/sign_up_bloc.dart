@@ -14,9 +14,9 @@ class SignUpBloc extends Bloc<SignUpEvent, ResultState<String>> {
     on<_SignUp>((e, emit) async {
       emit(const ResultState.loading());
       ApiResult<String> apiResult = const ApiResult.success(data: "Email added successfully");
-      apiResult.when(
+      await apiResult.when(
         success: (String response) async {
-          _sessionBloc.add(SessionEvent.createProfile(email: e.emailAddress, phoneNumber: e.phoneNumber, password: e.password, confirmPassword: e.confirmPassword));
+          _sessionBloc.add(SessionEvent.createProfile(hasDialog: false, email: e.emailAddress, phoneNumber: e.phoneNumber, password: e.password, confirmPassword: e.confirmPassword));
           emit(ResultState.data(data: response));
         },
         failure: (NetworkExceptions error) async {

@@ -49,6 +49,7 @@ const String kFirstNameNullError = "Please enter your first name.";
 const String kAddressNullError = "Please enter your address.";
 const String kLastNameNullError = "Please enter your last name.";
 const String kPhoneNumberNullError = "Please enter your phone number.";
+const String kShortPhoneNumberError = "Phone number must have at least 11 digits.";
 const String kInvalidPhoneNumberError = "Please enter a valid phone number. Signs not necessary.";
 const String kInvalidEmailError = "Please enter a valid email.";
 const String kPassNullError = "Please enter your password.";

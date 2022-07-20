@@ -5,7 +5,6 @@ import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/services/services.dart';
 import 'package:tithe_box/firebase_options.dart';
 import 'package:tithe_box/presentation/app_widget.dart';
-import 'package:tithe_box/session_wrapper.dart';
 
 import 'injection.dart';
 

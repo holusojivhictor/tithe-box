@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
-import 'package:tithe_box/application/result/result_state.dart';
 import 'package:tithe_box/domain/app_constants.dart';
-import 'package:tithe_box/domain/models/network/network_exceptions.dart';
-import 'package:tithe_box/presentation/shared/custom_alert_dialog.dart';
 import 'package:tithe_box/presentation/shared/custom_form_field.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/row_text.dart';
@@ -67,6 +64,8 @@ class _SignUpFormState extends State<SignUpForm> {
                 return kPhoneNumberNullError;
               } else if (!phoneNumberValidatorRegExp.hasMatch(value)) {
                 return kInvalidPhoneNumberError;
+              } else if (value.length < 11) {
+                return kShortPhoneNumberError;
               }
               return null;
             },
@@ -136,7 +135,7 @@ class _SignUpFormState extends State<SignUpForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             child: InkWell(
               onTap: () {
-                context.read<SessionBloc>().add(const SessionEvent.signInRequested());
+                context.read<SessionBloc>().add(const SessionEvent.signInRequested(hasDialog: false));
               },
               child: Text(
                 'Login',
@@ -156,21 +155,6 @@ class _SignUpFormState extends State<SignUpForm> {
 
       final bloc = context.read<SignUpBloc>();
       bloc.add(SignUpEvent.signUp(emailAddress: emailAddressController.text, phoneNumber: phoneNumberController.text, password: passwordController.text, confirmPassword: confirmPasswordController.text));
-
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (ctx) => BlocBuilder<SignUpBloc, ResultState>(
-          builder: (ctx, state) => state.when(
-            idle: () => const CustomAlertDialog(text: 'Idling...'),
-            loading: () => const CustomAlertDialog(text: 'Adding information...'),
-            data: (_) {
-              return const CustomAlertDialog(text: 'Details added successfully');
-            },
-            error: (e) => CustomAlertDialog(title: Text('Sign up failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
-          ),
-        ),
-      );
     }
   }
 }

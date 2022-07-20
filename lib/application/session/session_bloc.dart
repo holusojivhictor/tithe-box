@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/domain/services/services.dart';
@@ -13,12 +15,12 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
 
   SessionBloc(this._titheBoxService, this._settingsService, this._logger) : super(const SessionState.unInitialized()) {
     on<_AppStarted>((event, emit) async {
+      final settings = _settingsService.appSettings;
       if (event.init) {
         await Future.delayed(const Duration(milliseconds: 2000));
       }
-      final settings = _settingsService.appSettings;
       if (!settings.isFirstInstall) {
-        emit(const SessionState.accountTypeSelection());
+        emit(const SessionState.accountTypeSelection(isInitialize: false));
         return;
       }
 
@@ -26,14 +28,14 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     });
 
     on<_SelectAccountType>((event, emit) async {
-      emit(const SessionState.accountTypeSelection());
+      emit(const SessionState.accountTypeSelection(isInitialize: false));
     });
 
     on<_StartAuthState>((event, emit) async {
       final hasToken = await checkToken();
 
       if (hasToken) {
-        emit(const SessionState.loading());
+        emit(const SessionState.accountTypeSelection(isInitialize: true));
         await initialize();
 
         emit(const SessionState.authenticated());
@@ -45,7 +47,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
 
     on<_LogOut>((event, emit) async {
       await _titheBoxService.signOut();
-      emit(const SessionState.unAuthenticated());
+      emit(const SessionState.accountTypeSelection(isInitialize: false));
     });
 
     on<_SignUp>((event, emit) async {
@@ -53,11 +55,11 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     });
 
     on<_CreateProfile>((e, emit) async {
-      emit(SessionState.userProfileState(email: e.email, phoneNumber: e.phoneNumber, password: e.password, confirmPassword: e.confirmPassword));
+      emit(SessionState.userProfileState(hasDialog: e.hasDialog, email: e.email, phoneNumber: e.phoneNumber, password: e.password, confirmPassword: e.confirmPassword));
     });
 
     on<_SignIn>((event, emit) async {
-      emit(const SessionState.signInState());
+      emit(SessionState.signInState(hasDialog: event.hasDialog));
     });
 
     on<_InitStartup>((event, emit) async {

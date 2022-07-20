@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/domain/assets.dart';
+import 'package:tithe_box/presentation/shared/custom_alert_dialog.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/start/bottom_portrait_layout.dart';
 import 'package:tithe_box/presentation/shared/start/top_portrait_layout.dart';
@@ -10,7 +11,8 @@ import 'package:tithe_box/presentation/shared/svg_image.dart';
 import 'package:tithe_box/theme.dart';
 
 class AccountSelectionPage extends StatelessWidget {
-  const AccountSelectionPage({Key? key}) : super(key: key);
+  final bool isInitialize;
+  const AccountSelectionPage({Key? key, required this.isInitialize}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +72,11 @@ class AccountSelectionPage extends StatelessWidget {
               ),
             ],
           ),
+          if (isInitialize)
+            Container(
+              color: Colors.black54,
+              child: const CustomAlertDialog(text: 'Initializing data...'),
+            ),
         ],
       ),
     );
