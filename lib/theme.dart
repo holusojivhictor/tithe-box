@@ -3,8 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 Color kDark = Colors.black;
 Color kWhite = Colors.white;
-Color kPrimary = const Color(0xFFDF4903);
-Color kSecondary = const Color(0xFF505050);
 
 class Styles {
   static const edgeInsetAll16 = EdgeInsets.all(16);
@@ -24,8 +22,7 @@ class Styles {
   static const edgeInsetSymmetric8 = EdgeInsets.symmetric(horizontal: 8, vertical: 8);
   static const edgeInsetSymmetric5 = EdgeInsets.symmetric(horizontal: 5, vertical: 5);
 
-  static const homeContentPadding = EdgeInsets.only(left: 15, top: 5, bottom: 5);
-  static const altHomeContentPadding = EdgeInsets.symmetric(horizontal: 15, vertical: 5);
+  static const homeContentPadding = EdgeInsets.symmetric(horizontal: 15, vertical: 10);
 
   static const edgeInsetHorizontal16Top10 = EdgeInsets.only(left: 16, right: 16, top: 10);
 
@@ -85,6 +82,11 @@ class Styles {
     borderRadius: BorderRadius.all(Radius.circular(5)),
   );
 
+  static const searchFieldBorder = OutlineInputBorder(
+    borderSide: BorderSide.none,
+    borderRadius: BorderRadius.all(Radius.circular(25)),
+  );
+
   static const formFieldPadding = EdgeInsets.symmetric(horizontal: 14, vertical: 18);
 
   static const editFormFieldPadding = EdgeInsets.symmetric(horizontal: 0, vertical: 7);
@@ -101,7 +103,7 @@ class Styles {
 
   static const circularBorderRadius7 = BorderRadius.all(Radius.circular(7));
 
-  static const mainCardBorderRadius = BorderRadius.all(Radius.circular(10));
+  static const mainCardBorderRadius = BorderRadius.all(Radius.circular(5));
 
   static const settingsCardBorderRadius = BorderRadius.all(Radius.circular(5));
 
@@ -115,6 +117,10 @@ class Styles {
 
   static const RoundedRectangleBorder alertDialogShape = RoundedRectangleBorder(borderRadius: alertDialogBorderRadius);
 }
+
+Color kPrimary = const Color(0xFFDF4903);
+Color kSecondary = const Color(0xFF505050);
+Color kGrey = const Color(0xFFEFEFEF);
 
 class TitheBoxTheme {
   static Typography textTypography = Typography.material2021();
