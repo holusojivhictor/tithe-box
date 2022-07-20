@@ -6,5 +6,7 @@ class HomeState with _$HomeState {
 
   const factory HomeState.loaded({
     required String firstName,
+    required HomeContentType contentType,
+    required HomeContentType tempContentType,
   }) = _LoadedState;
 }

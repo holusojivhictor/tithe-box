@@ -38,4 +38,19 @@ class Assets {
         throw Exception('Unknown error occurred');
     }
   }
+
+  static String translateHomeContentType(HomeContentType type) {
+    switch (type) {
+      case HomeContentType.all:
+        return 'All';
+      case HomeContentType.addIncome:
+        return 'Add Income';
+      case HomeContentType.tithingSlider:
+        return 'Tithing Slider';
+      case HomeContentType.progress:
+        return 'Progress';
+      default:
+        throw Exception('Invalid home content type = $type');
+    }
+  }
 }
