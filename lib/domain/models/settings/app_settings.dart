@@ -14,6 +14,7 @@ class AppSettings with _$AppSettings {
     required bool doubleBackToClose,
     required bool useDemoImage,
     required AutoThemeModeType themeMode,
+    required double tithePercentage,
   }) = _AppSettings;
 
   const AppSettings._();

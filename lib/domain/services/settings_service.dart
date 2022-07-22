@@ -22,5 +22,8 @@ abstract class SettingsService {
   AutoThemeModeType get autoThemeMode;
   set autoThemeMode(AutoThemeModeType themeMode);
 
+  double get tithePercentage;
+  set tithePercentage(double value);
+
   Future<void> init();
 }

@@ -23,4 +23,8 @@ class SettingsEvent with _$SettingsEvent {
   const factory SettingsEvent.autoThemeModeTypeChanged({
     required AutoThemeModeType newValue,
   }) = _AutoThemeModeTypeChanged;
+
+  const factory SettingsEvent.tithePercentageChanged({
+    required double newValue,
+  }) = _TithePercentageChanged;
 }

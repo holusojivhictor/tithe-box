@@ -15,6 +15,7 @@ class SettingsServiceImpl extends SettingsService {
   final _doubleBackToCloseKey = 'DoubleBackToCloseKey';
   final _useDemoImageKey = 'UseDemoImageKey';
   final _autoThemeModeKey = 'AutoThemeModeKey';
+  final _tithePercentageKey = 'TithePercentageKey';
 
   bool _initialized = false;
 
@@ -60,6 +61,12 @@ class SettingsServiceImpl extends SettingsService {
   set autoThemeMode(AutoThemeModeType themeMode) => _prefs.setInt(_autoThemeModeKey, themeMode.index);
 
   @override
+  double get tithePercentage => _prefs.getDouble(_tithePercentageKey)!;
+
+  @override
+  set tithePercentage(double value) => _prefs.setDouble(_tithePercentageKey, value);
+
+  @override
   AppSettings get appSettings => AppSettings(
     appTheme: appTheme,
     appLanguage: language,
@@ -68,6 +75,7 @@ class SettingsServiceImpl extends SettingsService {
     doubleBackToClose: doubleBackToClose,
     useDemoImage: useDemoImage,
     themeMode: autoThemeMode,
+    tithePercentage: tithePercentage,
   );
 
   @override
@@ -110,6 +118,11 @@ class SettingsServiceImpl extends SettingsService {
     if (_prefs.get(_autoThemeModeKey) == null) {
       _logger.info(runtimeType, 'Auto theme mode set to true as default');
       autoThemeMode = AutoThemeModeType.off;
+    }
+
+    if (_prefs.getDouble(_tithePercentageKey) == null) {
+      _logger.info(runtimeType, 'Tithe percentage set to 10 as default');
+      tithePercentage = 10.0;
     }
 
     _initialized = true;

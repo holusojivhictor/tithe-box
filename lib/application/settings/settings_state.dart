@@ -11,5 +11,6 @@ class SettingsState with _$SettingsState {
     required bool doubleBackToClose,
     required bool useDemoProfilePicture,
     required AutoThemeModeType themeMode,
+    required double tithePercentage,
   }) = _LoadedState;
 }

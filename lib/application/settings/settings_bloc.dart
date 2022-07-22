@@ -26,6 +26,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<_DoubleBackToCloseChanged>(_mapDoubleBackToCloseToState);
     on<_UseDemoProfilePictureChanged>(_mapUseDemoPictureToState);
     on<_AutoThemeModeTypeChanged>(_mapAutoThemeModeChangedToState);
+    on<_TithePercentageChanged>(_mapTithePercentageChangedToState);
   }
 
   _LoadedState get currentState => state as _LoadedState;
@@ -40,6 +41,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       doubleBackToClose: settings.doubleBackToClose,
       useDemoProfilePicture: settings.useDemoImage,
       themeMode: settings.themeMode,
+      tithePercentage: settings.tithePercentage,
     ));
   }
 
@@ -68,6 +70,11 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   void _mapUseDemoPictureToState(_UseDemoProfilePictureChanged event, Emitter<SettingsState> emit) {
     _settingsService.useDemoImage = event.newValue;
     emit(currentState.copyWith.call(useDemoProfilePicture: event.newValue));
+  }
+
+  void _mapTithePercentageChangedToState(_TithePercentageChanged event, Emitter<SettingsState> emit) {
+    _settingsService.tithePercentage = event.newValue;
+    emit(currentState.copyWith.call(tithePercentage: event.newValue));
   }
 
   void _mapAutoThemeModeChangedToState(_AutoThemeModeTypeChanged event, Emitter<SettingsState> emit) {
