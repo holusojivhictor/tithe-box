@@ -16,9 +16,17 @@ class SliverSliderBar extends StatelessWidget {
         loaded: (state) => SliverPadding(
           padding: const EdgeInsets.symmetric(vertical: 5),
           sliver: SliverToBoxAdapter(
-            child: SliderBar(
-              sliderValue: state.tithePercentage,
-              isActive: false,
+            child: Column(
+              children: [
+                Text(
+                  'My Current Tithe Percentage (${state.tithePercentage.round()}%)',
+                  textAlign: TextAlign.center,
+                ),
+                SliderBar(
+                  sliderValue: state.tithePercentage,
+                  isActive: false,
+                ),
+              ],
             ),
           ),
         ),
