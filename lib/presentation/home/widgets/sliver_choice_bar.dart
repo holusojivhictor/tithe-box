@@ -15,7 +15,7 @@ class SliverChoiceBar extends StatelessWidget {
       builder: (ctx, state) => state.map(
         loading: (_) => const SliverLoading(),
         loaded: (state) => SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
           sliver: SliverToBoxAdapter(
             child: ChoiceBarWithoutIcon<int>(
               values: HomeContentType.values.map((e) => e.index).toList(),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:tithe_box/presentation/home/widgets/sliver_cards_menu.dart';
+import 'package:tithe_box/presentation/home/widgets/sliver_verse_card.dart';
+import 'package:tithe_box/presentation/shared/clickable_title.dart';
 
 import 'widgets/sliver_choice_bar.dart';
 import 'widgets/sliver_home_greet.dart';
@@ -30,6 +32,8 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
             SliverInfoBanner(),
             SliverChoiceBar(),
             SliverCardsMenu(),
+            SliverClickableTitle(title: 'What the Bible says'),
+            SliverVerseCard(),
           ],
         ),
       ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/presentation/shared/loading.dart';
-import 'package:tithe_box/theme.dart';
 
 class SliverHomeGreet extends StatelessWidget {
   const SliverHomeGreet({Key? key}) : super(key: key);
@@ -11,7 +10,7 @@ class SliverHomeGreet extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return SliverPadding(
-      padding: Styles.homeContentPadding,
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
       sliver: SliverToBoxAdapter(
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (ctx, state) => state.map(

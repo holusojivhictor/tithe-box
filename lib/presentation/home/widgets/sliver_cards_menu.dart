@@ -13,7 +13,7 @@ class SliverCardsMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: Styles.homeContentPadding,
+      padding: Styles.edgeInsetAll10,
       sliver: SliverWaterfallFlow(
         delegate: SliverChildBuilderDelegate((context, index) => _buildCardsSection(index), childCount: 4),
         gridDelegate: const SliverWaterfallFlowDelegateWithFixedCrossAxisCount(

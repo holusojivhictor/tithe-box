@@ -16,7 +16,7 @@ class InfoBanner extends StatelessWidget {
         alignment: AlignmentDirectional.center,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: Styles.mainCardBorderRadius,
             child: SvgImage(
               label: 'Info banner svg',
               image: Assets.getSvgPath('mask-vector.svg'),

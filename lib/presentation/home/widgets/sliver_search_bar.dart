@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tithe_box/presentation/shared/search_field.dart';
-import 'package:tithe_box/theme.dart';
 
 class SliverSearchBar extends StatelessWidget {
   const SliverSearchBar({Key? key}) : super(key: key);
@@ -8,7 +7,7 @@ class SliverSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: Styles.homeContentPadding,
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       sliver: SliverToBoxAdapter(
         child: SearchField(
           value: '',
