@@ -71,13 +71,9 @@ class Styles {
     borderRadius: BorderRadius.all(Radius.circular(30)),
   );
 
-  static const editFormFieldBorder = UnderlineInputBorder(
-    borderSide: BorderSide(width: 1.5, color: Colors.grey),
-  );
-
-  static const onboardingFieldBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.black, width: 1),
-    borderRadius: BorderRadius.all(Radius.circular(5)),
+  static const altFormFieldBorder = OutlineInputBorder(
+    borderSide: BorderSide(width: 1, color: Colors.grey),
+    borderRadius: BorderRadius.all(Radius.circular(30)),
   );
 
   static const searchFieldBorder = OutlineInputBorder(
@@ -86,6 +82,8 @@ class Styles {
   );
 
   static const formFieldPadding = EdgeInsets.symmetric(horizontal: 14, vertical: 18);
+
+  static const altFormFieldPadding = EdgeInsets.symmetric(horizontal: 14, vertical: 15);
 
   static const editFormFieldPadding = EdgeInsets.symmetric(horizontal: 0, vertical: 7);
 

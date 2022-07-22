@@ -48,7 +48,7 @@ class _ProfileFormState extends State<ProfileForm> {
       key: _formKey,
       child: Column(
         children: [
-          CustomFormField(
+          FormFieldWithoutBorder(
             text: "First Name",
             hintText: "e.g Steven",
             textEditingController: firstNameController,
@@ -63,7 +63,7 @@ class _ProfileFormState extends State<ProfileForm> {
               return null;
             },
           ),
-          CustomFormField(
+          FormFieldWithoutBorder(
             text: "Last Name",
             hintText: "e.g Peterson",
             textEditingController: lastNameController,
@@ -78,7 +78,7 @@ class _ProfileFormState extends State<ProfileForm> {
               return null;
             },
           ),
-          CustomFormField(
+          FormFieldWithoutBorder(
             text: "Occupation",
             hintText: "e.g Civil Engineer",
             textEditingController: occupationController,
@@ -93,7 +93,7 @@ class _ProfileFormState extends State<ProfileForm> {
               return null;
             },
           ),
-          CustomFormField(
+          FormFieldWithoutBorder(
             text: "Name of Church",
             hintText: "e.g Assemblies of God",
             textEditingController: nameOfChurchController,
@@ -108,7 +108,7 @@ class _ProfileFormState extends State<ProfileForm> {
               return null;
             },
           ),
-          CustomFormField(
+          FormFieldWithoutBorder(
             text: "City",
             hintText: "e.g Lagos",
             textEditingController: cityController,

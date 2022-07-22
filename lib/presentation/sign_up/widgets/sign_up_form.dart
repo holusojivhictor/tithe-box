@@ -34,7 +34,7 @@ class _SignUpFormState extends State<SignUpForm> {
       key: _formKey,
       child: Column(
         children: [
-          CustomFormField(
+          FormFieldWithoutBorder(
             text: "Email",
             hintText: "e.g steven@gmail.com",
             textEditingController: emailAddressController,
@@ -51,7 +51,7 @@ class _SignUpFormState extends State<SignUpForm> {
               return null;
             },
           ),
-          CustomFormField(
+          FormFieldWithoutBorder(
             text: "Phone number",
             hintText: "e.g 08012345678",
             textEditingController: phoneNumberController,
@@ -70,7 +70,7 @@ class _SignUpFormState extends State<SignUpForm> {
               return null;
             },
           ),
-          CustomFormField(
+          FormFieldWithoutBorder(
             text: "Password",
             hintText: "Enter your password",
             obscureText: obscurePassword,
@@ -95,7 +95,7 @@ class _SignUpFormState extends State<SignUpForm> {
               return null;
             },
           ),
-          CustomFormField(
+          FormFieldWithoutBorder(
             text: "Confirm password",
             hintText: "Re-enter your password",
             obscureText: obscureConfirmPassword,

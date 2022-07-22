@@ -29,7 +29,7 @@ class _SignInFormState extends State<SignInForm> {
       key: _formKey,
       child: Column(
         children: [
-          CustomFormField(
+          FormFieldWithoutBorder(
             text: "Email",
             hintText: "e.g steven@gmail.com",
             textEditingController: emailAddressController,
@@ -46,7 +46,7 @@ class _SignInFormState extends State<SignInForm> {
               return null;
             },
           ),
-          CustomFormField(
+          FormFieldWithoutBorder(
             text: "Password",
             hintText: "enter your password",
             obscureText: obscurePassword,
