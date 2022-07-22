@@ -20,7 +20,7 @@ class SliverHomeGreet extends StatelessWidget {
               return RichText(
                 text: TextSpan(
                   text: 'Welcome, ',
-                  style: theme.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: theme.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20, color: theme.indicatorColor),
                   children: <TextSpan> [
                     TextSpan(
                       text: firstName,
