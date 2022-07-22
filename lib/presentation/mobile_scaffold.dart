@@ -53,6 +53,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Theme.of(context).primaryColor,
         backgroundColor: Theme.of(context).dividerColor,
         currentIndex: _index,
         showUnselectedLabels: true,

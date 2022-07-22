@@ -21,6 +21,7 @@ class SliverSliderBar extends StatelessWidget {
                 Text(
                   'My Current Tithe Percentage (${state.tithePercentage.round()}%)',
                   textAlign: TextAlign.center,
+                  style: TextStyle(color: Theme.of(context).indicatorColor),
                 ),
                 SliderBar(
                   sliderValue: state.tithePercentage,

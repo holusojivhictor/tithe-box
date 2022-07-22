@@ -50,7 +50,6 @@ class _SearchFieldState extends State<SearchField> {
       child: Card(
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-        color: kWhite,
         child: Row(
           children: [
             Expanded(

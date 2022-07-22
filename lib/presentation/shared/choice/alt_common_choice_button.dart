@@ -24,6 +24,7 @@ class AltCommonChoiceButton<T> extends StatelessWidget {
     final theme = Theme.of(context);
     return InkWell(
       onTap: onPressed != null ? () => onPressed!(value) : null,
+      borderRadius: BorderRadius.circular(20),
       child: Container(
         decoration: BoxDecoration(
           color: isSelected ? theme.primaryColor : Colors.transparent,
