@@ -6,3 +6,4 @@ export 'db/user_profile/user_profile_model.dart';
 export 'db/user_profile/user_profile_file.dart';
 export 'settings/app_settings.dart';
 export 'language/language_model.dart';
+export 'banner/banner_data.dart';

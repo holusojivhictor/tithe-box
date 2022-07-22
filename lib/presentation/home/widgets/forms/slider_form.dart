@@ -69,6 +69,8 @@ class _SliderFormState extends State<SliderForm> {
       final fToast = ToastUtils.of(context);
       bloc.add(SettingsEvent.tithePercentageChanged(newValue: double.parse(percentageController.text)));
       ToastUtils.showSucceedToast(fToast, 'Percentage successfully updated');
+      setState(() => submitted = false);
+      percentageController.clear();
     }
   }
 }

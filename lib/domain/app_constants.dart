@@ -22,6 +22,21 @@ class Data {
       reading: 'But remember the Lord your God. For it is He who is giving you power to become rich.',
     ),
   ];
+
+  static List<BannerData> homeBannerData = [
+    BannerData(
+      header: 'Total Income\n\n',
+      info: 'N1000.00',
+    ),
+    BannerData(
+      header: 'Total Income\n\n',
+      info: 'N1000.00',
+    ),
+    BannerData(
+      header: 'Total Income\n\n',
+      info: 'N1000.00',
+    ),
+  ];
 }
 
 /// SharedPreferences operations

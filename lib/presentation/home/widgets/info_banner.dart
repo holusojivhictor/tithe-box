@@ -5,13 +5,22 @@ import 'package:tithe_box/presentation/shared/svg_image.dart';
 import 'package:tithe_box/theme.dart';
 
 class InfoBanner extends StatelessWidget {
-  const InfoBanner({Key? key}) : super(key: key);
+  final String header;
+  final String info;
+  const InfoBanner({
+    Key? key,
+    required this.header,
+    required this.info,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomCard(
       elevation: 0,
       shape: Styles.mainCardShape,
+      margin: EdgeInsets.zero,
+      clipBehavior: Clip.antiAlias,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Stack(
         alignment: AlignmentDirectional.center,
         children: [
@@ -21,7 +30,7 @@ class InfoBanner extends StatelessWidget {
               label: 'Info banner svg',
               image: Assets.getSvgPath('mask-vector.svg'),
               fit: BoxFit.cover,
-              height: 140,
+              height: 135,
             ),
           ),
           Row(
@@ -33,16 +42,17 @@ class InfoBanner extends StatelessWidget {
               Expanded(
                 flex: 75,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text.rich(
                       TextSpan(
-                        text: "Total Income\n\n",
+                        text: header,
                         style: TextStyle(color: kWhite, fontSize: 18),
-                        children: const [
+                        children: [
                           TextSpan(
-                            text: "N1000.00",
-                            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
+                            text: info,
+                            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
                           ),
                         ],
                       ),

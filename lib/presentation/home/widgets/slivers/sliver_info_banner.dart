@@ -12,7 +12,7 @@ class SliverInfoBanner extends StatefulWidget {
 }
 
 class _SliverInfoBannerState extends State<SliverInfoBanner> {
-  final int _currentPage = 0;
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,21 @@ class _SliverInfoBannerState extends State<SliverInfoBanner> {
       sliver: SliverToBoxAdapter(
         child: Column(
           children: [
-            const InfoBanner(),
+            SizedBox(
+              height: 135,
+              child: PageView.builder(
+                onPageChanged: (value) {
+                  setState(() {
+                    _currentPage = value;
+                  });
+                },
+                itemCount: Data.homeBannerData.length,
+                itemBuilder: (context, index) => InfoBanner(
+                  header: Data.homeBannerData[index].header,
+                  info: Data.homeBannerData[index].info,
+                ),
+              ),
+            ),
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
