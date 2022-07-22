@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:tithe_box/presentation/home/widgets/sliver_cards_menu.dart';
 
 import 'widgets/sliver_choice_bar.dart';
 import 'widgets/sliver_home_greet.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
             SliverSearchBar(),
             SliverInfoBanner(),
             SliverChoiceBar(),
+            SliverCardsMenu(),
           ],
         ),
       ),

@@ -52,8 +52,6 @@ class Styles {
     return forDefaultIcons ? 24 : 18;
   }
 
-  static BorderRadius homeCardItemBorderRadius = BorderRadius.circular(15);
-
   static const double mediumButtonSplashRadius = 25;
 
   static const expandedBorderRadius = BorderRadius.only(
@@ -93,8 +91,8 @@ class Styles {
 
   static const double materialCardHeight = 270;
   static const double materialCardWidth = 220;
-  static const double homeCardHeight = 170;
-  static const double homeCardWidth = 280;
+  static const double homeCardHeight = 160;
+  static const double homeCardWidth = 140;
 
   static const double cardThreeElevation = 3;
   static const double cardTenElevation = 10;
@@ -104,6 +102,8 @@ class Styles {
   static const circularBorderRadius7 = BorderRadius.all(Radius.circular(7));
 
   static const mainCardBorderRadius = BorderRadius.all(Radius.circular(5));
+
+  static const homeCardBorderRadius = BorderRadius.all(Radius.circular(10));
 
   static const settingsCardBorderRadius = BorderRadius.all(Radius.circular(5));
 
