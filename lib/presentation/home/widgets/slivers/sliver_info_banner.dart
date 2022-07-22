@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/theme.dart';
 
-import 'info_banner.dart';
+import '../info_banner.dart';
 
 class SliverInfoBanner extends StatefulWidget {
   const SliverInfoBanner({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tithe_box/theme.dart';
 
-import 'verse_card.dart';
+import '../verse_card.dart';
 
 class SliverVerseCard extends StatelessWidget {
   const SliverVerseCard({Key? key}) : super(key: key);
