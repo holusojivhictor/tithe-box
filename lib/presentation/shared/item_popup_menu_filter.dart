@@ -32,7 +32,7 @@ class ItemPopupMenuFilter<TEnum> extends StatelessWidget {
       onSelected: handleItemSelected,
       itemBuilder: (context) {
         final translatedValues = getTranslatedValues(context);
-        return getValuesToUse(translatedValues);
+        return getValuesToUse(context, translatedValues);
       },
       tooltip: toolTipText,
     );
@@ -42,11 +42,14 @@ class ItemPopupMenuFilter<TEnum> extends StatelessWidget {
     return EnumUtils.getTranslatedAndSortedEnum<TEnum>(values, itemText, exclude: exclude);
   }
 
-  List<CheckedPopupMenuItem<TEnum>> getValuesToUse(List<TranslatedEnum<TEnum>> translatedValues) {
+  List<CheckedPopupMenuItem<TEnum>> getValuesToUse(BuildContext context, List<TranslatedEnum<TEnum>> translatedValues) {
     return translatedValues.map((e) => CheckedPopupMenuItem<TEnum>(
       checked: selectedValue == e.enumValue,
       value: e.enumValue,
-      child: Text(e.translation),
+      child: Text(
+        e.translation,
+        style: TextStyle(color: Theme.of(context).indicatorColor),
+      ),
     )).toList();
   }
 

@@ -44,6 +44,7 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
     final screenWidth = MediaQuery.of(context).size.width;
     return Container(
       constraints: BoxConstraints(maxWidth: screenWidth * 0.9),
@@ -62,7 +63,7 @@ class _SearchFieldState extends State<SearchField> {
                 decoration: InputDecoration(
                   border: Styles.searchFieldBorder,
                   filled: true,
-                  fillColor: Colors.grey.withOpacity(0.25),
+                  fillColor: customTheme.categoryOverlay,
                   hintText: widget.hintText,
                   hintStyle: const TextStyle(fontSize: 15),
                   prefixIcon: Container(

@@ -71,11 +71,6 @@ class Styles {
     borderRadius: BorderRadius.all(Radius.circular(30)),
   );
 
-  static const altFormFieldBorder = OutlineInputBorder(
-    borderSide: BorderSide(width: 1, color: Colors.grey),
-    borderRadius: BorderRadius.all(Radius.circular(30)),
-  );
-
   static const searchFieldBorder = OutlineInputBorder(
     borderSide: BorderSide.none,
     borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -182,6 +177,12 @@ class TitheBoxTheme {
       textTheme: lightTextTheme,
       primaryColor: const Color(0xFFDF4903),
       colorScheme: const ColorScheme.light(primary: Color(0xFFDF4903)).copyWith(secondary: const Color(0xFF505050)),
+      extensions: const <ThemeExtension<dynamic>>[
+        CustomTheme(
+          formBorder: Color(0x8A000000),
+          categoryOverlay: Color(0xFFE0E0E0),
+        ),
+      ],
     );
   }
 
@@ -204,6 +205,43 @@ class TitheBoxTheme {
       textTheme: darkTextTheme,
       primaryColor: const Color(0xFFDF4903),
       colorScheme: const ColorScheme.dark(primary: Color(0xFFDF4903)).copyWith(secondary: const Color(0xFF505050)),
+      extensions: const <ThemeExtension<dynamic>>[
+        CustomTheme(
+          formBorder: Color(0xFFBDBDBD),
+          categoryOverlay: Color(0xFF616161),
+        ),
+      ],
+    );
+  }
+}
+
+@immutable
+class CustomTheme extends ThemeExtension<CustomTheme> {
+  final Color? formBorder;
+  final Color? categoryOverlay;
+
+  const CustomTheme({
+    required this.formBorder,
+    required this.categoryOverlay,
+  });
+
+  @override
+  CustomTheme copyWith({Color? formBorder, Color? categoryOverlay}) {
+    return CustomTheme(
+      formBorder: formBorder ?? this.formBorder,
+      categoryOverlay: categoryOverlay ?? this.categoryOverlay,
+    );
+  }
+
+  @override
+  CustomTheme lerp(ThemeExtension<CustomTheme>? other, double t) {
+    if (other is! CustomTheme) {
+      return this;
+    }
+
+    return CustomTheme(
+      formBorder: Color.lerp(formBorder, other.formBorder, t),
+      categoryOverlay: Color.lerp(categoryOverlay, other.categoryOverlay, t),
     );
   }
 }

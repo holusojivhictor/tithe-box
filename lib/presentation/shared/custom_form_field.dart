@@ -112,6 +112,7 @@ class FormFieldWithBorder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Container(
       margin: Styles.formFieldMargin,
       child: Column(
@@ -139,9 +140,9 @@ class FormFieldWithBorder extends StatelessWidget {
               errorText: errorText,
               suffixIcon: suffixIcon,
               contentPadding: Styles.altFormFieldPadding,
-              border: Styles.altFormFieldBorder,
-              enabledBorder: Styles.altFormFieldBorder,
-              focusedBorder: Styles.altFormFieldBorder,
+              border: altFormFieldBorder(context),
+              enabledBorder: altFormFieldBorder(context),
+              focusedBorder: altFormFieldBorder(context),
               filled: true,
               fillColor: theme.scaffoldBackgroundColor,
               hintStyle: theme.textTheme.bodyMedium!.copyWith(letterSpacing: 0.5, color: theme.indicatorColor.withOpacity(0.5)),
@@ -149,6 +150,14 @@ class FormFieldWithBorder extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  OutlineInputBorder altFormFieldBorder(BuildContext context) {
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
+    return OutlineInputBorder(
+      borderSide: BorderSide(color: customTheme.formBorder!),
+      borderRadius: const BorderRadius.all(Radius.circular(30)),
     );
   }
 }

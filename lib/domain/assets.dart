@@ -53,4 +53,21 @@ class Assets {
         throw Exception('Invalid home content type = $type');
     }
   }
+
+  static String translateSalaryType(SalaryType type) {
+    switch (type) {
+      case SalaryType.daily:
+        return 'Daily';
+      case SalaryType.weekly:
+        return 'Weekly';
+      case SalaryType.monthly:
+        return 'Monthly';
+      case SalaryType.yearly:
+        return 'Yearly';
+      case SalaryType.random:
+        return 'Random';
+      default:
+        throw Exception('Invalid salary type = $type');
+    }
+  }
 }

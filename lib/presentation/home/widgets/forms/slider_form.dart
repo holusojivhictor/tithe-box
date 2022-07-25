@@ -5,6 +5,7 @@ import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/presentation/shared/custom_form_field.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/utils/toast_utils.dart';
+import 'package:tithe_box/theme.dart';
 
 class SliderForm extends StatefulWidget {
   const SliderForm({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class _SliderFormState extends State<SliderForm> {
           ),
           const SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: Styles.edgeInsetAll10,
             child: DefaultButton(
               isPrimary: true,
               text: 'Save',

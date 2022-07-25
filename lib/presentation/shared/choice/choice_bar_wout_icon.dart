@@ -28,6 +28,7 @@ class ChoiceBarWithoutIcon<TEnum> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
     final translatedValues = getTranslatedValues();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
@@ -35,7 +36,7 @@ class ChoiceBarWithoutIcon<TEnum> extends StatelessWidget {
         padding: Styles.edgeInsetAll5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.grey.withOpacity(0.25),
+          color: customTheme.categoryOverlay,
         ),
         height: 45,
         child: ListView(
