@@ -55,7 +55,8 @@ class TitheBoxServiceImpl implements TitheBoxService {
 
   @override
   List<IncomeCardModel> getIncomesForCard() {
-    return _incomeFile.map((e) => _toIncomeForCard(e)).toList();
+    final userIncomeFile = _incomeFile.where((el) => el.userId == userId);
+    return userIncomeFile.map((e) => _toIncomeForCard(e)).toList();
   }
 
   IncomeCardModel _toIncomeForCard(IncomeFileModel model) {
