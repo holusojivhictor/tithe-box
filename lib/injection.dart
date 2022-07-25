@@ -26,6 +26,10 @@ class Injection {
     await settingsService.init();
     getIt.registerSingleton<SettingsService>(settingsService);
     
-    getIt.registerSingleton<TitheBoxService>(TitheBoxServiceImpl(authService, incomeService));
+    getIt.registerSingleton<TitheBoxService>(TitheBoxServiceImpl(
+      authService,
+      incomeService,
+      settingsService,
+    ));
   }
 }

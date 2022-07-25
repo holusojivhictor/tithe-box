@@ -1,17 +1,20 @@
+import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tithe_box/domain/app_constants.dart';
+import 'package:tithe_box/domain/enums/enums.dart';
 import 'package:tithe_box/domain/models/models.dart';
 import 'package:tithe_box/domain/services/services.dart';
 
 class TitheBoxServiceImpl implements TitheBoxService {
   final AuthService _authService;
   final IncomeService _incomeService;
+  final SettingsService _settingsService;
   late String token;
   late String userId;
   late UserProfileFile _userProfileFile;
   final List<IncomeFileModel> _incomeFile = <IncomeFileModel>[];
 
-  TitheBoxServiceImpl(this._authService, this._incomeService);
+  TitheBoxServiceImpl(this._authService, this._incomeService, this._settingsService);
 
   @override
   Future<void> init() async {
@@ -73,6 +76,24 @@ class TitheBoxServiceImpl implements TitheBoxService {
   @override
   UserProfileModel getProfile() {
     return _userProfileFile.user;
+  }
+
+  @override
+  Future<Response> recordIncome(String businessName, String incomeAmount, String description, String frequency) async {
+    final settings = _settingsService.appSettings;
+
+    final response = _incomeService.recordIncome(
+      token,
+      userId,
+      UserAccountType.personal.name,
+      businessName,
+      incomeAmount,
+      description,
+      settings.tithePercentage.toString(),
+      frequency,
+    );
+    
+    return response;
   }
 
   @override

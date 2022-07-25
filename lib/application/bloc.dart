@@ -7,3 +7,4 @@ export 'settings/settings_bloc.dart';
 export 'main_tab/main_tab_bloc.dart';
 export 'home/home_bloc.dart';
 export 'incomes/incomes_bloc.dart';
+export 'data/data_bloc.dart';
