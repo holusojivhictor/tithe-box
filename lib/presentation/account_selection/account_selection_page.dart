@@ -66,9 +66,7 @@ class AccountSelectionPage extends StatelessWidget {
                 isPrimary: true,
                 elevation: 0,
                 backgroundColor: kSecondary,
-                onPressed: () {
-                  context.read<SessionBloc>().add(const SessionEvent.startAuthState());
-                },
+                onPressed: null,
               ),
             ],
           ),

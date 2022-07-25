@@ -19,10 +19,13 @@ class Injection {
     final authService = AuthServiceImpl(firebaseService);
     getIt.registerSingleton<AuthService>(authService);
 
+    final incomeService = IncomeServiceImpl();
+    getIt.registerSingleton<IncomeService>(incomeService);
+
     final settingsService = SettingsServiceImpl(loggingService);
     await settingsService.init();
     getIt.registerSingleton<SettingsService>(settingsService);
     
-    getIt.registerSingleton<TitheBoxService>(TitheBoxServiceImpl(authService));
+    getIt.registerSingleton<TitheBoxService>(TitheBoxServiceImpl(authService, incomeService));
   }
 }

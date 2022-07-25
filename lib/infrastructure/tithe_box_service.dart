@@ -5,11 +5,13 @@ import 'package:tithe_box/domain/services/services.dart';
 
 class TitheBoxServiceImpl implements TitheBoxService {
   final AuthService _authService;
+  final IncomeService _incomeService;
   late String token;
   late String userId;
   late UserProfileFile _userProfileFile;
+  final List<IncomeFileModel> _incomeFile = <IncomeFileModel>[];
 
-  TitheBoxServiceImpl(this._authService);
+  TitheBoxServiceImpl(this._authService, this._incomeService);
 
   @override
   Future<void> init() async {
@@ -31,6 +33,40 @@ class TitheBoxServiceImpl implements TitheBoxService {
     final response = await _authService.getProfile(userId, token);
     final json = response.data as Map<String, dynamic>;
     _userProfileFile = UserProfileFile.fromJson(json);
+  }
+
+  @override
+  Future<void> getIncomeData() async {
+    final response = await _incomeService.getIncomes(token, userId);
+    final list = response.data as List;
+    _incomeFile.addAll(list as List<IncomeFileModel>);
+  }
+
+  @override
+  IncomeFileModel getIncome(String id) {
+    return _incomeFile.firstWhere((el) => el.incomeId == id);
+  }
+
+  @override
+  IncomeCardModel getIncomeForCard(String id) {
+    final income = _incomeFile.firstWhere((el) => el.incomeId == id);
+    return _toIncomeForCard(income);
+  }
+
+  @override
+  List<IncomeCardModel> getIncomesForCard() {
+    return _incomeFile.map((e) => _toIncomeForCard(e)).toList();
+  }
+
+  IncomeCardModel _toIncomeForCard(IncomeFileModel model) {
+    return IncomeCardModel(
+      id: model.incomeId,
+      type: model.type,
+      businessName: model.businessName,
+      amount: model.amount,
+      frequency: model.frequency,
+      createdAt: model.createdAt,
+    );
   }
 
   @override

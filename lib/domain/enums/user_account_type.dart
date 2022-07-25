@@ -1,0 +1,4 @@
+enum UserAccountType {
+  personal,
+  corporate,
+}
