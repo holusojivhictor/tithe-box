@@ -39,10 +39,14 @@ class ChoiceBarWithoutIcon<TEnum> extends StatelessWidget {
           color: customTheme.categoryOverlay,
         ),
         height: 45,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          physics: const NeverScrollableScrollPhysics(),
-          children: getButtons(context, translatedValues),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          child: SizedBox(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: getButtons(context, translatedValues),
+            ),
+          ),
         ),
       ),
     );
