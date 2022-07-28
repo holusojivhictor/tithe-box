@@ -7,6 +7,7 @@ class ClickableTitle extends StatelessWidget {
   final TextStyle? textStyle;
   final TextStyle? trailingTextStyle;
   final EdgeInsetsGeometry padding;
+  final Color? color;
 
   const ClickableTitle({
     Key? key,
@@ -16,6 +17,7 @@ class ClickableTitle extends StatelessWidget {
     this.buttonText,
     this.textStyle,
     this.trailingTextStyle,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -35,7 +37,7 @@ class ClickableTitle extends StatelessWidget {
         title: Text(
           title,
           textAlign: TextAlign.start,
-          style: textStyle ?? theme.textTheme.bodyLarge!.copyWith(fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 0.15, color: theme.primaryColor),
+          style: textStyle ?? theme.textTheme.bodyLarge!.copyWith(fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 0.15, color: color),
         ),
       ),
     );
@@ -49,6 +51,7 @@ class SliverClickableTitle extends StatelessWidget {
   final TextStyle? textStyle;
   final TextStyle? trailingTextStyle;
   final EdgeInsetsGeometry padding;
+  final Color? color;
 
   const SliverClickableTitle({
     Key? key,
@@ -58,6 +61,7 @@ class SliverClickableTitle extends StatelessWidget {
     this.buttonText,
     this.textStyle,
     this.trailingTextStyle,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -78,7 +82,7 @@ class SliverClickableTitle extends StatelessWidget {
           title: Text(
             title,
             textAlign: TextAlign.start,
-            style: textStyle ?? theme.textTheme.bodyLarge!.copyWith(fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 0.15, color: theme.primaryColor),
+            style: textStyle ?? theme.textTheme.bodyLarge!.copyWith(fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 0.15, color: color),
           ),
         ),
       ),

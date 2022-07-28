@@ -20,6 +20,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
   Future<void> init() async {
     await Future.wait([
       initProfile(),
+      getIncomeData(),
     ]);
   }
 
@@ -40,9 +41,10 @@ class TitheBoxServiceImpl implements TitheBoxService {
 
   @override
   Future<void> getIncomeData() async {
+    _incomeFile.clear();
     final response = await _incomeService.getIncomes(token, userId);
     final list = response.data as List;
-    _incomeFile.addAll(list as List<IncomeFileModel>);
+    _incomeFile.addAll(list.map((e) => IncomeFileModel.fromJson(e)));
   }
 
   @override

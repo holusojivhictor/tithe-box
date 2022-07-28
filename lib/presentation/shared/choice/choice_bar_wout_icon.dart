@@ -24,8 +24,6 @@ class ChoiceBarWithoutIcon<TEnum> extends StatelessWidget {
     required this.choiceText,
   }) : super(key: key);
 
-  // TODO: Remove never scrollable physics
-
   @override
   Widget build(BuildContext context) {
     final customTheme = Theme.of(context).extension<CustomTheme>()!;

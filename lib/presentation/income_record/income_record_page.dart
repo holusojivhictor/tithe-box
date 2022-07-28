@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
+import 'package:tithe_box/domain/assets.dart';
+import 'package:tithe_box/domain/extensions/string_extensions.dart';
 import 'package:tithe_box/domain/models/models.dart';
+import 'package:grouped_list/grouped_list.dart';
 import 'package:tithe_box/presentation/income_record/widgets/sliver_income_choice_bar.dart';
 import 'package:tithe_box/presentation/income_record/widgets/income_record_card.dart';
 import 'package:tithe_box/presentation/income_record/widgets/sliver_page_header.dart';
-import 'package:tithe_box/presentation/shared/sliver_loading.dart';
+import 'package:tithe_box/presentation/shared/clickable_title.dart';
+import 'package:tithe_box/presentation/shared/loading.dart';
 import 'package:tithe_box/presentation/shared/sliver_nothing_found.dart';
 import 'package:tithe_box/presentation/shared/sliver_scaffold_with_fab.dart';
 
@@ -14,37 +18,41 @@ class IncomeRecordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverScaffoldWithFab(
-      appbar: const _AppBar(),
-      slivers: [
-        const SliverPageHeader(),
-        const SliverIncomeChoiceBar(),
-        BlocBuilder<IncomesBloc, IncomesState>(
-          builder: (ctx, state) => state.map(
-            loading: (_) => const SliverLoading(),
-            loaded: (state) {
-              if (state.incomes.isNotEmpty) {
-                return SliverToBoxAdapter(
-                  child: _buildList(context, state.incomes),
-                );
-              } else {
-                return const SliverNothingFound();
-              }
-            },
-          ),
+    final theme = Theme.of(context);
+
+    return BlocBuilder<IncomesBloc, IncomesState>(
+      builder: (ctx, state) => state.map(
+        loading: (_) => const Loading(),
+        loaded: (state) => SliverScaffoldWithFab(
+          appbar: const _AppBar(),
+          slivers: [
+            const SliverPageHeader(),
+            const SliverIncomeChoiceBar(),
+            SliverClickableTitle(
+              title: 'Income Record - (${Assets.translateSalaryType(state.salaryType)})',
+              textStyle: theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+            ),
+            if (state.incomes.isNotEmpty)
+              SliverToBoxAdapter(child: _buildGroupedList(context, state.incomes))
+            else const SliverNothingFound(),
+
+          ],
         ),
-      ],
+      ),
     );
   }
 
-  Widget _buildList(BuildContext context, List<IncomeCardModel> incomes) {
-    return ListView.builder(
-      physics: const BouncingScrollPhysics(),
-      itemCount: incomes.length,
-      itemBuilder: (ctx, index) {
-        final e = incomes[index];
-        return IncomeRecordCard.item(income: e);
-      },
+  Widget _buildGroupedList(BuildContext context, List<IncomeCardModel> incomes, {ScrollController? scrollController}) {
+    return GroupedListView<IncomeCardModel, String>(
+      shrinkWrap: true,
+      elements: incomes,
+      controller: scrollController,
+      groupBy: (item) => item.createdAt.formatDateString(),
+      itemBuilder: (context, element) => IncomeRecordCard.item(income: element),
+      groupSeparatorBuilder: (type) => Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Text(type),
+      ),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/enums/enums.dart';
 import 'package:tithe_box/presentation/shared/clickable_title.dart';
 import 'package:tithe_box/presentation/shared/loading.dart';
+import 'package:tithe_box/theme.dart';
 
 import 'widgets/slivers/sliver_add_income_form.dart';
 import 'widgets/slivers/sliver_cards_menu.dart';
@@ -38,11 +39,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
           List children;
           switch (contentType) {
             case HomeContentType.all:
-              children = const [
-                SliverSliderBar(),
-                SliverCardsMenu(),
-                SliverClickableTitle(title: 'What the Bible says'),
-                SliverVerseCard(),
+              children = [
+                const SliverSliderBar(),
+                const SliverCardsMenu(),
+                SliverClickableTitle(title: 'What the Bible says', color: kPrimary),
+                const SliverVerseCard(),
               ];
               break;
             case HomeContentType.addIncome:

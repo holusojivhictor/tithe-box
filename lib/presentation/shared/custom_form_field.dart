@@ -142,7 +142,6 @@ class FormFieldWithBorder extends StatelessWidget {
               contentPadding: Styles.altFormFieldPadding,
               border: altFormFieldBorder(context),
               enabledBorder: altFormFieldBorder(context),
-              focusedBorder: altFormFieldBorder(context),
               filled: true,
               fillColor: theme.scaffoldBackgroundColor,
               hintStyle: theme.textTheme.bodyMedium!.copyWith(letterSpacing: 0.5, color: theme.indicatorColor.withOpacity(0.5)),

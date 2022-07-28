@@ -28,6 +28,24 @@ class IncomesBloc extends Bloc<IncomesEvent, IncomesState> {
     var data = _titheBoxService.getIncomesForCard();
 
     if (!isLoaded) {
+      switch (salaryType) {
+        case SalaryType.daily:
+          data = data.where((el) => el.frequency == SalaryType.daily).toList();
+          break;
+        case SalaryType.weekly:
+          data = data.where((el) => el.frequency == SalaryType.weekly).toList();
+          break;
+        case SalaryType.monthly:
+          data = data.where((el) => el.frequency == SalaryType.monthly).toList();
+          break;
+        case SalaryType.yearly:
+          data = data.where((el) => el.frequency == SalaryType.yearly).toList();
+          break;
+        case SalaryType.random:
+          data = data.where((el) => el.frequency == SalaryType.random).toList();
+          break;
+      }
+
       return IncomesState.loaded(
         incomes: data,
         salaryType: salaryType,
