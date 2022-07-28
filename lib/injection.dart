@@ -13,6 +13,13 @@ class Injection {
     return SignInBloc(authService, titheBoxService, logger, bloc);
   }
 
+  static UserProfileBloc getUserProfileBloc(SessionBloc bloc) {
+    final authService = getIt<AuthService>();
+    final titheBoxService = getIt<TitheBoxService>();
+    final logger = getIt<LoggingService>();
+    return UserProfileBloc(authService, titheBoxService, logger, bloc);
+  }
+
   static Future<void> init() async {
     final deviceInfoService = DeviceInfoServiceImpl();
     getIt.registerSingleton<DeviceInfoService>(deviceInfoService);

@@ -35,14 +35,6 @@ class TitheBox extends StatelessWidget {
             return SignUpBloc(ctx.read<SessionBloc>());
           },
         ),
-        BlocProvider(
-          create: (ctx) {
-            final authService = getIt<AuthService>();
-            final titheBoxService = getIt<TitheBoxService>();
-            final logger = getIt<LoggingService>();
-            return UserProfileBloc(authService, titheBoxService, logger, ctx.read<SessionBloc>());
-          },
-        ),
         BlocProvider(create: (ctx) => MainTabBloc()),
         BlocProvider(
           create: (ctx) {

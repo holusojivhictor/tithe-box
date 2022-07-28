@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tithe_box/application/bloc.dart';
-import 'package:tithe_box/application/result/result_state.dart';
-import 'package:tithe_box/domain/models/models.dart';
 import 'package:tithe_box/presentation/create_profile/widgets/profile_form.dart';
 import 'package:tithe_box/presentation/shared/auth_app_bar.dart';
-import 'package:tithe_box/presentation/shared/custom_alert_dialog.dart';
 import 'package:tithe_box/theme.dart';
 
 class CreateProfilePage extends StatelessWidget {
@@ -72,22 +67,6 @@ class CreateProfilePage extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ),
-        ),
-        Container(
-          color: Colors.black54,
-          child: BlocBuilder<UserProfileBloc, ResultState>(
-            builder: (ctx, state) => state.when(
-              idle: () => const SizedBox.shrink(),
-              loading: () => const CustomAlertDialog(text: 'Creating account...'),
-              data: (_) {
-                return const CustomAlertDialog(text: 'Initializing data...');
-              },
-              done: () {
-                return const SizedBox.shrink();
-              },
-              error: (e) => CustomAlertDialog(title: Text('Account creation failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
             ),
           ),
         ),
