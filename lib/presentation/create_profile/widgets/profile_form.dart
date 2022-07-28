@@ -164,8 +164,6 @@ class _ProfileFormState extends State<ProfileForm> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      context.read<SessionBloc>().add(SessionEvent.createProfile(hasDialog: true, email: widget.email, phoneNumber: widget.phoneNumber, password: widget.password, confirmPassword: widget.confirmPassword));
-
       final bloc = context.read<UserProfileBloc>();
       bloc.add(UserProfileEvent.createProfile(emailAddress: widget.email, firstName: firstNameController.text, lastName: lastNameController.text, occupation: occupationController.text, churchName: nameOfChurchController.text, city: cityController.text, country: selectedCountryValue, phoneNumber: widget.phoneNumber, serviceDays: ["Sunday"], password: widget.password, passwordConfirmation: widget.confirmPassword));
     }

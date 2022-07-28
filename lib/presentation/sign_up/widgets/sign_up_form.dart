@@ -135,7 +135,7 @@ class _SignUpFormState extends State<SignUpForm> {
             mainAxisAlignment: MainAxisAlignment.center,
             child: InkWell(
               onTap: () {
-                context.read<SessionBloc>().add(const SessionEvent.signInRequested(hasDialog: false));
+                context.read<SessionBloc>().add(const SessionEvent.signInRequested());
               },
               child: Text(
                 'Login',

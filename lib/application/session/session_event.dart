@@ -13,16 +13,13 @@ class SessionEvent with _$SessionEvent {
   const factory SessionEvent.signUpRequested() = _SignUp;
 
   const factory SessionEvent.createProfile({
-    required bool hasDialog,
     required String email,
     required String phoneNumber,
     required String password,
     required String confirmPassword,
   }) = _CreateProfile;
 
-  const factory SessionEvent.signInRequested({
-    required bool hasDialog,
-  }) = _SignIn;
+  const factory SessionEvent.signInRequested() = _SignIn;
 
   const factory SessionEvent.initStartup() = _InitStartup;
 }

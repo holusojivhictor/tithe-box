@@ -13,6 +13,8 @@ class ResultState<T> with _$ResultState<T> {
     required T data,
   }) = _DataState<T>;
 
+  const factory ResultState.done() = _DoneState<T>;
+
   const factory ResultState.error({
     required NetworkExceptions error,
   }) = _ErrorState<T>;

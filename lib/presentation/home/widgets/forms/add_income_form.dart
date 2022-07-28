@@ -122,10 +122,25 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
           const SizedBox(height: 10),
           Padding(
             padding: Styles.edgeInsetAll10,
-            child: DefaultButton(
-              isPrimary: true,
-              text: 'Record Income',
-              onPressed: () => _recordIncome(context),
+            child: BlocBuilder<DataBloc, DataState>(
+              builder: (ctx, state) => state.map(
+                idle: (_) => DefaultButton(
+                  isPrimary: true,
+                  text: 'Record Income',
+                  onPressed: () => _recordIncome(context),
+                ),
+                loading: (_) => const ProgressButton(),
+                data: (state) => DefaultButton(
+                  isPrimary: true,
+                  text: 'Record Income',
+                  onPressed: () => _recordIncome(context),
+                ),
+                error: (e) => DefaultButton(
+                  isPrimary: true,
+                  text: 'Record Income',
+                  onPressed: () => _recordIncome(context),
+                ),
+              ),
             ),
           ),
         ],
@@ -143,7 +158,9 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
       bloc.add(DataEvent.recordIncome(businessName: businessNameController.text, incomeAmount: incomeController.text, description: descriptionController.text, frequency: selectedSalaryType.name));
       ToastUtils.showSucceedToast(fToast, 'Income added successfully');
       setState(() => submitted = false);
-      TextEditingController().clear();
+      businessNameController.clear();
+      incomeController.clear();
+      descriptionController.clear();
     }
   }
 }

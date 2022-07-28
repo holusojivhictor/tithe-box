@@ -13,7 +13,6 @@ class CreateProfilePage extends StatelessWidget {
   final String phoneNumber;
   final String password;
   final String confirmPassword;
-  final bool hasDialog;
 
   const CreateProfilePage({
     Key? key,
@@ -21,26 +20,11 @@ class CreateProfilePage extends StatelessWidget {
     required this.phoneNumber,
     required this.password,
     required this.confirmPassword,
-    required this.hasDialog,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-
-    final dialog = Container(
-      color: Colors.black54,
-      child: BlocBuilder<UserProfileBloc, ResultState>(
-        builder: (ctx, state) => state.when(
-          idle: () => const CustomAlertDialog(text: 'Idling...'),
-          loading: () => const CustomAlertDialog(text: 'Creating account...'),
-          data: (_) {
-            return const CustomAlertDialog(text: 'Initializing data...');
-          },
-          error: (e) => CustomAlertDialog(title: Text('Account creation failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
-        ),
-      ),
-    );
 
     return Stack(
       children: [
@@ -91,8 +75,22 @@ class CreateProfilePage extends StatelessWidget {
             ),
           ),
         ),
-        if (hasDialog)
-          dialog
+        Container(
+          color: Colors.black54,
+          child: BlocBuilder<UserProfileBloc, ResultState>(
+            builder: (ctx, state) => state.when(
+              idle: () => const SizedBox.shrink(),
+              loading: () => const CustomAlertDialog(text: 'Creating account...'),
+              data: (_) {
+                return const CustomAlertDialog(text: 'Initializing data...');
+              },
+              done: () {
+                return const SizedBox.shrink();
+              },
+              error: (e) => CustomAlertDialog(title: Text('Account creation failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
+            ),
+          ),
+        ),
       ],
     );
   }

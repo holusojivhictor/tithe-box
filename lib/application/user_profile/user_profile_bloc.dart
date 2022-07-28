@@ -12,26 +12,36 @@ part 'user_profile_event.dart';
 
 class UserProfileBloc extends Bloc<UserProfileEvent, ResultState<Response>> {
   final AuthService _authService;
+  final TitheBoxService _titheBoxService;
+  final LoggingService _logger;
   final SessionBloc _sessionBloc;
 
-  UserProfileBloc(this._authService, this._sessionBloc) : super(const ResultState.idle()) {
+  UserProfileBloc(this._authService, this._titheBoxService, this._logger, this._sessionBloc) : super(const ResultState.idle()) {
     on<_CreateProfile>((e, emit) async {
       emit(const ResultState.loading());
       ApiResult<Response> apiResult = await _authService.registerAccount(e.firstName, e.lastName, e.emailAddress, e.occupation, e.city, e.churchName, e.country, e.phoneNumber, e.serviceDays, e.password, e.passwordConfirmation);
       await apiResult.when(
         success: (Response response) async {
           final json = response.data as Map<String, dynamic>;
-          final token = json["token"] as String;
-          final userId = json["_id"] as String;
-          await saveString(key: tokenStorageKey, value: token);
-          await saveString(key: userIdStorageKey, value: userId);
-          _sessionBloc.add(const SessionEvent.initStartup());
+          await _saveData(json);
           emit(ResultState.data(data: response));
+          await _titheBoxService.getTokenAndId();
+          await _titheBoxService.init().whenComplete(() => emit(const ResultState.done()));
+          final userData = _titheBoxService.getProfile();
+          _logger.info(runtimeType, 'User ${userData.email} signing in...');
+          _sessionBloc.add(const SessionEvent.initStartup());
         },
         failure: (NetworkExceptions error) async {
           emit(ResultState.error(error: error));
         },
       );
     });
+  }
+
+  Future<void> _saveData(Map<String, dynamic> json) async {
+    final token = json["token"] as String;
+    final userId = json["_id"] as String;
+    await saveString(key: tokenStorageKey, value: token);
+    await saveString(key: userIdStorageKey, value: userId);
   }
 }

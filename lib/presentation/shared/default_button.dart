@@ -7,7 +7,7 @@ class DefaultButton extends StatelessWidget {
   final bool hasBorder;
   final EdgeInsetsGeometry padding;
   final double borderRadius;
-  final double minHeight;
+  final double maxHeight;
   final Color? backgroundColor;
   final bool hasIcon;
   final Widget? child;
@@ -22,7 +22,7 @@ class DefaultButton extends StatelessWidget {
     this.backgroundColor,
     this.padding = const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
     this.borderRadius = 30,
-    this.minHeight = 55,
+    this.maxHeight = 55,
     this.hasIcon = false,
     this.child,
     this.elevation,
@@ -51,7 +51,7 @@ class DefaultButton extends StatelessWidget {
           ),
           elevation: MaterialStateProperty.all(elevation),
           shadowColor: MaterialStateProperty.all(theme.shadowColor),
-          maximumSize: MaterialStateProperty.all(Size(width, minHeight)),
+          maximumSize: MaterialStateProperty.all(Size(width, maxHeight)),
         ),
         onPressed: onPressed,
         child: Row(
@@ -65,6 +65,39 @@ class DefaultButton extends StatelessWidget {
               ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ProgressButton extends StatelessWidget {
+  final EdgeInsetsGeometry padding;
+  final double minHeight;
+  final double? elevation;
+
+  const ProgressButton({
+    Key? key,
+    this.padding = const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+    this.minHeight = 55,
+    this.elevation,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width * 0.8;
+
+    return Padding(
+      padding: padding,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor),
+          shape: MaterialStateProperty.all(const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))),
+          ),
+          elevation: MaterialStateProperty.all(elevation),
+          minimumSize: MaterialStateProperty.all(Size(width, minHeight)),
+        ),
+        onPressed: null,
+        child: const CircularProgressIndicator(color: Colors.white),
       ),
     );
   }

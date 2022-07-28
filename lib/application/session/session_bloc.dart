@@ -55,11 +55,11 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     });
 
     on<_CreateProfile>((e, emit) async {
-      emit(SessionState.userProfileState(hasDialog: e.hasDialog, email: e.email, phoneNumber: e.phoneNumber, password: e.password, confirmPassword: e.confirmPassword));
+      emit(SessionState.userProfileState(email: e.email, phoneNumber: e.phoneNumber, password: e.password, confirmPassword: e.confirmPassword));
     });
 
     on<_SignIn>((event, emit) async {
-      emit(SessionState.signInState(hasDialog: event.hasDialog));
+      emit(const SessionState.signInState());
     });
 
     on<_InitStartup>((event, emit) async {
@@ -69,7 +69,6 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
         emit(const SessionState.unAuthenticated());
         return;
       }
-      await initialize();
 
       emit(const SessionState.authenticated());
     });

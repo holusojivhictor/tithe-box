@@ -23,8 +23,8 @@ class SessionWrapper extends StatelessWidget {
         accountTypeSelection: (s) => AccountSelectionPage(isInitialize: s.isInitialize),
         authSession: (_) => const AuthScreen(),
         signUpState: (_) => const SignUpPage(),
-        userProfileState: (s) => CreateProfilePage(hasDialog: s.hasDialog, email: s.email, phoneNumber: s.phoneNumber, password: s.password, confirmPassword: s.confirmPassword),
-        signInState: (s) => SignInPage(hasDialog: s.hasDialog),
+        userProfileState: (s) => CreateProfilePage(email: s.email, phoneNumber: s.phoneNumber, password: s.password, confirmPassword: s.confirmPassword),
+        signInState: (s) => const SignInPage(),
         authenticated: (_) => const MainTabPage(),
       ),
     );
