@@ -15,6 +15,7 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
     final theme = Theme.of(context);
     return Scaffold(
       backgroundColor: kWhite,
@@ -41,7 +42,7 @@ class AuthScreen extends StatelessWidget {
             children: [
               Text(
                 'Tithing has never been this easy',
-                style: theme.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
+                style: theme.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20, color: theme.indicatorColor),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 25),
@@ -49,7 +50,7 @@ class AuthScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   defaultText,
-                  style: theme.textTheme.bodyMedium!.copyWith(color: Colors.black54),
+                  style: theme.textTheme.bodyMedium!.copyWith(color: customTheme.altTextColor),
                   textAlign: TextAlign.center,
                 ),
               ),

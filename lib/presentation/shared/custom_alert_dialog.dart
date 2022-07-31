@@ -28,6 +28,7 @@ class CustomAlertDialog extends StatelessWidget {
             Text(
               text,
               overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: Theme.of(context).indicatorColor),
               maxLines: 3,
             ),
           ],
@@ -98,12 +99,13 @@ class CommonAlertDialog extends StatelessWidget {
       shape: Styles.alertDialogShape,
       title: Text(
         titleText,
-        style: theme.textTheme.bodyLarge,
+        style: theme.textTheme.bodyLarge!.copyWith(color: theme.indicatorColor),
       ),
       content: SizedBox(
         width: mediaQuery.getWidthForDialogs(),
         child: Text(
           contentText,
+          style: TextStyle(color: theme.indicatorColor),
           overflow: TextOverflow.ellipsis,
           maxLines: 3,
         ),

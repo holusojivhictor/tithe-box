@@ -26,7 +26,7 @@ class RowText extends StatelessWidget {
       children: [
         Text(
           text,
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: color),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: color ?? Theme.of(context).indicatorColor),
         ),
         if (isSelectable)
           child!,

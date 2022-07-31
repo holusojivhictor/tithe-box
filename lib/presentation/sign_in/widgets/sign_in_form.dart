@@ -120,6 +120,7 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   Future<void> _signIn(BuildContext context) async {
+    final theme = Theme.of(context);
     setState(() => submitted = true);
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -141,7 +142,7 @@ class _SignInFormState extends State<SignInForm> {
               Navigator.pop(context);
               return const SizedBox.shrink();
             },
-            error: (e) => CustomAlertDialog(title: Text('Log in failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
+            error: (e) => CustomAlertDialog(title: Text('Log in failed', style: theme.textTheme.titleMedium!.copyWith(color: theme.indicatorColor)), text: NetworkExceptions.getErrorMessage(e), isError: true),
           ),
         ),
       );

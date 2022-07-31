@@ -16,6 +16,7 @@ class AccountSelectionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       backgroundColor: kWhite,
@@ -39,7 +40,7 @@ class AccountSelectionPage extends StatelessWidget {
             children: [
               Text(
                 'Choose Tithe Type',
-                style: textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
+                style: textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20, color: Theme.of(context).indicatorColor),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 25),
@@ -47,7 +48,7 @@ class AccountSelectionPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   defaultText,
-                  style: textTheme.bodyMedium!.copyWith(color: Colors.black54),
+                  style: textTheme.bodyMedium!.copyWith(color: customTheme.altTextColor),
                   textAlign: TextAlign.center,
                 ),
               ),

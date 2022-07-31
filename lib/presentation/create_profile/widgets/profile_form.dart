@@ -173,6 +173,20 @@ class _ProfileFormState extends State<ProfileForm> {
                 onPressed: () => _completeProfile(context),
               ),
             ),
+            RowText(
+              isSelectable: true,
+              text: "Already have an account?.   ",
+              mainAxisAlignment: MainAxisAlignment.center,
+              child: InkWell(
+                onTap: () {
+                  context.read<SessionBloc>().add(const SessionEvent.signInRequested());
+                },
+                child: Text(
+                  'Login',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).primaryColor),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -180,6 +194,7 @@ class _ProfileFormState extends State<ProfileForm> {
   }
 
   Future<void> _completeProfile(BuildContext context) async {
+    final theme = Theme.of(context);
     setState(() => submitted = true);
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -201,7 +216,7 @@ class _ProfileFormState extends State<ProfileForm> {
               Navigator.pop(context);
               return const SizedBox.shrink();
             },
-            error: (e) => CustomAlertDialog(title: Text('Account creation failed', style: Theme.of(context).textTheme.titleMedium), text: NetworkExceptions.getErrorMessage(e), isError: true),
+            error: (e) => CustomAlertDialog(title: Text('Account creation failed', style: theme.textTheme.titleMedium!.copyWith(color: theme.indicatorColor)), text: NetworkExceptions.getErrorMessage(e), isError: true),
           ),
         ),
       );

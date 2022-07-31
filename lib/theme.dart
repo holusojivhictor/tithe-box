@@ -181,6 +181,7 @@ class TitheBoxTheme {
         CustomTheme(
           formBorder: Color(0x8A000000),
           categoryOverlay: Color(0xFFE0E0E0),
+          altTextColor: Colors.black54,
         ),
       ],
     );
@@ -209,6 +210,7 @@ class TitheBoxTheme {
         CustomTheme(
           formBorder: Color(0xFFBDBDBD),
           categoryOverlay: Color(0xFF616161),
+          altTextColor: Colors.white54,
         ),
       ],
     );
@@ -219,17 +221,20 @@ class TitheBoxTheme {
 class CustomTheme extends ThemeExtension<CustomTheme> {
   final Color? formBorder;
   final Color? categoryOverlay;
+  final Color? altTextColor;
 
   const CustomTheme({
     required this.formBorder,
     required this.categoryOverlay,
+    required this.altTextColor,
   });
 
   @override
-  CustomTheme copyWith({Color? formBorder, Color? categoryOverlay}) {
+  CustomTheme copyWith({Color? formBorder, Color? categoryOverlay, Color? altTextColor}) {
     return CustomTheme(
       formBorder: formBorder ?? this.formBorder,
       categoryOverlay: categoryOverlay ?? this.categoryOverlay,
+      altTextColor: altTextColor ?? this.altTextColor,
     );
   }
 
@@ -242,6 +247,7 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
     return CustomTheme(
       formBorder: Color.lerp(formBorder, other.formBorder, t),
       categoryOverlay: Color.lerp(categoryOverlay, other.categoryOverlay, t),
+        altTextColor: Color.lerp(altTextColor, other.altTextColor, t),
     );
   }
 }

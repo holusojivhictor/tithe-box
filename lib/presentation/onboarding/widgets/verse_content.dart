@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tithe_box/theme.dart';
 
 class VerseContent extends StatelessWidget {
   final String verse;
@@ -12,13 +13,14 @@ class VerseContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
     final textTheme = Theme.of(context).textTheme;
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Text(
           verse,
-          style: textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
+          style: textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20, color: Theme.of(context).indicatorColor),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 20),
@@ -26,7 +28,7 @@ class VerseContent extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             reading,
-            style: textTheme.bodyMedium!.copyWith(color: Colors.black54),
+            style: textTheme.bodyMedium!.copyWith(color: customTheme.altTextColor),
             textAlign: TextAlign.center,
           ),
         ),

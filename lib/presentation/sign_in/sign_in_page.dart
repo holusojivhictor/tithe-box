@@ -39,8 +39,9 @@ class _SignInPageState extends State<SignInPage> {
                       style: textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
                     ),
                     const SizedBox(height: 10),
-                    const Text(
+                    Text(
                       "Fill in your details to log into your account",
+                      style: TextStyle(color: Theme.of(context).indicatorColor),
                     ),
                   ],
                 ),

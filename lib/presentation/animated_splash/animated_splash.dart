@@ -35,7 +35,7 @@ class AnimatedSplash extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                     'Your digital Tithe Booklet',
-                    style: theme.textTheme.bodySmall!.copyWith(fontStyle: FontStyle.italic),
+                    style: theme.textTheme.bodySmall!.copyWith(fontStyle: FontStyle.italic, color: theme.indicatorColor),
                   ),
                 ],
               ),
