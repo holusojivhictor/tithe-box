@@ -18,6 +18,7 @@ abstract class TitheBoxService {
   List<IncomeCardModel> getIncomesForCard();
   IncomeFileModel getIncome(String id);
   IncomeCardModel getIncomeForCard(String id);
+  double totalIncome();
 
   Future<Response> recordIncome(
     String businessName,

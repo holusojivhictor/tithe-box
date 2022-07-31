@@ -18,16 +18,19 @@ class CalculateTithePage extends StatelessWidget {
       builder: (ctx, state) => state.map(
         loading: (_) => const Loading(),
         loaded: (state) => SliverScaffoldWithFab(
-          appbar: _AppBar(),
+          appbar: const _AppBar(),
           slivers: [
-            SliverPageHeader(header: 'Calculate Tithe', subHeader: 'Input the needed details to calculate your tithe seamlessly.'),
+            const SliverPageHeader(header: 'Calculate Tithe', subHeader: 'Input the needed details to calculate your tithe seamlessly.'),
             SliverPadding(
-              padding: EdgeInsets.only(top: 25, bottom: 10),
+              padding: const EdgeInsets.only(top: 25, bottom: 10),
               sliver: SliverToBoxAdapter(
-                child: InfoBanner(header: 'Total Income\n\n', info: 'N1000.00'),
+                child: InfoBanner(
+                  header: 'Total Income\n\n',
+                  info: 'N${state.totalIncome}',
+                ),
               ),
             ),
-            SliverPadding(
+            const SliverPadding(
               padding: Styles.edgeInsetAll10,
               sliver: SliverToBoxAdapter(
                 child: CalculateTitheForm(),

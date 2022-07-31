@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:intl/intl.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tithe_box/domain/enums/enums.dart';
 import 'package:tithe_box/domain/models/models.dart';
@@ -50,6 +54,12 @@ Future<String> getSavedString({required String key}) async {
   final value = prefs.getString(key);
 
   return value ?? '';
+}
+
+/// Get currency symbol from platform locale
+String getCurrency() {
+  var format = NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'NGN');
+  return format.currencySymbol;
 }
 
 /// Validator strings

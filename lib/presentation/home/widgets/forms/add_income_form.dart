@@ -156,11 +156,11 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
       final bloc = context.read<DataBloc>();
       final fToast = ToastUtils.of(context);
       bloc.add(DataEvent.recordIncome(businessName: businessNameController.text, incomeAmount: incomeController.text, description: descriptionController.text, frequency: selectedSalaryType.name));
-      ToastUtils.showSucceedToast(fToast, 'Income added successfully');
       setState(() => submitted = false);
       businessNameController.clear();
       incomeController.clear();
       descriptionController.clear();
+      ToastUtils.showSucceedToast(fToast, 'Income added successfully');
     }
   }
 }

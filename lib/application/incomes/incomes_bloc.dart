@@ -26,6 +26,7 @@ class IncomesBloc extends Bloc<IncomesEvent, IncomesState> {
   }) {
     final isLoaded = state is _LoadedState;
     var data = _titheBoxService.getIncomesForCard();
+    final totalIncome = _titheBoxService.totalIncome();
 
     if (!isLoaded) {
       switch (salaryType) {
@@ -48,6 +49,7 @@ class IncomesBloc extends Bloc<IncomesEvent, IncomesState> {
 
       return IncomesState.loaded(
         incomes: data,
+        totalIncome: totalIncome,
         salaryType: salaryType,
         tempSalaryType: salaryType,
       );
@@ -73,6 +75,7 @@ class IncomesBloc extends Bloc<IncomesEvent, IncomesState> {
 
     final s = currentState.copyWith.call(
       incomes: data,
+      totalIncome: totalIncome,
       salaryType: salaryType,
       tempSalaryType: salaryType,
     );

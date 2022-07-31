@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/presentation/home/widgets/slider_bar.dart';
 import 'package:tithe_box/presentation/shared/custom_form_field.dart';
+import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/loading.dart';
 import 'package:tithe_box/presentation/shared/row_text.dart';
 import 'package:tithe_box/theme.dart';
@@ -79,6 +80,14 @@ class _CalculateTitheFormState extends State<CalculateTitheForm> {
                 ),
               ),
             ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            child: DefaultButton(
+              isPrimary: true,
+              text: 'Record Tithe',
+              onPressed: () {},
+            ),
           ),
         ],
       ),
