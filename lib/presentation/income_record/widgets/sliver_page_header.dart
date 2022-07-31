@@ -4,18 +4,20 @@ import 'package:tithe_box/theme.dart';
 class SliverPageHeader extends StatelessWidget {
   final String header;
   final String subHeader;
+  final bool hasSpace;
 
   const SliverPageHeader({
     Key? key,
     required this.header,
     required this.subHeader,
+    this.hasSpace = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: hasSpace ? 10 : 0),
       sliver: SliverToBoxAdapter(
         child: Column(
           children: [

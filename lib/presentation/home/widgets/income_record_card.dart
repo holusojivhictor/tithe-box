@@ -17,7 +17,7 @@ class IncomeRecordCard extends StatelessWidget {
   }
 
   Future<void> _goToIncomeRecordPage(BuildContext context) async {
-    final route = MaterialPageRoute(builder: (c) => const IncomeRecordPage());
+    final route = MaterialPageRoute(builder: (c) => const IncomeRecordPage(hasAppBar: true));
     await Navigator.push(context, route);
     await route.completed;
   }

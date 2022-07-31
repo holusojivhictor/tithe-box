@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
+import 'package:tithe_box/presentation/income_record/income_record_page.dart';
 import 'package:tithe_box/presentation/shared/extensions/focus_scope_node_extensions.dart';
 
 import 'home/home_page.dart';
@@ -46,7 +47,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
             children: [
               const HomePage(),
               Container(),
-              Container(),
+              const IncomeRecordPage(),
               const SettingsPage(),
             ],
           ),
@@ -59,8 +60,8 @@ class _MobileScaffoldState extends State<MobileScaffold> {
         showUnselectedLabels: true,
         items: const [
           BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home)),
-          BottomNavigationBarItem(label: 'Record', icon: Icon(Icons.add_circle_outline), activeIcon: Icon(Icons.add_circle)),
-          BottomNavigationBarItem(label: 'Churches', icon: Icon(Icons.church_outlined), activeIcon: Icon(Icons.church)),
+          BottomNavigationBarItem(label: 'Tithe History', icon: Icon(Icons.church_outlined), activeIcon: Icon(Icons.church)),
+          BottomNavigationBarItem(label: 'Income Record', icon: Icon(Icons.add_circle_outline), activeIcon: Icon(Icons.add_circle)),
           BottomNavigationBarItem(label: 'Settings', icon: Icon(Icons.settings_outlined), activeIcon: Icon(Icons.settings)),
         ],
         type: BottomNavigationBarType.fixed,

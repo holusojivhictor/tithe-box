@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
-import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/domain/assets.dart';
 import 'package:tithe_box/presentation/shared/auth_app_bar.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
@@ -49,7 +48,7 @@ class AuthScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  defaultText,
+                  "Create an account or log in to an existing one to gain access to the app.",
                   style: theme.textTheme.bodyMedium!.copyWith(color: customTheme.altTextColor),
                   textAlign: TextAlign.center,
                 ),

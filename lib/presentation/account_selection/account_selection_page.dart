@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
-import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/domain/assets.dart';
 import 'package:tithe_box/presentation/shared/custom_alert_dialog.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
@@ -47,7 +46,7 @@ class AccountSelectionPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  defaultText,
+                  "Select a personal or a corporate account type according to which best describes your use of the app.",
                   style: textTheme.bodyMedium!.copyWith(color: customTheme.altTextColor),
                   textAlign: TextAlign.center,
                 ),

@@ -8,8 +8,8 @@ class ChurchesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardItem(
-      title: 'Churches',
-      subtitle: "Search for churches around.",
+      title: 'Pay Tithe Now',
+      subtitle: "Start the tithe payment flow.",
       image: 'church.jpg',
       onClick: _goToChurchesPage,
     );

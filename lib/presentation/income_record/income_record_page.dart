@@ -15,7 +15,8 @@ import 'package:tithe_box/presentation/shared/sliver_nothing_found.dart';
 import 'package:tithe_box/presentation/shared/sliver_scaffold_with_fab.dart';
 
 class IncomeRecordPage extends StatelessWidget {
-  const IncomeRecordPage({Key? key}) : super(key: key);
+  final bool hasAppBar;
+  const IncomeRecordPage({Key? key, this.hasAppBar = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +26,9 @@ class IncomeRecordPage extends StatelessWidget {
       builder: (ctx, state) => state.map(
         loading: (_) => const Loading(),
         loaded: (state) => SliverScaffoldWithFab(
-          appbar: const _AppBar(),
+          appbar: hasAppBar ? const _AppBar() : null,
           slivers: [
-            const SliverPageHeader(header: 'Income Record', subHeader: 'Input the needed details and calculate your tithe seamlessly.',),
+            SliverPageHeader(header: 'Income Record', subHeader: 'Input the needed details and calculate your tithe seamlessly.', hasSpace: !hasAppBar),
             const SliverIncomeChoiceBar(),
             SliverClickableTitle(
               title: 'Income Record - (${Assets.translateSalaryType(state.salaryType)})',
