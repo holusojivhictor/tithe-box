@@ -12,7 +12,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
   late String token;
   late String userId;
   late UserProfileFile _userProfileFile;
-  final List<IncomeFileModel> _incomeFile = <IncomeFileModel>[];
+  late List<IncomeFileModel> _incomeFile = <IncomeFileModel>[];
 
   TitheBoxServiceImpl(this._authService, this._incomeService, this._settingsService);
 
@@ -41,10 +41,9 @@ class TitheBoxServiceImpl implements TitheBoxService {
 
   @override
   Future<void> getIncomeData() async {
-    _incomeFile.clear();
     final response = await _incomeService.getIncomes(token, userId);
     final list = response.data as List;
-    _incomeFile.addAll(list.map((e) => IncomeFileModel.fromJson(e)));
+    _incomeFile = list.map((e) => IncomeFileModel.fromJson(e)).toList();
   }
 
   @override
