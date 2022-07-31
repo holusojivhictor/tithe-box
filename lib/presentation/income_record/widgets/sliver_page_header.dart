@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:tithe_box/theme.dart';
 
 class SliverPageHeader extends StatelessWidget {
-  const SliverPageHeader({Key? key}) : super(key: key);
+  final String header;
+  final String subHeader;
+
+  const SliverPageHeader({
+    Key? key,
+    required this.header,
+    required this.subHeader,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +20,11 @@ class SliverPageHeader extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Income Record',
+              header,
               style: textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
             ),
             const SizedBox(height: 10),
-            const Text(
-              "Input the needed details and calculate your tithe seamlessly.",
-            ),
+            Text(subHeader),
           ],
         ),
       ),

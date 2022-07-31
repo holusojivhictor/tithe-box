@@ -93,6 +93,7 @@ class FormFieldWithBorder extends StatelessWidget {
   final String? errorText;
   final bool isSubmitted;
   final int? maxLength;
+  final bool enabled;
 
   const FormFieldWithBorder({
     Key? key,
@@ -102,6 +103,7 @@ class FormFieldWithBorder extends StatelessWidget {
     required this.textInputType,
     this.isSubmitted = false,
     this.obscureText = false,
+    this.enabled = true,
     this.suffixIcon,
     this.validator,
     this.onChanged,
@@ -135,6 +137,7 @@ class FormFieldWithBorder extends StatelessWidget {
             keyboardType: textInputType,
             maxLength: maxLength,
             decoration: InputDecoration(
+              enabled: enabled,
               counter: maxLength != null ? const Offstage() : null,
               hintText: hintText,
               errorText: errorText,

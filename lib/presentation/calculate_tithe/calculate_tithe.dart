@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tithe_box/application/bloc.dart';
+import 'package:tithe_box/presentation/home/widgets/info_banner.dart';
+import 'package:tithe_box/presentation/income_record/widgets/sliver_page_header.dart';
+import 'package:tithe_box/presentation/shared/loading.dart';
+import 'package:tithe_box/presentation/shared/sliver_scaffold_with_fab.dart';
+import 'package:tithe_box/theme.dart';
+
+import 'widgets/calculate_tithe_form.dart';
+
+class CalculateTithePage extends StatelessWidget {
+  const CalculateTithePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<IncomesBloc, IncomesState>(
+      builder: (ctx, state) => state.map(
+        loading: (_) => const Loading(),
+        loaded: (state) => SliverScaffoldWithFab(
+          appbar: _AppBar(),
+          slivers: [
+            SliverPageHeader(header: 'Calculate Tithe', subHeader: 'Input the needed details to calculate your tithe seamlessly.'),
+            SliverPadding(
+              padding: EdgeInsets.only(top: 25, bottom: 10),
+              sliver: SliverToBoxAdapter(
+                child: InfoBanner(header: 'Total Income\n\n', info: 'N1000.00'),
+              ),
+            ),
+            SliverPadding(
+              padding: Styles.edgeInsetAll10,
+              sliver: SliverToBoxAdapter(
+                child: CalculateTitheForm(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AppBar extends StatelessWidget implements PreferredSizeWidget{
+  const _AppBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return AppBar(
+      elevation: 0,
+      iconTheme: IconThemeData(color: theme.indicatorColor),
+      backgroundColor: Colors.transparent,
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
+}
