@@ -1,5 +1,6 @@
-import 'dart:io';
+// ignore_for_file: depend_on_referenced_packages
 
+import 'dart:io';
 import 'package:intl/intl.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -56,6 +57,11 @@ Future<String> getSavedString({required String key}) async {
   return value ?? '';
 }
 
+/// Calculate tithe from percentage
+double calculateTithe(double total, double percentage) {
+  return total * (percentage / 100);
+}
+
 /// Get currency symbol from platform locale
 String getCurrency() {
   var format = NumberFormat.simpleCurrency(locale: Platform.localeName, name: 'NGN');
@@ -64,7 +70,8 @@ String getCurrency() {
 
 /// Validator strings
 final RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-final RegExp phoneNumberValidatorRegExp = RegExp(r"^[0-9]");
+final RegExp phoneNumberValidatorRegExp = RegExp(r"^[0-9]*$");
+final RegExp amountValidatorRegExp = RegExp(r"^[0-9]+$");
 const String kEmailNullError = "Please enter your email.";
 const String kFullNameNullError = "Please enter your full name.";
 const String kOccupationNullError = "Please enter your current occupation.";

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
+import 'package:tithe_box/domain/extensions/double_extensions.dart';
 import 'package:tithe_box/presentation/home/widgets/info_banner.dart';
 import 'package:tithe_box/presentation/income_record/widgets/sliver_page_header.dart';
 import 'package:tithe_box/presentation/shared/loading.dart';
@@ -26,14 +27,16 @@ class CalculateTithePage extends StatelessWidget {
               sliver: SliverToBoxAdapter(
                 child: InfoBanner(
                   header: 'Total Income\n\n',
-                  info: 'N${state.totalIncome}',
+                  info: 'N${state.totalIncome.parseToString()}',
                 ),
               ),
             ),
-            const SliverPadding(
+            SliverPadding(
               padding: Styles.edgeInsetAll10,
               sliver: SliverToBoxAdapter(
-                child: CalculateTitheForm(),
+                child: CalculateTitheForm(
+                  totalIncome: state.totalIncome,
+                ),
               ),
             ),
           ],

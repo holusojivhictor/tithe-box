@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/app_constants.dart';
+import 'package:tithe_box/domain/extensions/double_extensions.dart';
+import 'package:tithe_box/presentation/shared/sliver_loading.dart';
 import 'package:tithe_box/theme.dart';
 
 import '../info_banner.dart';
@@ -16,32 +20,37 @@ class _SliverInfoBannerState extends State<SliverInfoBanner> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: Styles.homeContentPadding,
-      sliver: SliverToBoxAdapter(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 135,
-              child: PageView.builder(
-                onPageChanged: (value) {
-                  setState(() {
-                    _currentPage = value;
-                  });
-                },
-                itemCount: Data.homeBannerData.length,
-                itemBuilder: (context, index) => InfoBanner(
-                  header: Data.homeBannerData[index].header,
-                  info: Data.homeBannerData[index].info,
+    return BlocBuilder<IncomesBloc, IncomesState>(
+      builder: (ctx, state) => state.map(
+        loading: (_) => const SliverLoading(),
+        loaded: (state) => SliverPadding(
+          padding: Styles.homeContentPadding,
+          sliver: SliverToBoxAdapter(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 135,
+                  child: PageView.builder(
+                    onPageChanged: (value) {
+                      setState(() {
+                        _currentPage = value;
+                      });
+                    },
+                    itemCount: Data.homeBannerData.length,
+                    itemBuilder: (context, index) => InfoBanner(
+                      header: 'Total Income\n\n',
+                      info: 'N${state.totalIncome.parseToString()}',
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(3, (index) => buildDot(index: index)),
+                ),
+              ],
             ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(3, (index) => buildDot(index: index)),
-            ),
-          ],
+          ),
         ),
       ),
     );
