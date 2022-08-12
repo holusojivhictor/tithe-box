@@ -54,7 +54,7 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
           ),
           FormFieldWithBorder(
             text: "Income Earned",
-            hintText: "e.g \$1000.00",
+            hintText: "e.g 1000.00",
             textEditingController: incomeController,
             textInputType: TextInputType.number,
             errorText: incomeErrorText,

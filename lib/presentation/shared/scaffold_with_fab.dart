@@ -10,7 +10,7 @@ class ScaffoldWithFab extends StatefulWidget {
   const ScaffoldWithFab({
     Key? key,
     required this.child,
-    this.appbar, required appBar,
+    this.appbar,
   }) : super(key: key);
 
   @override

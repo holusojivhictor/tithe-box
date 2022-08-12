@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/extensions/double_extensions.dart';
 import 'package:tithe_box/presentation/home/widgets/info_banner.dart';
-import 'package:tithe_box/presentation/income_record/widgets/sliver_page_header.dart';
+import 'package:tithe_box/presentation/shared/sliver_page_header.dart';
 import 'package:tithe_box/presentation/shared/loading.dart';
 import 'package:tithe_box/presentation/shared/sliver_scaffold_with_fab.dart';
 import 'package:tithe_box/theme.dart';

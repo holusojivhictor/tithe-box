@@ -94,6 +94,7 @@ class FormFieldWithBorder extends StatelessWidget {
   final bool isSubmitted;
   final int? maxLength;
   final bool enabled;
+  final bool isBold;
 
   const FormFieldWithBorder({
     Key? key,
@@ -104,6 +105,7 @@ class FormFieldWithBorder extends StatelessWidget {
     this.isSubmitted = false,
     this.obscureText = false,
     this.enabled = true,
+    this.isBold = false,
     this.suffixIcon,
     this.validator,
     this.onChanged,
@@ -122,6 +124,7 @@ class FormFieldWithBorder extends StatelessWidget {
         children: [
           RowText(
             text: text,
+            isBold: isBold,
             color: theme.indicatorColor.withOpacity(0.8),
           ),
           const SizedBox(height: 10),

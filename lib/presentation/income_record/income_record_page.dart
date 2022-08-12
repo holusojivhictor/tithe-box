@@ -7,7 +7,7 @@ import 'package:tithe_box/domain/models/models.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:tithe_box/presentation/income_record/widgets/sliver_income_choice_bar.dart';
 import 'package:tithe_box/presentation/income_record/widgets/income_record_card.dart';
-import 'package:tithe_box/presentation/income_record/widgets/sliver_page_header.dart';
+import 'package:tithe_box/presentation/shared/sliver_page_header.dart';
 import 'package:tithe_box/presentation/shared/clickable_title.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/loading.dart';

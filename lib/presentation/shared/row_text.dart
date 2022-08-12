@@ -8,6 +8,7 @@ class RowText extends StatelessWidget {
   final Widget? child;
   final Color? color;
   final bool hasContainer;
+  final bool isBold;
 
   const RowText({
     Key? key,
@@ -15,6 +16,7 @@ class RowText extends StatelessWidget {
     this.mainAxisAlignment,
     this.isSelectable = false,
     this.hasContainer = false,
+    this.isBold = false,
     this.color,
     this.child,
   }) : super(key: key);
@@ -26,7 +28,7 @@ class RowText extends StatelessWidget {
       children: [
         Text(
           text,
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: color ?? Theme.of(context).indicatorColor),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: color ?? Theme.of(context).indicatorColor, fontWeight: isBold ? FontWeight.bold : FontWeight.normal),
         ),
         if (isSelectable)
           child!,

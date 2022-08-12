@@ -5,7 +5,7 @@ import 'package:waterfall_flow/waterfall_flow.dart';
 import '../calculate_tithe_card.dart';
 import '../churches_card.dart';
 import '../income_record_card.dart';
-import '../payment_history_card.dart';
+import '../add_church_card.dart';
 
 class SliverCardsMenu extends StatelessWidget {
   const SliverCardsMenu({Key? key}) : super(key: key);
@@ -32,7 +32,7 @@ class SliverCardsMenu extends StatelessWidget {
       case 1:
         return const IncomeRecordCard();
       case 2:
-        return const PaymentHistoryCard();
+        return const AddChurchCard();
       case 3:
         return const ChurchesCard();
       default:
