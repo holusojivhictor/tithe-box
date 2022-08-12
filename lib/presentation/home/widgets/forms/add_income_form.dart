@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/assets.dart';
 import 'package:tithe_box/domain/enums/enums.dart';
+import 'package:tithe_box/domain/models/models.dart';
 import 'package:tithe_box/presentation/shared/custom_form_field.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/item_popup_menu_filter.dart';
@@ -122,20 +123,17 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
           const SizedBox(height: 10),
           Padding(
             padding: Styles.edgeInsetAll10,
-            child: BlocBuilder<DataBloc, DataState>(
-              builder: (ctx, state) => state.map(
-                idle: (_) => DefaultButton(
-                  isPrimary: true,
-                  text: 'Record Income',
-                  onPressed: () => _recordIncome(context),
-                ),
+            child: BlocConsumer<DataBloc, DataState>(
+              listener: (ctx, state) async {
+                state.maybeMap(
+                  data: (s) => _showSuccessToast(),
+                  error: (e) => _showErrorToast(NetworkExceptions.getErrorMessage(e.error)),
+                  orElse: () => {},
+                );
+              },
+              builder: (ctx, state) => state.maybeMap(
                 loading: (_) => const ProgressButton(),
-                data: (state) => DefaultButton(
-                  isPrimary: true,
-                  text: 'Record Income',
-                  onPressed: () => _recordIncome(context),
-                ),
-                error: (e) => DefaultButton(
+                orElse: () => DefaultButton(
                   isPrimary: true,
                   text: 'Record Income',
                   onPressed: () => _recordIncome(context),
@@ -154,13 +152,21 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
       _formKey.currentState!.save();
 
       final bloc = context.read<DataBloc>();
-      final fToast = ToastUtils.of(context);
       bloc.add(DataEvent.recordIncome(businessName: businessNameController.text, incomeAmount: incomeController.text, description: descriptionController.text, frequency: selectedSalaryType.name));
-      setState(() => submitted = false);
-      businessNameController.clear();
-      incomeController.clear();
-      descriptionController.clear();
-      ToastUtils.showSucceedToast(fToast, 'Income added successfully');
     }
+  }
+
+  void _showSuccessToast() {
+    final fToast = ToastUtils.of(context);
+    setState(() => submitted = false);
+    businessNameController.clear();
+    incomeController.clear();
+    descriptionController.clear();
+    ToastUtils.showSucceedToast(fToast, 'Income added successfully');
+  }
+
+  void _showErrorToast(String error) {
+    final fToast = ToastUtils.of(context);
+    ToastUtils.showErrorToast(fToast, error);
   }
 }

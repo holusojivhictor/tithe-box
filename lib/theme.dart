@@ -109,6 +109,8 @@ class Styles {
   static const RoundedRectangleBorder settingsCardShape = RoundedRectangleBorder(borderRadius: settingsCardBorderRadius);
 
   static const RoundedRectangleBorder alertDialogShape = RoundedRectangleBorder(borderRadius: alertDialogBorderRadius);
+
+  static const RoundedRectangleBorder dialogShape = RoundedRectangleBorder(borderRadius: alertDialogBorderRadius);
 }
 
 Color kPrimary = const Color(0xFFDF4903);
