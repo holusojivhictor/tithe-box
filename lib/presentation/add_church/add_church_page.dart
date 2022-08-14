@@ -10,7 +10,7 @@ class AddChurchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverScaffoldWithFab(
+    return const SliverScaffoldWithFab(
       appbar: _AppBar(),
       slivers: [
         SliverPageHeader(subHeader: "Fill these in to keep record of your church's details", hasSpace: false),

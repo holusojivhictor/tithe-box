@@ -21,7 +21,7 @@ class CalculateTithePage extends StatelessWidget {
         loaded: (state) => SliverScaffoldWithFab(
           appbar: const _AppBar(),
           slivers: [
-            const SliverPageHeader(subHeader: 'Input the needed details to calculate your tithe seamlessly.'),
+            const SliverPageHeader(subHeader: 'Input the needed details to calculate your tithe.'),
             SliverPadding(
               padding: const EdgeInsets.only(top: 25, bottom: 10),
               sliver: SliverToBoxAdapter(

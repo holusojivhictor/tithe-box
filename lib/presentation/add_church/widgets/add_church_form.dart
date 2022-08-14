@@ -184,6 +184,24 @@ class _AddChurchFormState extends State<AddChurchForm> {
   }
 
   Future<void> _saveChurch(BuildContext context) async {
+    setState(() => submitted = true);
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      final bloc = context.read<DataBloc>();
+      final countryMap = countries.firstWhere((el) => el["name"] == selectedCountryValue);
+      final bankMap = banks.firstWhere((el) => el["name"] == selectedBank);
+      bloc.add(DataEvent.saveChurch(
+        address: locationController.text,
+        churchName: churchNameController.text,
+        accountName: accountNameController.text,
+        accountNumber: accountNumberController.text,
+        countryCode: countryMap["code"]!,
+        bankName: selectedBank,
+        bankCode: bankMap["code"]!,
+        serviceDays: selectedServiceDays.map((e) => e.name).toList(),
+      ));
+    }
   }
 
   void _handlePressEvent(ChurchServiceDay day) {

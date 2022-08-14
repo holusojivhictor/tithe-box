@@ -18,6 +18,7 @@ class Styles {
   static const edgeInsetVertical10 = EdgeInsets.symmetric(vertical: 10);
   static const edgeInsetHorizontal10 = EdgeInsets.symmetric(horizontal: 10);
   static const edgeInsetHorizontal10Vertical5 = EdgeInsets.symmetric(horizontal: 10, vertical: 5);
+  static const edgeInsetHorizontal16Vertical5 = EdgeInsets.symmetric(horizontal: 16, vertical: 5);
   static const edgeInsetSymmetric10 = EdgeInsets.symmetric(horizontal: 10, vertical: 10);
   static const edgeInsetSymmetric8 = EdgeInsets.symmetric(horizontal: 8, vertical: 8);
   static const edgeInsetSymmetric5 = EdgeInsets.symmetric(horizontal: 5, vertical: 5);

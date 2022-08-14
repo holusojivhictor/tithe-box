@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
-import 'package:tithe_box/application/churches/churches_bloc.dart';
 
 import 'mobile_scaffold.dart';
 import 'shared/utils/toast_utils.dart';

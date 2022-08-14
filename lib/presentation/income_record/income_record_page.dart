@@ -29,7 +29,7 @@ class IncomeRecordPage extends StatelessWidget {
         loaded: (state) => SliverScaffoldWithFab(
           appbar: hasAppBar ? const _AppBar() : null,
           slivers: [
-            SliverPageHeader(header: 'Income Record', subHeader: 'Input the needed details and calculate your tithe seamlessly.', hasSpace: !hasAppBar),
+            SliverPageHeader(header: 'Income Record', subHeader: 'View your recorded incomes by the time added.', hasSpace: !hasAppBar),
             const SliverIncomeChoiceBar(),
             SliverClickableTitle(
               title: 'Income Record - (${Assets.translateSalaryType(state.salaryType)})',

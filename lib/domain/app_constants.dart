@@ -10,7 +10,7 @@ import 'package:tithe_box/domain/models/models.dart';
 const kPadding = 10.0;
 const kAnimationDuration = Duration(milliseconds: 200);
 
-const baseUrl = 'https://tithe22.herokuapp.com/api/v1/users';
+const baseUrl = 'https://tithebox.herokuapp.com/api/v1/users';
 
 class Data {
   static List<StartVerseModel> startVerseData = [

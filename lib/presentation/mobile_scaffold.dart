@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
+import 'package:tithe_box/presentation/churches/churches_page.dart';
 import 'package:tithe_box/presentation/income_record/income_record_page.dart';
 import 'package:tithe_box/presentation/shared/extensions/focus_scope_node_extensions.dart';
 
@@ -46,7 +47,7 @@ class _MobileScaffoldState extends State<MobileScaffold> {
             physics: const NeverScrollableScrollPhysics(),
             children: [
               const HomePage(),
-              Container(),
+              const ChurchesPage(),
               const IncomeRecordPage(),
               Container(),
               const SettingsPage(),

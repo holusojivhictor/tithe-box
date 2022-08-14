@@ -1,41 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:tithe_box/domain/enums/enums.dart';
-import 'package:tithe_box/domain/extensions/string_extensions.dart';
 import 'package:tithe_box/domain/models/models.dart';
 import 'package:tithe_box/presentation/shared/custom_card.dart';
 import 'package:tithe_box/theme.dart';
 
-class IncomeRecordCard extends StatelessWidget {
+class ChurchCard extends StatelessWidget {
   final String id;
-  final UserAccountType type;
-  final String businessName;
-  final double amount;
-  final SalaryType frequency;
-  final String createdAt;
+  final String name;
+  final List<ChurchServiceDay> serviceDays;
+  final String address;
 
   final bool withElevation;
 
-  const IncomeRecordCard({
+  const ChurchCard({
     Key? key,
     required this.id,
-    required this.type,
-    required this.businessName,
-    required this.amount,
-    required this.frequency,
-    required this.createdAt,
+    required this.name,
+    required this.serviceDays,
+    required this.address,
     this.withElevation = true,
   }) : super(key: key);
 
-  IncomeRecordCard.item({
+  ChurchCard.item({
     Key? key,
-    required IncomeCardModel income,
+    required ChurchCardModel church,
     this.withElevation = true,
-  })  : id = income.id,
-        type = income.type,
-        businessName = income.businessName,
-        amount = income.amount,
-        frequency = income.frequency,
-        createdAt = income.createdAt,
+  })  : id = church.id,
+        name = church.name,
+        serviceDays = church.serviceDays,
+        address = church.address,
         super(key: key);
 
   @override
@@ -57,18 +50,7 @@ class IncomeRecordCard extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    flex: 13,
-                    child: CircleAvatar(
-                      radius: 20,
-                      backgroundColor: frequency.color,
-                      child: const RotatedBox(
-                        quarterTurns: 3,
-                        child: Icon(Icons.arrow_back, color: Colors.black87, size: 20),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 57,
+                    flex: 80,
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: Column(
@@ -76,7 +58,7 @@ class IncomeRecordCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            businessName,
+                            name,
                             style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w500),
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.start,
@@ -85,7 +67,7 @@ class IncomeRecordCard extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                createdAt.formatTimeString(hasYear: true),
+                                address,
                                 style: textTheme.bodyMedium!.copyWith(color: Colors.black54),
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.start,
@@ -98,10 +80,10 @@ class IncomeRecordCard extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 20,
-                    child: Text(
-                      'N$amount',
-                      textAlign: TextAlign.center,
-                      style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
+                    child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.grey.withOpacity(0.5),
+                      child: const Icon(Icons.church_outlined, color: Colors.black87, size: 20),
                     ),
                   ),
                 ],
