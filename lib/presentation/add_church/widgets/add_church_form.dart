@@ -12,6 +12,8 @@ import 'package:tithe_box/presentation/shared/row_text.dart';
 import 'package:tithe_box/presentation/shared/utils/toast_utils.dart';
 import 'package:tithe_box/theme.dart';
 
+import 'form_field_header.dart';
+
 class AddChurchForm extends StatefulWidget {
   const AddChurchForm({Key? key}) : super(key: key);
 
@@ -220,27 +222,12 @@ class _AddChurchFormState extends State<AddChurchForm> {
     locationController.clear();
     accountNameController.clear();
     accountNumberController.clear();
+    selectedServiceDays = [ChurchServiceDay.Sunday];
     ToastUtils.showSucceedToast(fToast, 'Church added successfully');
   }
 
   void _showErrorToast(String error) {
     final fToast = ToastUtils.of(context);
     ToastUtils.showErrorToast(fToast, error);
-  }
-}
-
-class FormFieldHeader extends StatelessWidget {
-  final String text;
-  const FormFieldHeader({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
-      child: RowText(text: text, isBold: true),
-    );
   }
 }
