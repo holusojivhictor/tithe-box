@@ -8,13 +8,14 @@ import 'package:tithe_box/domain/services/services.dart';
 class TitheBoxServiceImpl implements TitheBoxService {
   final AuthService _authService;
   final IncomeService _incomeService;
+  final ChurchService _churchService;
   final SettingsService _settingsService;
   late String token;
   late String userId;
   late UserProfileFile _userProfileFile;
   late List<IncomeFileModel> _incomeFile = <IncomeFileModel>[];
 
-  TitheBoxServiceImpl(this._authService, this._incomeService, this._settingsService);
+  TitheBoxServiceImpl(this._authService, this._incomeService, this._churchService, this._settingsService);
 
   @override
   Future<void> init() async {
@@ -62,7 +63,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
     final userIncomeFile = _incomeFile.where((el) => el.userId == userId);
     return userIncomeFile.map((e) => _toIncomeForCard(e)).toList();
   }
-  
+
   @override
   double totalIncome() {
     final userIncomeFile = _incomeFile.where((el) => el.userId == userId).toList();
@@ -90,7 +91,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
   Future<Response> recordIncome(String businessName, String incomeAmount, String description, String frequency) async {
     final settings = _settingsService.appSettings;
 
-    final response = _incomeService.recordIncome(
+    final response = await _incomeService.recordIncome(
       token,
       userId,
       UserAccountType.personal.name,
@@ -100,7 +101,25 @@ class TitheBoxServiceImpl implements TitheBoxService {
       settings.tithePercentage.toString(),
       frequency,
     );
-    
+
+    return response;
+  }
+
+  @override
+  Future<Response> saveChurch(String address, String churchName, String accountName, String accountNumber, String countryCode, String bankName, String bankCode, List<String> serviceDays) async {
+    final response = await _churchService.saveChurch(
+      token,
+      userId,
+      address,
+      churchName,
+      accountName,
+      accountNumber,
+      countryCode,
+      bankName,
+      bankCode,
+      serviceDays,
+    );
+
     return response;
   }
 

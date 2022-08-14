@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/domain/enums/enums.dart';
+import 'package:tithe_box/domain/models/models.dart';
 import 'package:tithe_box/presentation/shared/choice/choice_list.dart';
 import 'package:tithe_box/presentation/shared/custom_form_field.dart';
+import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/dropdown/custom_full_dropdown.dart';
 import 'package:tithe_box/presentation/shared/row_text.dart';
+import 'package:tithe_box/presentation/shared/utils/toast_utils.dart';
 import 'package:tithe_box/theme.dart';
 
 class AddChurchForm extends StatefulWidget {
@@ -152,9 +157,33 @@ class _AddChurchFormState extends State<AddChurchForm> {
             selectedValues: selectedServiceDays,
             onSelected: (v) => _handlePressEvent(v),
           ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: Styles.edgeInsetAll10,
+            child: BlocConsumer<DataBloc, DataState>(
+              listener: (ctx, state) async {
+                state.maybeMap(
+                  data: (s) => _showSuccessToast(),
+                  error: (e) => _showErrorToast(NetworkExceptions.getErrorMessage(e.error)),
+                  orElse: () => {},
+                );
+              },
+              builder: (ctx, state) => state.maybeMap(
+                loading: (_) => const ProgressButton(),
+                orElse: () => DefaultButton(
+                  isPrimary: true,
+                  text: 'Add church',
+                  onPressed: () => _saveChurch(context),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  Future<void> _saveChurch(BuildContext context) async {
   }
 
   void _handlePressEvent(ChurchServiceDay day) {
@@ -164,6 +193,21 @@ class _AddChurchFormState extends State<AddChurchForm> {
       selectedServiceDays = selectedServiceDays + [day];
     }
     setState(() {});
+  }
+
+  void _showSuccessToast() {
+    final fToast = ToastUtils.of(context);
+    setState(() => submitted = false);
+    churchNameController.clear();
+    locationController.clear();
+    accountNameController.clear();
+    accountNumberController.clear();
+    ToastUtils.showSucceedToast(fToast, 'Church added successfully');
+  }
+
+  void _showErrorToast(String error) {
+    final fToast = ToastUtils.of(context);
+    ToastUtils.showErrorToast(fToast, error);
   }
 }
 

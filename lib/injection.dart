@@ -37,13 +37,17 @@ class Injection {
     final incomeService = IncomeServiceImpl();
     getIt.registerSingleton<IncomeService>(incomeService);
 
+    final churchService = ChurchServiceImpl();
+    getIt.registerSingleton<ChurchService>(churchService);
+
     final settingsService = SettingsServiceImpl(loggingService);
     await settingsService.init();
     getIt.registerSingleton<SettingsService>(settingsService);
-    
+
     getIt.registerSingleton<TitheBoxService>(TitheBoxServiceImpl(
       authService,
       incomeService,
+      churchService,
       settingsService,
     ));
   }

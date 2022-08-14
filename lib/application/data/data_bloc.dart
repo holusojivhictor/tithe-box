@@ -25,5 +25,14 @@ class DataBloc extends Bloc<DataEvent, DataState> {
         emit(DataState.error(error: NetworkExceptions.getDioException(e)));
       }
     });
+    on<_SaveChurch>((e, emit) async {
+      emit(const DataState.loading());
+      try {
+        final response = await _titheBoxService.saveChurch(e.address, e.churchName, e.accountName, e.accountNumber, e.countryCode, e.bankName, e.bankCode, e.serviceDays);
+        emit(DataState.data(data: response));
+      } catch (e) {
+        emit(DataState.error(error: NetworkExceptions.getDioException(e)));
+      }
+    });
   }
 }

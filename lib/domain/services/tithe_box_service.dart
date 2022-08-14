@@ -27,5 +27,16 @@ abstract class TitheBoxService {
     String frequency,
   );
 
+  Future<Response> saveChurch(
+    String address,
+    String churchName,
+    String accountName,
+    String accountNumber,
+    String countryCode,
+    String bankName,
+    String bankCode,
+    List<String> serviceDays,
+  );
+
   Future<void> signOut();
 }
