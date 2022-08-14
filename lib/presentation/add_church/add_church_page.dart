@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tithe_box/presentation/shared/sliver_page_header.dart';
 import 'package:tithe_box/presentation/shared/sliver_scaffold_with_fab.dart';
+import 'package:tithe_box/theme.dart';
 
 import 'widgets/add_church_form.dart';
 
@@ -12,7 +13,7 @@ class AddChurchPage extends StatelessWidget {
     return SliverScaffoldWithFab(
       appbar: _AppBar(),
       slivers: [
-        SliverPageHeader(header: "Church Information", subHeader: "Fill these in to keep record of your church's details", hasSpace: false),
+        SliverPageHeader(subHeader: "Fill these in to keep record of your church's details", hasSpace: false),
         SliverPadding(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           sliver: SliverToBoxAdapter(
@@ -34,6 +35,11 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget{
       elevation: 0,
       iconTheme: IconThemeData(color: theme.indicatorColor),
       backgroundColor: Colors.transparent,
+      centerTitle: true,
+      title: Text(
+        "Church Information",
+        style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
+      ),
     );
   }
 

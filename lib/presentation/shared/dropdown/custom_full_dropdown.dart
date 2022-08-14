@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tithe_box/presentation/shared/dropdown/translated_dropdown.dart';
 import 'package:tithe_box/presentation/shared/utils/enum_utils.dart';
+import 'package:tithe_box/theme.dart';
 
 import 'common_dropdown_button.dart';
 
@@ -14,6 +15,7 @@ class CustomFullDropdownButton<T> extends StatelessWidget {
   final EdgeInsets margin;
   final EdgeInsets padding;
   final bool isTranslated;
+  final bool hasBorder;
 
   const CustomFullDropdownButton({
     Key? key,
@@ -26,16 +28,19 @@ class CustomFullDropdownButton<T> extends StatelessWidget {
     this.isTranslated = false,
     this.margin = const EdgeInsets.only(bottom: 15),
     this.padding = const EdgeInsets.only(left: 10),
+    this.hasBorder = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
     return Container(
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-        color: const Color(0xFFE5E5E5),
+        color: hasBorder ? null : const Color(0xFFE5E5E5),
         borderRadius: BorderRadius.circular(30),
+        border: hasBorder ? Border.all(color: customTheme.formBorder!) : null,
       ),
       child: isTranslated
           ? TranslatedDropdown<T>(

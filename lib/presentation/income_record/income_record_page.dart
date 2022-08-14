@@ -13,6 +13,7 @@ import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/loading.dart';
 import 'package:tithe_box/presentation/shared/sliver_nothing_found.dart';
 import 'package:tithe_box/presentation/shared/sliver_scaffold_with_fab.dart';
+import 'package:tithe_box/theme.dart';
 
 class IncomeRecordPage extends StatelessWidget {
   final bool hasAppBar;
@@ -81,6 +82,11 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget{
       elevation: 0,
       iconTheme: IconThemeData(color: theme.indicatorColor),
       backgroundColor: Colors.transparent,
+      centerTitle: true,
+      title: Text(
+        "Income Record",
+        style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
+      ),
     );
   }
 

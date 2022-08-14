@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/domain/enums/enums.dart';
 import 'package:tithe_box/presentation/shared/choice/choice_list.dart';
 import 'package:tithe_box/presentation/shared/custom_form_field.dart';
+import 'package:tithe_box/presentation/shared/dropdown/custom_full_dropdown.dart';
 import 'package:tithe_box/presentation/shared/row_text.dart';
+import 'package:tithe_box/theme.dart';
 
 class AddChurchForm extends StatefulWidget {
   const AddChurchForm({Key? key}) : super(key: key);
@@ -17,8 +20,10 @@ class _AddChurchFormState extends State<AddChurchForm> {
   late TextEditingController locationController = TextEditingController();
   late TextEditingController accountNameController = TextEditingController();
   late TextEditingController accountNumberController = TextEditingController();
-  bool submitted = false;
+  String selectedCountryValue = 'Nigeria';
+  String selectedBank = 'Access Bank Nigeria';
   List<ChurchServiceDay> selectedServiceDays = <ChurchServiceDay>[ChurchServiceDay.Sunday];
+  bool submitted = false;
 
   String? nameErrorText;
   String? locationErrorText;
@@ -64,7 +69,7 @@ class _AddChurchFormState extends State<AddChurchForm> {
             },
           ),
           FormFieldWithBorder(
-            text: "Bank Account Name",
+            text: "Account Name",
             hintText: "e.g Assemblies of God Ministries",
             textEditingController: accountNameController,
             textInputType: TextInputType.name,
@@ -80,7 +85,7 @@ class _AddChurchFormState extends State<AddChurchForm> {
             },
           ),
           FormFieldWithBorder(
-            text: "Bank Account Number",
+            text: "Account Number",
             hintText: "e.g 0690000032",
             textEditingController: accountNumberController,
             textInputType: TextInputType.number,
@@ -94,6 +99,44 @@ class _AddChurchFormState extends State<AddChurchForm> {
               }
               return null;
             },
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const FormFieldHeader(text: 'Bank'),
+              CustomFullDropdownButton<String>(
+                hasBorder: true,
+                margin: Styles.formFieldMargin,
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                title: 'Bank',
+                currentValue: selectedBank,
+                items: banks.map((e) => e["name"]!).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedBank = value;
+                  });
+                },
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const FormFieldHeader(text: 'Country'),
+              CustomFullDropdownButton<String>(
+                hasBorder: true,
+                margin: Styles.formFieldMargin,
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                title: 'Country',
+                currentValue: selectedCountryValue,
+                items: countries.map((e) => e["name"]!).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedCountryValue = value;
+                  });
+                },
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.only(left: 12, right: 12, top: 10),
@@ -121,5 +164,21 @@ class _AddChurchFormState extends State<AddChurchForm> {
       selectedServiceDays = selectedServiceDays + [day];
     }
     setState(() {});
+  }
+}
+
+class FormFieldHeader extends StatelessWidget {
+  final String text;
+  const FormFieldHeader({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+      child: RowText(text: text, isBold: true),
+    );
   }
 }

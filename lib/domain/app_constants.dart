@@ -98,8 +98,32 @@ const languagesMap = {
   AppLanguageType.english: LanguageModel('en', 'US'),
 };
 
-/// Countries map list
-List<Map<String, String>> countries = [
+/// Bank codes mapped list
+const List<Map<String, String>> banks = [
+  {"name": "Access Bank Nigeria", "code": "044"},
+  {"name": "Diamond Bank", "code": "063"},
+  {"name": "Ecobank Nigeria", "code": "050"},
+  {"name": "Enterprise Bank", "code": "084"},
+  {"name": "Fidelity Bank", "code": "070"},
+  {"name": "First Bank of Nigeria", "code": "011"},
+  {"name": "First City Monument Bank", "code": "214"},
+  {"name": "Guaranty Trust Bank", "code": "058"},
+  {"name": "Heritage Banking Company", "code": "030"},
+  {"name": "Jaiz Bank", "code": "301"},
+  {"name": "Keystone Bank", "code": "082"},
+  {"name": "Mainstreet Bank", "code": "014"},
+  {"name": "Skye Bank", "code": "076"},
+  {"name": "Stanbic IBTC", "code": "039"},
+  {"name": "Sterling Bank", "code": "232"},
+  {"name": "Union Bank Nigeria", "code": "032"},
+  {"name": "United Bank for Africa", "code": "033"},
+  {"name": "Unity Bank", "code": "215"},
+  {"name": "WEMA Bank", "code": "035"},
+  {"name": "Zenith Bank International", "code": "057"},
+];
+
+/// Countries mapped list
+const List<Map<String, String>> countries = [
   {"name": "Afghanistan", "code": "AF"},
   {"name": "land Islands", "code": "AX"},
   {"name": "Albania", "code": "AL"},

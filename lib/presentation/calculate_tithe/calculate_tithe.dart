@@ -21,7 +21,7 @@ class CalculateTithePage extends StatelessWidget {
         loaded: (state) => SliverScaffoldWithFab(
           appbar: const _AppBar(),
           slivers: [
-            const SliverPageHeader(header: 'Calculate Tithe', subHeader: 'Input the needed details to calculate your tithe seamlessly.'),
+            const SliverPageHeader(subHeader: 'Input the needed details to calculate your tithe seamlessly.'),
             SliverPadding(
               padding: const EdgeInsets.only(top: 25, bottom: 10),
               sliver: SliverToBoxAdapter(
@@ -56,6 +56,11 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget{
       elevation: 0,
       iconTheme: IconThemeData(color: theme.indicatorColor),
       backgroundColor: Colors.transparent,
+      centerTitle: true,
+      title: Text(
+        "Calculate Tithe",
+        style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
+      ),
     );
   }
 

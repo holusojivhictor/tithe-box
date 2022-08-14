@@ -8,7 +8,7 @@ class PageHeader extends StatelessWidget {
 
   const PageHeader({
     Key? key,
-    required this.header,
+    this.header = '',
     required this.subHeader,
     required this.hasSpace,
   }) : super(key: key);
@@ -21,11 +21,11 @@ class PageHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          hasSpace ? Text(
             header,
             style: textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
-          ),
-          const SizedBox(height: 10),
+          ) : const SizedBox.shrink(),
+          SizedBox(height: hasSpace ? 10 : 0),
           Text(subHeader),
         ],
       ),

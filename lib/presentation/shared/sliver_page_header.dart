@@ -8,7 +8,7 @@ class SliverPageHeader extends StatelessWidget {
 
   const SliverPageHeader({
     Key? key,
-    required this.header,
+    this.header = '',
     required this.subHeader,
     this.hasSpace = false,
   }) : super(key: key);
