@@ -9,3 +9,5 @@ export 'language/language_model.dart';
 export 'banner/banner_data.dart';
 export 'db/income/income_file_model.dart';
 export 'income/income_card_model.dart';
+export 'db/church/church_file_model.dart';
+export 'church/church_card_model.dart';

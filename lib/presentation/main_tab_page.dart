@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
+import 'package:tithe_box/application/churches/churches_bloc.dart';
 
 import 'mobile_scaffold.dart';
 import 'shared/utils/toast_utils.dart';
@@ -36,6 +37,7 @@ class _MainTabPageState extends State<MainTabPage> with SingleTickerProviderStat
     context.read<HomeBloc>().add(const HomeEvent.init());
     context.read<SettingsBloc>().add(const SettingsEvent.init());
     context.read<IncomesBloc>().add(const IncomesEvent.init());
+    context.read<ChurchesBloc>().add(const ChurchesEvent.init());
   }
 
   @override

@@ -14,6 +14,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
   late String userId;
   late UserProfileFile _userProfileFile;
   late List<IncomeFileModel> _incomeFile = <IncomeFileModel>[];
+  late List<ChurchFileModel> _churchFile = <ChurchFileModel>[];
 
   TitheBoxServiceImpl(this._authService, this._incomeService, this._churchService, this._settingsService);
 
@@ -22,6 +23,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
     await Future.wait([
       initProfile(),
       getIncomeData(),
+      getChurchData(),
     ]);
   }
 
@@ -48,6 +50,13 @@ class TitheBoxServiceImpl implements TitheBoxService {
   }
 
   @override
+  Future<void> getChurchData() async {
+    final response = await _churchService.getChurches(token, userId);
+    final list = response.data as List;
+    _churchFile = list.map((e) => ChurchFileModel.fromJson(e)).toList();
+  }
+
+  @override
   IncomeFileModel getIncome(String id) {
     return _incomeFile.firstWhere((el) => el.incomeId == id);
   }
@@ -60,15 +69,29 @@ class TitheBoxServiceImpl implements TitheBoxService {
 
   @override
   List<IncomeCardModel> getIncomesForCard() {
-    final userIncomeFile = _incomeFile.where((el) => el.userId == userId);
-    return userIncomeFile.map((e) => _toIncomeForCard(e)).toList();
+    return _incomeFile.map((e) => _toIncomeForCard(e)).toList();
   }
 
   @override
   double totalIncome() {
-    final userIncomeFile = _incomeFile.where((el) => el.userId == userId).toList();
-    final List<double> amounts = userIncomeFile.map((e) => e.amount).toList();
+    final List<double> amounts = _incomeFile.map((e) => e.amount).toList();
     return amounts.fold(0, (previous, element) => previous + element);
+  }
+
+  @override
+  ChurchFileModel getChurch(String id) {
+    return _churchFile.firstWhere((el) => el.churchId == id);
+  }
+
+  @override
+  ChurchCardModel getChurchForCard(String id) {
+    final church = _churchFile.firstWhere((el) => el.churchId == id);
+    return _toChurchForCard(church);
+  }
+
+  @override
+  List<ChurchCardModel> getChurchesForCard() {
+    return _churchFile.map((e) => _toChurchForCard(e)).toList();
   }
 
   IncomeCardModel _toIncomeForCard(IncomeFileModel model) {
@@ -79,6 +102,15 @@ class TitheBoxServiceImpl implements TitheBoxService {
       amount: model.amount,
       frequency: model.frequency,
       createdAt: model.createdAt,
+    );
+  }
+
+  ChurchCardModel _toChurchForCard(ChurchFileModel model) {
+    return ChurchCardModel(
+      id: model.churchId,
+      name: model.name,
+      serviceDays: model.serviceDays,
+      address: model.address,
     );
   }
 
