@@ -26,4 +26,6 @@ class DataEvent with _$DataEvent {
     required String churchId,
     required String accountId,
   }) = _AddPayment;
+
+  const factory DataEvent.refreshTransactions() = _RefreshTransactions;
 }

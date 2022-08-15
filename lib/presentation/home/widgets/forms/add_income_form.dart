@@ -24,7 +24,7 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
   late TextEditingController addressController = TextEditingController();
   late TextEditingController incomeController = TextEditingController();
   late TextEditingController descriptionController = TextEditingController();
-  SalaryType selectedSalaryType = SalaryType.weekly;
+  SalaryType selectedSalaryType = SalaryType.monthly;
   bool submitted = false;
 
   String? businessNameErrorText;

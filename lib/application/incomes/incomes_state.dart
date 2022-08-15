@@ -6,6 +6,7 @@ class IncomesState with _$IncomesState {
 
   const factory IncomesState.loaded({
     required List<IncomeCardModel> incomes,
+    @Default(false) bool isRefreshing,
     required double totalIncome,
     required SalaryType salaryType,
     required SalaryType tempSalaryType,

@@ -1,6 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/presentation/shared/custom_alert_dialog.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -30,12 +33,21 @@ class _PaymentModalState extends State<PaymentModal> {
         body: WebView(
           javascriptMode: JavascriptMode.unrestricted,
           initialUrl: widget.link,
+          navigationDelegate: (NavigationRequest request) async {
+            if (request.url.startsWith('https://tithebox.herokuapp.com/api/v1/redirect/payment/')) {
+              Timer(const Duration(milliseconds: 500), () async {
+                await handleClose(context);
+              });
+            }
+            return NavigationDecision.navigate;
+          },
         ),
       ),
     );
   }
 
   Future<bool> handleWillPop(BuildContext context) async {
+    final bloc = context.read<IncomesBloc>();
     showDialog(
       context: context,
       builder: (ctx) => CommonAlertDialog(
@@ -46,10 +58,29 @@ class _PaymentModalState extends State<PaymentModal> {
         actionOnPressed: () {
           Navigator.of(context).pop();
           Navigator.of(context).pop();
+          bloc.add(const IncomesEvent.refresh());
         },
       ),
     );
     return false;
+  }
+
+  Future<void> handleClose(BuildContext context) async {
+    final bloc = context.read<IncomesBloc>();
+    await showDialog(
+      context: context,
+      builder: (ctx) => CommonAlertDialog(
+        titleText: 'Close Modal',
+        contentText: 'This transaction has been completed, close modal now.',
+        cancelText: 'No thanks',
+        actionText: 'Close',
+        actionOnPressed: () {
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
+          bloc.add(const IncomesEvent.refresh());
+        },
+      ),
+    );
   }
 }
 

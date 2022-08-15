@@ -9,6 +9,7 @@ import 'package:tithe_box/presentation/shared/sliver_nothing_found.dart';
 import 'package:tithe_box/presentation/shared/sliver_page_header.dart';
 import 'package:tithe_box/presentation/shared/sliver_scaffold_with_fab.dart';
 import 'package:tithe_box/presentation/shared/utils/size_utils.dart';
+import 'package:tithe_box/presentation/shared/utils/toast_utils.dart';
 import 'package:tithe_box/theme.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 
@@ -17,7 +18,16 @@ class PayTithePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<IncomesBloc, IncomesState>(
+    return BlocConsumer<IncomesBloc, IncomesState>(
+      listener: (ctx, state) => state.maybeMap(
+        loaded: (s) {
+          if (s.isRefreshing) {
+            _showRefreshToast(context);
+          }
+          return null;
+        },
+        orElse: () => {},
+      ),
       builder: (ctx, state) => state.map(
         loading: (_) => const Loading(),
         loaded: (state) => SliverScaffoldWithFab(
@@ -44,6 +54,11 @@ class PayTithePage extends StatelessWidget {
         childCount: incomes.length,
       ),
     );
+  }
+
+  void _showRefreshToast(BuildContext context) {
+    final fToast = ToastUtils.of(context);
+    ToastUtils.showInfoToast(fToast, 'Refreshing');
   }
 }
 
