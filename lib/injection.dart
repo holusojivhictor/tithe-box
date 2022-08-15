@@ -40,6 +40,9 @@ class Injection {
     final churchService = ChurchServiceImpl();
     getIt.registerSingleton<ChurchService>(churchService);
 
+    final paymentService = PaymentServiceImpl();
+    getIt.registerSingleton<PaymentService>(paymentService);
+
     final settingsService = SettingsServiceImpl(loggingService);
     await settingsService.init();
     getIt.registerSingleton<SettingsService>(settingsService);

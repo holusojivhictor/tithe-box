@@ -109,10 +109,12 @@ class TitheBoxServiceImpl implements TitheBoxService {
   }
 
   ChurchCardModel _toChurchForCard(ChurchFileModel model) {
+    final accountId = model.subAccountIds.first;
     return ChurchCardModel(
       id: model.churchId,
       name: model.name,
       serviceDays: model.serviceDays,
+      accountId: accountId,
       address: model.address,
     );
   }
