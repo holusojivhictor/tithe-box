@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/domain/extensions/double_extensions.dart';
+import 'package:tithe_box/domain/models/models.dart';
 import 'package:tithe_box/presentation/shared/sliver_loading.dart';
 import 'package:tithe_box/theme.dart';
 
@@ -23,33 +24,56 @@ class _SliverInfoBannerState extends State<SliverInfoBanner> {
     return BlocBuilder<IncomesBloc, IncomesState>(
       builder: (ctx, state) => state.map(
         loading: (_) => const SliverLoading(),
-        loaded: (state) => SliverPadding(
-          padding: Styles.homeContentPadding,
-          sliver: SliverToBoxAdapter(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 135,
-                  child: PageView.builder(
-                    onPageChanged: (value) {
-                      setState(() {
-                        _currentPage = value;
-                      });
-                    },
-                    itemCount: Data.homeBannerData.length,
-                    itemBuilder: (context, index) => InfoBanner(
-                      header: 'Total Income\n\n',
-                      info: 'N${state.totalIncome.parseToString()}',
-                    ),
+        loaded: (state) => BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (ctx, settingsState) => settingsState.map(
+            loading: (_) => const SliverLoading(),
+            loaded: (settingsState) {
+              final titheValue = calculateTithe(state.totalIncome, settingsState.tithePercentage);
+              final homeBannerData = [
+                BannerData(
+                  header: 'Total Income\n\n',
+                  info: 'N${state.totalIncome.parseToString()}',
+                ),
+                BannerData(
+                  header: 'Tithe Percentage\n\n',
+                  info: '${settingsState.tithePercentage}%',
+                ),
+                BannerData(
+                  header: 'Tithe Amount\n\n',
+                  info: 'N${titheValue.parseToString()}',
+                ),
+              ];
+
+              return SliverPadding(
+                padding: Styles.homeContentPadding,
+                sliver: SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 135,
+                        child: PageView.builder(
+                          onPageChanged: (value) {
+                            setState(() {
+                              _currentPage = value;
+                            });
+                          },
+                          itemCount: Data.homeBannerData.length,
+                          itemBuilder: (context, index) => InfoBanner(
+                            header: homeBannerData[index].header,
+                            info: homeBannerData[index].info,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(3, (index) => buildDot(index: index)),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(3, (index) => buildDot(index: index)),
-                ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),
