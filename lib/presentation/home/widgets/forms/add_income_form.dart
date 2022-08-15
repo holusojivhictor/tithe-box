@@ -21,12 +21,14 @@ class AddIncomeForm extends StatefulWidget {
 class _AddIncomeFormState extends State<AddIncomeForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TextEditingController businessNameController = TextEditingController();
+  late TextEditingController addressController = TextEditingController();
   late TextEditingController incomeController = TextEditingController();
   late TextEditingController descriptionController = TextEditingController();
   SalaryType selectedSalaryType = SalaryType.weekly;
   bool submitted = false;
 
   String? businessNameErrorText;
+  String? addressErrorText;
   String? incomeErrorText;
   String? descriptionErrorText;
 
@@ -53,6 +55,21 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
             },
           ),
           FormFieldWithBorder(
+            text: "Address",
+            hintText: "e.g Ikotun, Lagos",
+            textEditingController: addressController,
+            textInputType: TextInputType.text,
+            errorText: addressErrorText,
+            isSubmitted: submitted,
+            onChanged: (_) => setState(() {}),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Enter your business' address";
+              }
+              return null;
+            },
+          ),
+          FormFieldWithBorder(
             text: "Income Earned",
             hintText: "e.g 1000.00",
             textEditingController: incomeController,
@@ -69,6 +86,7 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
           ),
           FormFieldWithBorder(
             text: "Description",
+            isSelectable: true,
             hintText: "e.g i earned \$1000 from my business.",
             textEditingController: descriptionController,
             textInputType: TextInputType.text,
@@ -81,6 +99,7 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
               }
               return null;
             },
+            child: Text('*Optional', style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black54)),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,7 +171,13 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
       _formKey.currentState!.save();
 
       final bloc = context.read<DataBloc>();
-      bloc.add(DataEvent.recordIncome(businessName: businessNameController.text, incomeAmount: incomeController.text, description: descriptionController.text, frequency: selectedSalaryType.name));
+      bloc.add(DataEvent.recordIncome(
+        businessName: businessNameController.text,
+        businessAddress: addressController.text,
+        incomeAmount: incomeController.text,
+        description: descriptionController.text.isEmpty ? null : descriptionController.text,
+        frequency: selectedSalaryType.name,
+      ));
     }
   }
 

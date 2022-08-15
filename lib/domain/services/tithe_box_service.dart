@@ -27,9 +27,11 @@ abstract class TitheBoxService {
   ChurchCardModel getChurchForCard(String id);
 
   Future<Response> recordIncome(
+    String currency,
     String businessName,
+    String businessAddress,
     String incomeAmount,
-    String description,
+    String? description,
     String frequency,
   );
 

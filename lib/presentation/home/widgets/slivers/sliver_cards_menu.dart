@@ -3,7 +3,7 @@ import 'package:tithe_box/theme.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 
 import '../calculate_tithe_card.dart';
-import '../churches_card.dart';
+import '../pay_tithe_card.dart';
 import '../income_record_card.dart';
 import '../add_church_card.dart';
 

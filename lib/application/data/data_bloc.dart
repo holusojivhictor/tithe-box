@@ -18,7 +18,7 @@ class DataBloc extends Bloc<DataEvent, DataState> {
     on<_RecordIncome>((e, emit) async {
       emit(const DataState.loading());
       try {
-        final response = await _titheBoxService.recordIncome(e.businessName, e.incomeAmount, e.description, e.frequency);
+        final response = await _titheBoxService.recordIncome("NGN", e.businessName, e.businessAddress, e.incomeAmount, e.description, e.frequency);
         await _titheBoxService.getIncomeData();
         _incomesBloc.add(const IncomesEvent.init());
         emit(DataState.data(data: response));

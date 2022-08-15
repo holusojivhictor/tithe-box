@@ -91,8 +91,10 @@ class FormFieldWithBorder extends StatelessWidget {
   final Validator? validator;
   final OnChanged? onChanged;
   final String? errorText;
+  final Widget? child;
   final bool isSubmitted;
   final int? maxLength;
+  final bool isSelectable;
   final bool enabled;
   final bool isBold;
 
@@ -104,8 +106,10 @@ class FormFieldWithBorder extends StatelessWidget {
     required this.textInputType,
     this.isSubmitted = false,
     this.obscureText = false,
+    this.isSelectable = false,
     this.enabled = true,
     this.isBold = false,
+    this.child,
     this.suffixIcon,
     this.validator,
     this.onChanged,
@@ -125,7 +129,10 @@ class FormFieldWithBorder extends StatelessWidget {
           RowText(
             text: text,
             isBold: isBold,
+            isSelectable: isSelectable,
             color: theme.indicatorColor.withOpacity(0.8),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: child,
           ),
           const SizedBox(height: 10),
           TextFormField(

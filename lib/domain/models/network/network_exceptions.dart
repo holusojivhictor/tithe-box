@@ -151,43 +151,43 @@ class NetworkExceptions with _$NetworkExceptions {
   static String getErrorMessage(NetworkExceptions networkExceptions) {
     var errorMessage = "";
     networkExceptions.when(notImplemented: () {
-      errorMessage = "Not Implemented";
+      errorMessage = "Not Implemented.";
     }, requestCancelled: () {
-      errorMessage = "Request Cancelled";
+      errorMessage = "Request Cancelled.";
     }, internalServerError: () {
-      errorMessage = "Internal Server Error";
+      errorMessage = "Internal Server Error.";
     }, notFound: (String reason) {
       errorMessage = reason;
     }, serviceUnavailable: () {
-      errorMessage = "Service unavailable";
+      errorMessage = "Service unavailable.";
     }, methodNotAllowed: () {
-      errorMessage = "Method not Allowed";
+      errorMessage = "Method not Allowed.";
     }, badRequest: () {
-      errorMessage = "Bad request";
+      errorMessage = "Bad request.";
     }, unauthorisedRequest: () {
-      errorMessage = "Unauthorised request";
+      errorMessage = "Unauthorised request.";
     }, unexpectedError: () {
-      errorMessage = "Unexpected error occurred";
+      errorMessage = "Unexpected error occurred.";
     }, requestTimeout: () {
-      errorMessage = "Connection request timeout";
+      errorMessage = "Connection request timeout.";
     }, noInternetConnection: () {
-      errorMessage = "No internet connection";
+      errorMessage = "No internet connection.";
     }, conflict: () {
-      errorMessage = "Error due to a conflict";
+      errorMessage = "Error due to a conflict.";
     }, sendTimeout: () {
-      errorMessage = "Send timeout in connection with API server";
+      errorMessage = "Send timeout in connection with API server.";
     }, unableToProcess: () {
-      errorMessage = "Unable to process the data";
+      errorMessage = "Unable to process the data.";
     }, defaultError: (String error) {
       errorMessage = error;
     }, formatException: () {
-      errorMessage = "Unexpected error occurred";
+      errorMessage = "Unexpected error occurred.";
     }, notAcceptable: () {
-      errorMessage = "Not acceptable";
+      errorMessage = "Not acceptable.";
     }, incorrectAuth: () {
-      errorMessage = "Unauthorised: Invalid login credentials";
+      errorMessage = "Unauthorised: Invalid login credentials.";
     }, invalidRequest: () {
-      errorMessage = "Invalid credentials";
+      errorMessage = "Invalid details provided.";
     }, userNotFound: () {
       errorMessage = "No user found for this email.";
     }, weakPassword: () {

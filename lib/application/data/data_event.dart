@@ -4,8 +4,9 @@ part of 'data_bloc.dart';
 class DataEvent with _$DataEvent {
   const factory DataEvent.recordIncome({
     required String businessName,
+    required String businessAddress,
     required String incomeAmount,
-    required String description,
+    String? description,
     required String frequency,
   }) = _RecordIncome;
 

@@ -7,9 +7,11 @@ abstract class IncomeService {
     String token,
     String userId,
     String accountType,
+    String currency,
     String businessName,
+    String businessAddress,
     String incomeAmount,
-    String description,
+    String? description,
     String tithePercentage,
     String frequency,
   );

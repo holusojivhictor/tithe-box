@@ -1,4 +1,5 @@
 import 'package:tithe_box/domain/enums/enums.dart';
+import 'package:tithe_box/domain/extensions/string_extensions.dart';
 
 class Assets {
   static String dbPath = 'assets/db';
@@ -7,6 +8,13 @@ class Assets {
 
   static String getImagePath(String name) => '$imageBasePath/$name';
   static String getSvgPath(String name) => '$svgsBasePath/$name';
+
+  static String getDescription(String? desc) {
+    if (desc.isNullEmptyOrWhitespace) {
+      return 'No description';
+    }
+    return '$desc';
+  }
 
   static String translateAppLanguageType(AppLanguageType language) {
     switch (language) {

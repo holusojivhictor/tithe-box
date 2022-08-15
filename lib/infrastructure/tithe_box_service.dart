@@ -99,7 +99,9 @@ class TitheBoxServiceImpl implements TitheBoxService {
       id: model.incomeId,
       type: model.type,
       businessName: model.businessName,
+      businessAddress: model.businessAddress,
       amount: model.amount,
+      description: model.description,
       frequency: model.frequency,
       createdAt: model.createdAt,
     );
@@ -120,14 +122,16 @@ class TitheBoxServiceImpl implements TitheBoxService {
   }
 
   @override
-  Future<Response> recordIncome(String businessName, String incomeAmount, String description, String frequency) async {
+  Future<Response> recordIncome(String currency, String businessName, String businessAddress, String incomeAmount, String? description, String frequency) async {
     final settings = _settingsService.appSettings;
 
     final response = await _incomeService.recordIncome(
       token,
       userId,
       UserAccountType.personal.name,
+      currency,
       businessName,
+      businessAddress,
       incomeAmount,
       description,
       settings.tithePercentage.toString(),
