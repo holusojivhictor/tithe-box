@@ -11,6 +11,7 @@ abstract class TitheBoxService {
   Future<void> initProfile();
   Future<void> getIncomeData();
   Future<void> getChurchData();
+  Future<void> getTransactionData();
 
   /// User account
   UserProfileModel getProfile();
@@ -25,6 +26,11 @@ abstract class TitheBoxService {
   List<ChurchCardModel> getChurchesForCard();
   ChurchFileModel getChurch(String id);
   ChurchCardModel getChurchForCard(String id);
+
+  /// Transactions
+  List<TransactionCardModel> getTransactionsForCard();
+  TransactionFileModel getTransaction(String id);
+  TransactionCardModel getTransactionForCard(String id);
 
   Future<Response> recordIncome(
     String currency,

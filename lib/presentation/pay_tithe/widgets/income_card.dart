@@ -7,6 +7,7 @@ import 'package:tithe_box/domain/enums/enums.dart';
 import 'package:tithe_box/domain/extensions/string_extensions.dart';
 import 'package:tithe_box/domain/models/models.dart';
 import 'package:tithe_box/presentation/churches/churches_page.dart';
+import 'package:tithe_box/presentation/pay_tithe/widgets/payment_modal.dart';
 import 'package:tithe_box/presentation/shared/custom_alert_dialog.dart';
 import 'package:tithe_box/presentation/shared/custom_card.dart';
 import 'package:tithe_box/presentation/shared/utils/toast_utils.dart';
@@ -156,20 +157,39 @@ class _IncomeCardState extends State<IncomeCard> {
         cancelOnPressed: () {
           Navigator.of(context).pop();
         },
-        actionOnPressed: () {
+        actionOnPressed: () async {
           Navigator.of(context).pop();
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (ctx) => const CustomAlertDialog(text: 'Processing...'),
-          );
+          await _handlePayment(keys["id"]!, keys["accountId"]!);
         },
       ),
     );
 
-    ToastUtils.showInfoToast(fToast, 'Transaction discarded.');
+    // ToastUtils.showInfoToast(fToast, 'Transaction discarded.');
   }
 
-  Future<void> _handlePayment() async {
+  Future<void> _handlePayment(String churchId, String accountId) async {
+    String link;
+    final bloc = context.read<DataBloc>();
+    bloc.add(DataEvent.addPayment(incomeId: widget.id, churchId: churchId, accountId: accountId));
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => BlocListener<DataBloc, DataState>(
+        listener: (ctx, state) => state.maybeMap(
+          data: (state) async {
+            final data = state.data;
+            final response = data.data as Map<String, dynamic>;
+            link = response["data"]["link"];
+            Navigator.of(context).pop();
+            final route = MaterialPageRoute(builder: (_) => PaymentModal(link: link));
+            await Navigator.push(context, route);
+            await route.completed;
+            return;
+          },
+          orElse: () => {},
+        ),
+        child: const CustomAlertDialog(text: 'Processing...'),
+      ),
+    );
   }
 }

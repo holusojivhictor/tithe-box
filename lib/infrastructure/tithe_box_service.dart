@@ -16,6 +16,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
   late UserProfileFile _userProfileFile;
   late List<IncomeFileModel> _incomeFile = <IncomeFileModel>[];
   late List<ChurchFileModel> _churchFile = <ChurchFileModel>[];
+  late List<TransactionFileModel> _transactionFile = <TransactionFileModel>[];
 
   TitheBoxServiceImpl(this._authService, this._incomeService, this._churchService, this._paymentService, this._settingsService);
 
@@ -58,6 +59,13 @@ class TitheBoxServiceImpl implements TitheBoxService {
   }
 
   @override
+  Future<void> getTransactionData() async {
+    final response = await _paymentService.getTransactions(token, userId);
+    final list = response.data as List;
+    _transactionFile = list.map((e) => TransactionFileModel.fromJson(e)).toList();
+  }
+
+  @override
   IncomeFileModel getIncome(String id) {
     return _incomeFile.firstWhere((el) => el.incomeId == id);
   }
@@ -93,6 +101,32 @@ class TitheBoxServiceImpl implements TitheBoxService {
   @override
   List<ChurchCardModel> getChurchesForCard() {
     return _churchFile.map((e) => _toChurchForCard(e)).toList();
+  }
+
+  @override
+  TransactionFileModel getTransaction(String id) {
+    return _transactionFile.firstWhere((el) => el.transactionId == id);
+  }
+
+  @override
+  TransactionCardModel getTransactionForCard(String id) {
+    final transaction = _transactionFile.firstWhere((el) => el.transactionId == id);
+    return _toTransactionForCard(transaction);
+  }
+
+  @override
+  List<TransactionCardModel> getTransactionsForCard() {
+    return _transactionFile.map((e) => _toTransactionForCard(e)).toList();
+  }
+
+  TransactionCardModel _toTransactionForCard(TransactionFileModel model) {
+    return TransactionCardModel(
+      id: model.transactionId,
+      amount: model.amount,
+      tithePercentage: model.tithePercentage,
+      status: model.status,
+      createdAt: model.createdAt,
+    );
   }
 
   IncomeCardModel _toIncomeForCard(IncomeFileModel model) {
