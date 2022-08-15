@@ -64,6 +64,7 @@ class TitheBox extends StatelessWidget {
               titheBoxService,
               ctx.read<IncomesBloc>(),
               ctx.read<ChurchesBloc>(),
+              ctx.read<TransactionsBloc>(),
             );
           },
         ),

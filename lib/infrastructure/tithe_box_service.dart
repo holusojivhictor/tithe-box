@@ -131,6 +131,8 @@ class TitheBoxServiceImpl implements TitheBoxService {
   }
 
   IncomeCardModel _toIncomeForCard(IncomeFileModel model) {
+    final transactions = _transactionFile.where((el) => el.incomeId == model.incomeId).toList();
+    final mapped = transactions.map((e) => e.status).toList();
     return IncomeCardModel(
       id: model.incomeId,
       type: model.type,
@@ -141,6 +143,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
       tithePercentage: model.tithePercentage,
       frequency: model.frequency,
       createdAt: model.createdAt,
+      isPaid: mapped.contains(TransactionStatus.successful),
     );
   }
 

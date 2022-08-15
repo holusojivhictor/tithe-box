@@ -13,8 +13,9 @@ class DataBloc extends Bloc<DataEvent, DataState> {
   final TitheBoxService _titheBoxService;
   final IncomesBloc _incomesBloc;
   final ChurchesBloc _churchesBloc;
+  final TransactionsBloc _transactionsBloc;
 
-  DataBloc(this._titheBoxService, this._incomesBloc, this._churchesBloc) : super(const DataState.idle()) {
+  DataBloc(this._titheBoxService, this._incomesBloc, this._churchesBloc, this._transactionsBloc) : super(const DataState.idle()) {
     on<_RecordIncome>((e, emit) async {
       emit(const DataState.loading());
       try {
@@ -41,6 +42,8 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       emit(const DataState.loading());
       try {
         final response = await _titheBoxService.addPayment(e.incomeId, e.churchId, e.accountId);
+        await _titheBoxService.getTransactionData();
+        _transactionsBloc.add(const TransactionsEvent.init());
         emit(DataState.data(data: response));
       } catch (e) {
         emit(DataState.error(error: NetworkExceptions.getDioException(e)));

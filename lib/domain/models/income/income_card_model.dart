@@ -10,6 +10,7 @@ class IncomeCardModel {
   final double tithePercentage;
   final SalaryType frequency;
   final String createdAt;
+  final bool isPaid;
 
   IncomeCardModel({
     required this.id,
@@ -21,5 +22,6 @@ class IncomeCardModel {
     required this.tithePercentage,
     required this.frequency,
     required this.createdAt,
+    required this.isPaid,
   });
 }

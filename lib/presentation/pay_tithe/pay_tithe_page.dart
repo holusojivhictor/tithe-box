@@ -37,7 +37,7 @@ class PayTithePage extends StatelessWidget {
       gridDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
         crossAxisCount: SizeUtils.getCrossAxisCountForGrids(context, forPortrait: 1, forLandscape: 1),
         crossAxisSpacing: 5,
-        mainAxisSpacing: 10,
+        mainAxisSpacing: 7,
       ),
       delegate: SliverChildBuilderDelegate(
             (context, index) => IncomeCard.card(income: incomes[index]),

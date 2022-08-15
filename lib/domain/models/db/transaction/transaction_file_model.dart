@@ -10,6 +10,7 @@ part 'transaction_file_model.g.dart';
 class TransactionFileModel with _$TransactionFileModel {
   factory TransactionFileModel({
     @JsonKey(name: '_id') required String transactionId,
+    @JsonKey(name: 'income_id') required String incomeId,
     required double amount,
     required double tithePercentage,
     required TransactionStatus status,

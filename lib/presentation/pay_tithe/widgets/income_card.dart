@@ -10,7 +10,6 @@ import 'package:tithe_box/presentation/churches/churches_page.dart';
 import 'package:tithe_box/presentation/pay_tithe/widgets/payment_modal.dart';
 import 'package:tithe_box/presentation/shared/custom_alert_dialog.dart';
 import 'package:tithe_box/presentation/shared/custom_card.dart';
-import 'package:tithe_box/presentation/shared/utils/toast_utils.dart';
 import 'package:tithe_box/theme.dart';
 
 import 'container_tag.dart';
@@ -25,6 +24,7 @@ class IncomeCard extends StatefulWidget {
   final double titheAmount;
   final SalaryType frequency;
   final String createdAt;
+  final bool isPaid;
 
   final bool withElevation;
 
@@ -39,6 +39,7 @@ class IncomeCard extends StatefulWidget {
     required this.titheAmount,
     required this.frequency,
     required this.createdAt,
+    required this.isPaid,
     this.withElevation = true,
   }) : super(key: key);
 
@@ -55,6 +56,7 @@ class IncomeCard extends StatefulWidget {
         titheAmount = calculateTithe(income.amount, income.tithePercentage),
         frequency = income.frequency,
         createdAt = income.createdAt,
+        isPaid = income.isPaid,
         super(key: key);
 
   @override
@@ -121,8 +123,8 @@ class _IncomeCardState extends State<IncomeCard> {
               ),
               const SizedBox(height: 5),
               ElevatedButton(
-                onPressed: () => _payNow(context),
-                child: const Text('Pay Now'),
+                onPressed: widget.isPaid ? null : () => _payNow(context),
+                child: Text(widget.isPaid ? 'Paid' : 'Pay Now'),
               ),
             ],
           ),
@@ -145,7 +147,6 @@ class _IncomeCardState extends State<IncomeCard> {
   }
 
   Future<void> _showDialog(Map<String, String> keys) async {
-    final fToast = ToastUtils.of(context);
     await showDialog(
       context: context,
       barrierDismissible: false,
@@ -163,8 +164,6 @@ class _IncomeCardState extends State<IncomeCard> {
         },
       ),
     );
-
-    // ToastUtils.showInfoToast(fToast, 'Transaction discarded.');
   }
 
   Future<void> _handlePayment(String churchId, String accountId) async {
