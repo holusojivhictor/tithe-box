@@ -19,7 +19,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, ResultState<Response>> {
   UserProfileBloc(this._authService, this._titheBoxService, this._logger, this._sessionBloc) : super(const ResultState.idle()) {
     on<_CreateProfile>((e, emit) async {
       emit(const ResultState.loading());
-      ApiResult<Response> apiResult = await _authService.registerAccount(e.firstName, e.lastName, e.emailAddress, e.occupation, e.city, e.churchName, e.country, e.phoneNumber, e.serviceDays, e.password, e.passwordConfirmation);
+      ApiResult<Response> apiResult = await _authService.registerAccount(e.firstName, e.lastName, e.emailAddress, e.occupation, e.city, e.country, e.phoneNumber, e.password, e.passwordConfirmation);
       await apiResult.when(
         success: (Response response) async {
           final json = response.data as Map<String, dynamic>;

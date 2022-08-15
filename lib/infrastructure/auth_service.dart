@@ -20,10 +20,8 @@ class AuthServiceImpl implements AuthService {
     String email,
     String occupation,
     String city,
-    String churchName,
     String country,
     String phoneNumber,
-    List<String> serviceDays,
     String password,
     String passwordConfirmation,
   ) async {
@@ -34,11 +32,9 @@ class AuthServiceImpl implements AuthService {
       "email": email,
       "occupation": occupation,
       "city": city,
-      "church": churchName,
       "password": password,
       "confirmPassword": passwordConfirmation,
       "phoneNumber": phoneNumber,
-      "serviceDays": serviceDays,
       "country": country
     };
 

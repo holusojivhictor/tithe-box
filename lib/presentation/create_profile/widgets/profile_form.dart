@@ -35,7 +35,6 @@ class _ProfileFormState extends State<ProfileForm> {
   late TextEditingController firstNameController = TextEditingController();
   late TextEditingController lastNameController = TextEditingController();
   late TextEditingController occupationController = TextEditingController();
-  late TextEditingController nameOfChurchController = TextEditingController();
   late TextEditingController cityController = TextEditingController();
   late UserProfileBloc _userProfileBloc;
   String selectedCountryValue = 'Nigeria';
@@ -44,7 +43,6 @@ class _ProfileFormState extends State<ProfileForm> {
   String? firstNameErrorText;
   String? lastNameErrorText;
   String? occupationErrorText;
-  String? nameOfChurchErrorText;
   String? cityErrorText;
 
   @override
@@ -108,21 +106,6 @@ class _ProfileFormState extends State<ProfileForm> {
               validator: (value) {
                 if (value!.isEmpty) {
                   return kOccupationNullError;
-                }
-                return null;
-              },
-            ),
-            FormFieldWithoutBorder(
-              text: "Name of Church",
-              hintText: "e.g Assemblies of God",
-              textEditingController: nameOfChurchController,
-              textInputType: TextInputType.name,
-              errorText: nameOfChurchErrorText,
-              isSubmitted: submitted,
-              onChanged: (_) => setState(() {}),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return kNameOfChurchNullError;
                 }
                 return null;
               },
@@ -199,7 +182,7 @@ class _ProfileFormState extends State<ProfileForm> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      _userProfileBloc.add(UserProfileEvent.createProfile(emailAddress: widget.email, firstName: firstNameController.text, lastName: lastNameController.text, occupation: occupationController.text, churchName: nameOfChurchController.text, city: cityController.text, country: selectedCountryValue, phoneNumber: widget.phoneNumber, serviceDays: ["Sunday"], password: widget.password, passwordConfirmation: widget.confirmPassword));
+      _userProfileBloc.add(UserProfileEvent.createProfile(emailAddress: widget.email, firstName: firstNameController.text, lastName: lastNameController.text, occupation: occupationController.text, city: cityController.text, country: selectedCountryValue, phoneNumber: widget.phoneNumber, password: widget.password, passwordConfirmation: widget.confirmPassword));
 
       showDialog(
         context: context,

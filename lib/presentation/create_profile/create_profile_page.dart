@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/presentation/create_profile/widgets/profile_form.dart';
 import 'package:tithe_box/presentation/shared/auth_app_bar.dart';
 import 'package:tithe_box/theme.dart';
@@ -24,9 +26,9 @@ class CreateProfilePage extends StatelessWidget {
     return Stack(
       children: [
         Scaffold(
-          appBar: const AuthAppBar(
+          appBar: AuthAppBar(
             title: 'Create Profile',
-            hasLeading: false,
+            onTap: () => context.read<SessionBloc>().add(const SessionEvent.signUpRequested()),
           ),
           body: SizedBox(
             width: double.infinity,

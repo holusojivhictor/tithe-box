@@ -8,10 +8,8 @@ abstract class AuthService {
     String email,
     String occupation,
     String city,
-    String churchName,
     String country,
     String phoneNumber,
-    List<String> serviceDays,
     String password,
     String passwordConfirmation,
   );
