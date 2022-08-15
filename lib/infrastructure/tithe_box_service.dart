@@ -26,6 +26,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
       initProfile(),
       getIncomeData(),
       getChurchData(),
+      getTransactionData(),
     ]);
   }
 

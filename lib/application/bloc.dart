@@ -9,3 +9,4 @@ export 'home/home_bloc.dart';
 export 'incomes/incomes_bloc.dart';
 export 'data/data_bloc.dart';
 export 'churches/churches_bloc.dart';
+export 'transactions/transactions_bloc.dart';
