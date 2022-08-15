@@ -7,6 +7,7 @@ class IncomeCardModel {
   final String businessAddress;
   final double amount;
   final String description;
+  final double tithePercentage;
   final SalaryType frequency;
   final String createdAt;
 
@@ -17,6 +18,7 @@ class IncomeCardModel {
     required this.businessAddress,
     required this.amount,
     required this.description,
+    required this.tithePercentage,
     required this.frequency,
     required this.createdAt,
   });

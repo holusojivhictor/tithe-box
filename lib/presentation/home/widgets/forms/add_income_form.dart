@@ -30,7 +30,6 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
   String? businessNameErrorText;
   String? addressErrorText;
   String? incomeErrorText;
-  String? descriptionErrorText;
 
   @override
   Widget build(BuildContext context) {
@@ -90,15 +89,6 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
             hintText: "e.g i earned \$1000 from my business.",
             textEditingController: descriptionController,
             textInputType: TextInputType.text,
-            errorText: descriptionErrorText,
-            isSubmitted: submitted,
-            onChanged: (_) => setState(() {}),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Briefly describe the nature of this income";
-              }
-              return null;
-            },
             child: Text('*Optional', style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.black54)),
           ),
           Column(
@@ -106,7 +96,7 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-                child: const RowText(text: 'Frequency'),
+                child: const RowText(text: 'Income Type'),
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
@@ -185,6 +175,7 @@ class _AddIncomeFormState extends State<AddIncomeForm> {
     final fToast = ToastUtils.of(context);
     setState(() => submitted = false);
     businessNameController.clear();
+    addressController.clear();
     incomeController.clear();
     descriptionController.clear();
     ToastUtils.showSucceedToast(fToast, 'Income added successfully');

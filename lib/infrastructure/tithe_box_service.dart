@@ -102,6 +102,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
       businessAddress: model.businessAddress,
       amount: model.amount,
       description: model.description,
+      tithePercentage: model.tithePercentage,
       frequency: model.frequency,
       createdAt: model.createdAt,
     );
