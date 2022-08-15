@@ -163,7 +163,6 @@ class _IncomeCardState extends State<IncomeCard> {
             barrierDismissible: false,
             builder: (ctx) => const CustomAlertDialog(text: 'Processing...'),
           );
-          return;
         },
       ),
     );

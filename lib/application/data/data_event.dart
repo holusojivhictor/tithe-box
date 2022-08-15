@@ -20,4 +20,10 @@ class DataEvent with _$DataEvent {
     required String bankCode,
     required List<String> serviceDays,
   }) = _SaveChurch;
+
+  const factory DataEvent.addPayment({
+    required String incomeId,
+    required String churchId,
+    required String accountId,
+  }) = _AddPayment;
 }

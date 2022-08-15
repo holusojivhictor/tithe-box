@@ -9,6 +9,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
   final AuthService _authService;
   final IncomeService _incomeService;
   final ChurchService _churchService;
+  final PaymentService _paymentService;
   final SettingsService _settingsService;
   late String token;
   late String userId;
@@ -16,7 +17,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
   late List<IncomeFileModel> _incomeFile = <IncomeFileModel>[];
   late List<ChurchFileModel> _churchFile = <ChurchFileModel>[];
 
-  TitheBoxServiceImpl(this._authService, this._incomeService, this._churchService, this._settingsService);
+  TitheBoxServiceImpl(this._authService, this._incomeService, this._churchService, this._paymentService, this._settingsService);
 
   @override
   Future<void> init() async {
@@ -158,6 +159,13 @@ class TitheBoxServiceImpl implements TitheBoxService {
       bankCode,
       serviceDays,
     );
+
+    return response;
+  }
+
+  @override
+  Future<Response> addPayment(String incomeId, String churchId, String accountId) async {
+    final response = await _paymentService.addPayment(token, userId, incomeId, churchId, accountId);
 
     return response;
   }

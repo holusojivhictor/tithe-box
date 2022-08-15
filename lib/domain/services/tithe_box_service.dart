@@ -46,5 +46,11 @@ abstract class TitheBoxService {
     List<String> serviceDays,
   );
 
+  Future<Response> addPayment(
+    String incomeId,
+    String churchId,
+    String accountId,
+  );
+
   Future<void> signOut();
 }

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'network_exceptions.freezed.dart';
@@ -111,25 +110,6 @@ class NetworkExceptions with _$NetworkExceptions {
           }
         } else if (error is SocketException) {
           networkExceptions = const NetworkExceptions.noInternetConnection();
-        } else if (error is FirebaseAuthException) {
-          switch (error.code) {
-            case "user-not-found":
-              networkExceptions = const NetworkExceptions.userNotFound();
-              break;
-            case "wrong-password":
-              networkExceptions = const NetworkExceptions.wrongPassword();
-              break;
-            case "weak-password":
-              networkExceptions = const NetworkExceptions.weakPassword();
-              break;
-            case "email-already-in-use":
-              networkExceptions = const NetworkExceptions.existingEmail();
-              break;
-            default:
-              networkExceptions = NetworkExceptions.defaultError(
-                "Received invalid error code: ${error.code}",
-              );
-          }
         } else {
           networkExceptions = const NetworkExceptions.unexpectedError();
         }

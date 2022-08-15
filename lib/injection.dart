@@ -28,10 +28,7 @@ class Injection {
     final loggingService = LoggingServiceImpl();
     getIt.registerSingleton<LoggingService>(loggingService);
 
-    final firebaseService = FirebaseServiceImpl();
-    getIt.registerSingleton<FirebaseService>(firebaseService);
-
-    final authService = AuthServiceImpl(firebaseService);
+    final authService = AuthServiceImpl();
     getIt.registerSingleton<AuthService>(authService);
 
     final incomeService = IncomeServiceImpl();
@@ -51,6 +48,7 @@ class Injection {
       authService,
       incomeService,
       churchService,
+      paymentService,
       settingsService,
     ));
   }

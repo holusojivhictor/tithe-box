@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/services/services.dart';
-import 'package:tithe_box/firebase_options.dart';
 import 'package:tithe_box/presentation/app_widget.dart';
 
 import 'injection.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Injection.init();
   runApp(const TitheBox());
 }
