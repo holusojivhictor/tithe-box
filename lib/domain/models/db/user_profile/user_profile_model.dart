@@ -12,8 +12,6 @@ class UserProfileModel with _$UserProfileModel {
     required String email,
     required String occupation,
     required String city,
-    required String church,
-    required List<String> serviceDays,
     required String country,
   }) = _UserProfileModel;
 
