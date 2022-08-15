@@ -11,6 +11,7 @@ import 'package:tithe_box/domain/services/services.dart';
 class SettingsServiceImpl extends SettingsService {
   final _appThemeKey = 'AppTheme';
   final _appLanguageKey = 'AppLanguageKey';
+  final _salaryKey = 'SalaryKey';
   final _isFirstInstallKey = 'FirstInstall';
   final _doubleBackToCloseKey = 'DoubleBackToCloseKey';
   final _useDemoImageKey = 'UseDemoImageKey';
@@ -35,6 +36,12 @@ class SettingsServiceImpl extends SettingsService {
 
   @override
   set language(AppLanguageType lang) => _prefs.setInt(_appLanguageKey, lang.index);
+
+  @override
+  SalaryType get salaryType => SalaryType.values[_prefs.getInt(_salaryKey)!];
+
+  @override
+  set salaryType(SalaryType salaryType) => _prefs.setInt(_salaryKey, salaryType.index);
 
   @override
   bool get isFirstInstall => _prefs.getBool(_isFirstInstallKey)!;
@@ -70,6 +77,7 @@ class SettingsServiceImpl extends SettingsService {
   AppSettings get appSettings => AppSettings(
     appTheme: appTheme,
     appLanguage: language,
+    salaryType: salaryType,
     useDarkMode: false,
     isFirstInstall: isFirstInstall,
     doubleBackToClose: doubleBackToClose,
@@ -103,6 +111,11 @@ class SettingsServiceImpl extends SettingsService {
 
     if (_prefs.get(_appLanguageKey) == null) {
       language = await _getDefaultLangToUse();
+    }
+
+    if (_prefs.get(_salaryKey) == null) {
+      _logger.info(runtimeType, 'Salary type will be set to monthly');
+      salaryType = SalaryType.monthly;
     }
 
     if (_prefs.get(_doubleBackToCloseKey) == null) {

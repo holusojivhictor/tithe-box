@@ -7,7 +7,9 @@ import 'package:tithe_box/presentation/shared/loading.dart';
 import 'package:tithe_box/presentation/shared/sliver_nothing_found.dart';
 import 'package:tithe_box/presentation/shared/sliver_page_header.dart';
 import 'package:tithe_box/presentation/shared/sliver_scaffold_with_fab.dart';
+import 'package:tithe_box/presentation/shared/utils/size_utils.dart';
 import 'package:tithe_box/theme.dart';
+import 'package:waterfall_flow/waterfall_flow.dart';
 
 class ChurchesPage extends StatelessWidget {
   final bool isInSelectionMode;
@@ -34,7 +36,7 @@ class ChurchesPage extends StatelessWidget {
         loading: (_) => const Loading(),
         loaded: (state) => SliverScaffoldWithFab(
           slivers: [
-            isInSelectionMode ? const SliverPadding(padding: Styles.edgeInsetVertical10, sliver: SliverPageHeader(subHeader: 'Select the church you want to pay the tithe to.')) : const SliverPageHeader(header: 'Churches', subHeader: 'See all your added churches.', hasSpace: true),
+            isInSelectionMode ? const SliverPadding(padding: Styles.edgeInsetVertical10, sliver: SliverPageHeader(subHeader: 'Select the church you want to pay the tithe to.')) : const SliverPageHeader(header: 'Churches', subHeader: 'View all the churches added to the system.', hasSpace: true),
             if (state.churches.isNotEmpty) _buildList(context, state.churches) else const SliverNothingFound(),
           ],
         ),
@@ -42,19 +44,17 @@ class ChurchesPage extends StatelessWidget {
     );
   }
 
+
   Widget _buildList(BuildContext context, List<ChurchCardModel> churches) {
-    return SliverPadding(
-      padding: Styles.edgeInsetAll0,
-      sliver: SliverToBoxAdapter(
-        child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: churches.length,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (ctx, index) {
-            final e = churches[index];
-            return ChurchCard.item(church: e, isInSelectionMode: isInSelectionMode);
-          },
-        ),
+    return SliverWaterfallFlow(
+      gridDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
+        crossAxisCount: SizeUtils.getCrossAxisCountForGrids(context, forPortrait: 1, forLandscape: 1),
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
+      ),
+      delegate: SliverChildBuilderDelegate(
+            (context, index) => ChurchCard.item(church: churches[index], isInSelectionMode: isInSelectionMode),
+        childCount: churches.length,
       ),
     );
   }

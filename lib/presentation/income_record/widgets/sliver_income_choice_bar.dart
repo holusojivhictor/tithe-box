@@ -23,6 +23,7 @@ class SliverIncomeChoiceBar extends StatelessWidget {
               onSelected: (v) {
                 context.read<IncomesBloc>().add(IncomesEvent.salaryTypeChanged(SalaryType.values[v]));
                 context.read<IncomesBloc>().add(const IncomesEvent.applyFilterChanges());
+                context.read<SettingsBloc>().add(SettingsEvent.salaryTypeChanged(newValue: SalaryType.values[v]));
               },
               choiceText: (val, _) => Assets.translateSalaryType(SalaryType.values[val]),
             ),

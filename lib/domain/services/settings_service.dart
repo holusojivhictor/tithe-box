@@ -10,6 +10,9 @@ abstract class SettingsService {
   AppLanguageType get language;
   set language(AppLanguageType lang);
 
+  SalaryType get salaryType;
+  set salaryType(SalaryType salaryType);
+
   bool get isFirstInstall;
   set isFirstInstall(bool itIs);
 

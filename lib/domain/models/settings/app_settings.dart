@@ -9,6 +9,7 @@ class AppSettings with _$AppSettings {
   factory AppSettings({
     required AppThemeType appTheme,
     required AppLanguageType appLanguage,
+    required SalaryType salaryType,
     required bool useDarkMode,
     required bool isFirstInstall,
     required bool doubleBackToClose,

@@ -23,6 +23,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<_Init>(_mapInitToState);
     on<_ThemeChanged>(_mapThemeChangedToState);
     on<_LanguageChanged>(_mapLanguageChangedToState);
+    on<_SalaryTypeChanged>(_mapSalaryTypeChangedToState);
     on<_DoubleBackToCloseChanged>(_mapDoubleBackToCloseToState);
     on<_UseDemoProfilePictureChanged>(_mapUseDemoPictureToState);
     on<_AutoThemeModeTypeChanged>(_mapAutoThemeModeChangedToState);
@@ -37,6 +38,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(SettingsState.loaded(
       currentTheme: settings.appTheme,
       currentLanguage: settings.appLanguage,
+      salaryType: settings.salaryType,
       appVersion: _deviceInfoService.version,
       doubleBackToClose: settings.doubleBackToClose,
       useDemoProfilePicture: settings.useDemoImage,
@@ -60,6 +62,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
     _settingsService.language = event.newValue;
     emit(currentState.copyWith.call(currentLanguage: event.newValue));
+  }
+
+  void _mapSalaryTypeChangedToState(_SalaryTypeChanged event, Emitter<SettingsState> emit) {
+    if (event.newValue == _settingsService.salaryType) {
+      emit(currentState);
+    }
+    _settingsService.salaryType = event.newValue;
+    emit(currentState.copyWith.call(salaryType: event.newValue));
   }
 
   void _mapDoubleBackToCloseToState(_DoubleBackToCloseChanged event, Emitter<SettingsState> emit) {

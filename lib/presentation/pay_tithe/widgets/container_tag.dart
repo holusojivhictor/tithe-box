@@ -20,7 +20,7 @@ class ContainerTag extends StatelessWidget {
         border: Border.all(color: hasBorder ? Colors.grey.withOpacity(0.5) : Colors.white),
         borderRadius: BorderRadius.circular(4),
       ),
-      child: Text(tagText),
+      child: Text(tagText, textAlign: TextAlign.center),
     );
   }
 }

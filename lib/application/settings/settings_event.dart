@@ -12,6 +12,10 @@ class SettingsEvent with _$SettingsEvent {
     required AppLanguageType newValue,
   }) = _LanguageChanged;
 
+  const factory SettingsEvent.salaryTypeChanged({
+    required SalaryType newValue,
+  }) = _SalaryTypeChanged;
+
   const factory SettingsEvent.doubleBackToCloseChanged({
     required bool newValue,
   }) = _DoubleBackToCloseChanged;

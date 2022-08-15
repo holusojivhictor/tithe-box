@@ -9,7 +9,6 @@ import 'package:tithe_box/presentation/income_record/widgets/sliver_income_choic
 import 'package:tithe_box/presentation/income_record/widgets/income_record_card.dart';
 import 'package:tithe_box/presentation/shared/sliver_page_header.dart';
 import 'package:tithe_box/presentation/shared/clickable_title.dart';
-import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/loading.dart';
 import 'package:tithe_box/presentation/shared/sliver_nothing_found.dart';
 import 'package:tithe_box/presentation/shared/sliver_scaffold_with_fab.dart';
@@ -29,7 +28,7 @@ class IncomeRecordPage extends StatelessWidget {
         loaded: (state) => SliverScaffoldWithFab(
           appbar: hasAppBar ? const _AppBar() : null,
           slivers: [
-            SliverPageHeader(header: 'Income Record', subHeader: 'View your recorded incomes by the time added.', hasSpace: !hasAppBar),
+            SliverPageHeader(header: 'Income Record', subHeader: 'View your recorded incomes grouped by time added.', hasSpace: !hasAppBar),
             const SliverIncomeChoiceBar(),
             SliverClickableTitle(
               title: 'Income Record - (${Assets.translateSalaryType(state.salaryType)})',
@@ -38,16 +37,6 @@ class IncomeRecordPage extends StatelessWidget {
             if (state.incomes.isNotEmpty)
               ...[
                 SliverToBoxAdapter(child: _buildGroupedList(context, state.incomes)),
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  sliver: SliverToBoxAdapter(
-                    child: DefaultButton(
-                      isPrimary: true,
-                      text: 'Calculate Tithe',
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
               ]
             else const SliverNothingFound(),
 

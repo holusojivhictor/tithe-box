@@ -78,4 +78,17 @@ class Assets {
         throw Exception('Invalid salary type = $type');
     }
   }
+
+  static String translateTransactionStatus(TransactionStatus status) {
+    switch (status) {
+      case TransactionStatus.failed:
+        return 'Failed';
+      case TransactionStatus.pending:
+        return 'Pending';
+      case TransactionStatus.successful:
+        return 'Successful';
+      default:
+        throw Exception('Invalid status type = $status');
+    }
+  }
 }

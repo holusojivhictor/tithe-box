@@ -12,19 +12,19 @@ part 'incomes_state.dart';
 
 class IncomesBloc extends Bloc<IncomesEvent, IncomesState> {
   final TitheBoxService _titheBoxService;
+  final SettingsService _settingsService;
 
   _LoadedState get currentState => state as _LoadedState;
 
-  IncomesBloc(this._titheBoxService) : super(const IncomesState.loading()) {
+  IncomesBloc(this._titheBoxService, this._settingsService) : super(const IncomesState.loading()) {
     on<_Init>(_mapInitToState);
     on<_Refresh>(_mapRefreshToState);
     on<_SalaryTypeChanged>(_mapSalaryTypeChangedToState);
     on<_ApplyFilterChanges>(_mapApplyFilterChangesToState);
   }
 
-  IncomesState _buildInitialState({
-    SalaryType salaryType = SalaryType.monthly,
-  }) {
+  IncomesState _buildInitialState() {
+    final salaryType = _settingsService.appSettings.salaryType;
     final isLoaded = state is _LoadedState;
     var data = _titheBoxService.getIncomesForCard();
     final totalIncome = _titheBoxService.totalIncome();
@@ -104,7 +104,7 @@ class IncomesBloc extends Bloc<IncomesEvent, IncomesState> {
   }
 
   void _mapApplyFilterChangesToState(_ApplyFilterChanges event, Emitter<IncomesState> emit) {
-    final state = _buildInitialState(salaryType: currentState.tempSalaryType);
+    final state = _buildInitialState();
     emit(state);
   }
 }
