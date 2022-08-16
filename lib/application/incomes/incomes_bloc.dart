@@ -2,7 +2,9 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/enums/enums.dart';
+import 'package:tithe_box/domain/extensions/string_extensions.dart';
 import 'package:tithe_box/domain/models/models.dart';
 import 'package:tithe_box/domain/services/services.dart';
 
@@ -13,10 +15,11 @@ part 'incomes_state.dart';
 class IncomesBloc extends Bloc<IncomesEvent, IncomesState> {
   final TitheBoxService _titheBoxService;
   final SettingsService _settingsService;
+  final TransactionsBloc _transactionsBloc;
 
   _LoadedState get currentState => state as _LoadedState;
 
-  IncomesBloc(this._titheBoxService, this._settingsService) : super(const IncomesState.loading()) {
+  IncomesBloc(this._titheBoxService, this._settingsService, this._transactionsBloc) : super(const IncomesState.loading()) {
     on<_Init>(_mapInitToState);
     on<_Refresh>(_mapRefreshToState);
     on<_SalaryTypeChanged>(_mapSalaryTypeChangedToState);
@@ -48,6 +51,7 @@ class IncomesBloc extends Bloc<IncomesEvent, IncomesState> {
           break;
       }
 
+      _sortData(data);
       return IncomesState.loaded(
         incomes: data,
         totalIncome: totalIncome,
@@ -75,6 +79,8 @@ class IncomesBloc extends Bloc<IncomesEvent, IncomesState> {
         break;
     }
 
+    _sortData(data);
+
     final s = currentState.copyWith.call(
       incomes: data,
       totalIncome: totalIncome,
@@ -86,6 +92,10 @@ class IncomesBloc extends Bloc<IncomesEvent, IncomesState> {
     return s;
   }
 
+  void _sortData(List<IncomeCardModel> data) {
+    data.sort((x, y) => y.createdAt.getMillisecondsSinceEpoch().compareTo(x.createdAt.getMillisecondsSinceEpoch()));
+  }
+
   void _mapInitToState(_Init event, Emitter<IncomesState> emit) {
     final state = _buildInitialState();
     emit(state);
@@ -94,6 +104,7 @@ class IncomesBloc extends Bloc<IncomesEvent, IncomesState> {
   Future<void> _mapRefreshToState(_Refresh event, Emitter<IncomesState> emit) async {
     emit(currentState.copyWith.call(isRefreshing: true));
     await _titheBoxService.getTransactionData().whenComplete(() {
+      _transactionsBloc.add(const TransactionsEvent.init());
       emit(_buildInitialState());
     });
   }

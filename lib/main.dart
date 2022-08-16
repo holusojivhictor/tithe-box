@@ -42,20 +42,20 @@ class TitheBox extends StatelessWidget {
         BlocProvider(
           create: (ctx) {
             final titheBoxService = getIt<TitheBoxService>();
+            return TransactionsBloc(titheBoxService);
+          },
+        ),
+        BlocProvider(
+          create: (ctx) {
+            final titheBoxService = getIt<TitheBoxService>();
             final settingsService = getIt<SettingsService>();
-            return IncomesBloc(titheBoxService, settingsService);
+            return IncomesBloc(titheBoxService, settingsService, ctx.read<TransactionsBloc>());
           },
         ),
         BlocProvider(
           create: (ctx) {
             final titheBoxService = getIt<TitheBoxService>();
             return ChurchesBloc(titheBoxService);
-          },
-        ),
-        BlocProvider(
-          create: (ctx) {
-            final titheBoxService = getIt<TitheBoxService>();
-            return TransactionsBloc(titheBoxService);
           },
         ),
         BlocProvider(

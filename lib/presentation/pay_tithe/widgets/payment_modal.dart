@@ -33,13 +33,12 @@ class _PaymentModalState extends State<PaymentModal> {
         body: WebView(
           javascriptMode: JavascriptMode.unrestricted,
           initialUrl: widget.link,
-          navigationDelegate: (NavigationRequest request) async {
-            if (request.url.startsWith('https://tithebox.herokuapp.com/api/v1/redirect/payment/')) {
-              Timer(const Duration(milliseconds: 500), () async {
+          onPageStarted: (String url) async {
+            if (url.startsWith('https://tithebox.herokuapp.com/api/v1/redirect/payment/')) {
+              Timer(const Duration(seconds: 1), () async {
                 await handleClose(context);
               });
             }
-            return NavigationDecision.navigate;
           },
         ),
       ),

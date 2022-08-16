@@ -45,4 +45,11 @@ extension StringExtensions on String? {
 
     return date;
   }
+
+  int getMillisecondsSinceEpoch() {
+    final dateString = '$this';
+    final date = DateTime.parse(dateString);
+
+    return date.millisecondsSinceEpoch;
+  }
 }
