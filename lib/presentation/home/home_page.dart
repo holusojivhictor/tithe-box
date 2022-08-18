@@ -12,7 +12,6 @@ import 'widgets/slivers/sliver_cards_menu.dart';
 import 'widgets/slivers/sliver_choice_bar.dart';
 import 'widgets/slivers/sliver_home_greet.dart';
 import 'widgets/slivers/sliver_info_banner.dart';
-import 'widgets/slivers/sliver_search_bar.dart';
 import 'widgets/slivers/sliver_slider_bar.dart';
 import 'widgets/slivers/sliver_slider_form.dart';
 import 'widgets/slivers/sliver_verse_card.dart';
@@ -69,7 +68,6 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
               body: CustomScrollView(
                 slivers: [
                   const SliverHomeGreet(),
-                  const SliverSearchBar(),
                   const SliverInfoBanner(),
                   const SliverChoiceBar(),
                   ...children,
