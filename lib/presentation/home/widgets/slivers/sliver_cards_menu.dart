@@ -30,11 +30,11 @@ class SliverCardsMenu extends StatelessWidget {
       case 0:
         return const CalculateTitheCard();
       case 1:
-        return const IncomeRecordCard();
+        return const PayTitheCard();
       case 2:
         return const AddChurchCard();
       case 3:
-        return const ChurchesCard();
+        return const IncomeRecordCard();
       default:
         throw Exception('Invalid card item');
     }

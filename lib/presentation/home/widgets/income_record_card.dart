@@ -10,7 +10,7 @@ class IncomeRecordCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CardItem(
       title: 'Income Record',
-      subtitle: "Hurray! Credit Alert.",
+      subtitle: "Record your incomes to pay tithe.",
       image: 'income-record.jpg',
       onClick: _goToIncomeRecordPage,
     );

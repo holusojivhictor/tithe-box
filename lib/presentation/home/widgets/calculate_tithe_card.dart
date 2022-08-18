@@ -10,7 +10,7 @@ class CalculateTitheCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CardItem(
       title: 'Calculate Tithe',
-      subtitle: "Let’s find out what your tithe is gonna be.",
+      subtitle: "Calculate your tithe based on a percentage.",
       image: 'calculate-tithe.jpg',
       onClick: _goToCalculateTithePage,
     );
