@@ -72,6 +72,9 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
 
       emit(const SessionState.authenticated());
     });
+    on<_VerifyAccount>((event, emit) async {
+      emit(const SessionState.verifyState());
+    });
   }
 
   Future<bool> checkToken() async {

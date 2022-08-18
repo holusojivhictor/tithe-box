@@ -193,7 +193,7 @@ class _ProfileFormState extends State<ProfileForm> {
             idle: () => const CustomAlertDialog(text: 'Idling...'),
             loading: () => const CustomAlertDialog(text: 'Creating account...'),
             data: (_) {
-              return const CustomAlertDialog(text: 'Initializing data...');
+              return const CustomAlertDialog(text: 'Setting up user...');
             },
             done: () {
               Navigator.pop(context);

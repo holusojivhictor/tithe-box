@@ -5,6 +5,7 @@ import 'package:tithe_box/presentation/create_profile/create_profile_page.dart';
 import 'package:tithe_box/presentation/main_tab_page.dart';
 import 'package:tithe_box/presentation/sign_in/sign_in_page.dart';
 import 'package:tithe_box/presentation/sign_up/sign_up_page.dart';
+import 'package:tithe_box/presentation/verify/verify_page.dart';
 
 import 'presentation/account_selection/account_selection_page.dart';
 import 'presentation/animated_splash/animated_splash.dart';
@@ -26,6 +27,7 @@ class SessionWrapper extends StatelessWidget {
         userProfileState: (s) => CreateProfilePage(email: s.email, phoneNumber: s.phoneNumber, password: s.password, confirmPassword: s.confirmPassword),
         signInState: (s) => const SignInPage(),
         authenticated: (_) => const MainTabPage(),
+        verifyState: (_) => const VerifyPage(),
       ),
     );
   }

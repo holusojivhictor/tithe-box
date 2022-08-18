@@ -28,8 +28,8 @@ class UserProfileBloc extends Bloc<UserProfileEvent, ResultState<Response>> {
           await _titheBoxService.getTokenAndId();
           await _titheBoxService.init().whenComplete(() => emit(const ResultState.done()));
           final userData = _titheBoxService.getProfile();
-          _logger.info(runtimeType, 'User ${userData.email} signing in...');
-          _sessionBloc.add(const SessionEvent.initStartup());
+          _logger.info(runtimeType, 'User ${userData.email} signing up...');
+          _sessionBloc.add(const SessionEvent.verify());
         },
         failure: (NetworkExceptions error) async {
           emit(ResultState.error(error: error));

@@ -24,4 +24,6 @@ class SessionState with _$SessionState {
   const factory SessionState.signInState() = _SignInState;
 
   const factory SessionState.authenticated() = _AuthenticatedState;
+
+  const factory SessionState.verifyState() = _VerifyAccountState;
 }

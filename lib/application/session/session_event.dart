@@ -22,4 +22,6 @@ class SessionEvent with _$SessionEvent {
   const factory SessionEvent.signInRequested() = _SignIn;
 
   const factory SessionEvent.initStartup() = _InitStartup;
+
+  const factory SessionEvent.verify() = _VerifyAccount;
 }
