@@ -8,7 +8,7 @@ import 'package:tithe_box/domain/enums/enums.dart';
 import 'package:tithe_box/domain/models/models.dart';
 
 const kPadding = 10.0;
-const kAnimationDuration = Duration(milliseconds: 200);
+const kAnimationDuration = Duration(milliseconds: 300);
 
 const baseUrl = 'https://tithebox.herokuapp.com/api/v1/users';
 

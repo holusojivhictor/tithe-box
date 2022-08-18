@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
@@ -17,7 +19,30 @@ class SliverInfoBanner extends StatefulWidget {
 }
 
 class _SliverInfoBannerState extends State<SliverInfoBanner> {
+  final PageController _controller = PageController();
   int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _animateSlider());
+  }
+
+  void _animateToPage() {
+    _controller.animateToPage(_currentPage, duration: kAnimationDuration, curve: Curves.easeIn);
+  }
+
+  void _animateSlider() {
+    Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (_currentPage < Data.homeBannerData.length - 1) {
+        _currentPage++;
+        _animateToPage();
+      } else {
+        _currentPage = 0;
+        _animateToPage();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +77,7 @@ class _SliverInfoBannerState extends State<SliverInfoBanner> {
                       SizedBox(
                         height: 135,
                         child: PageView.builder(
+                          controller: _controller,
                           onPageChanged: (value) {
                             setState(() {
                               _currentPage = value;
