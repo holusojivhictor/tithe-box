@@ -12,6 +12,7 @@ class SettingsServiceImpl extends SettingsService {
   final _appThemeKey = 'AppTheme';
   final _appLanguageKey = 'AppLanguageKey';
   final _appAccentColorKey = 'AppAccentColorKey';
+  final _userAccountKey = 'UserAccountKey';
   final _salaryKey = 'SalaryKey';
   final _isFirstInstallKey = 'FirstInstall';
   final _doubleBackToCloseKey = 'DoubleBackToCloseKey';
@@ -43,6 +44,12 @@ class SettingsServiceImpl extends SettingsService {
 
   @override
   set accentColor(AppAccentColorType accentColor) => _prefs.setInt(_appAccentColorKey, accentColor.index);
+
+  @override
+  UserAccountType get accountType => UserAccountType.values[_prefs.getInt(_userAccountKey)!];
+
+  @override
+  set accountType(UserAccountType accountType) => _prefs.setInt(_userAccountKey, accountType.index);
 
   @override
   SalaryType get salaryType => SalaryType.values[_prefs.getInt(_salaryKey)!];
@@ -85,6 +92,7 @@ class SettingsServiceImpl extends SettingsService {
     appTheme: appTheme,
     appLanguage: language,
     accentColor: accentColor,
+    accountType: accountType,
     salaryType: salaryType,
     useDarkMode: false,
     isFirstInstall: isFirstInstall,
@@ -124,6 +132,11 @@ class SettingsServiceImpl extends SettingsService {
     if (_prefs.get(_appAccentColorKey) == null) {
       _logger.info(runtimeType, 'Setting orange as the default accent color');
       accentColor = AppAccentColorType.orange;
+    }
+
+    if (_prefs.get(_userAccountKey) == null) {
+      _logger.info(runtimeType, 'Setting personal as the default account type');
+      accountType = UserAccountType.personal;
     }
 
     if (_prefs.get(_salaryKey) == null) {

@@ -13,6 +13,9 @@ abstract class SettingsService {
   AppAccentColorType get accentColor;
   set accentColor(AppAccentColorType accentColor);
 
+  UserAccountType get accountType;
+  set accountType(UserAccountType accountType);
+
   SalaryType get salaryType;
   set salaryType(SalaryType salaryType);
 

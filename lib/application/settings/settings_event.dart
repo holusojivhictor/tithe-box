@@ -16,6 +16,10 @@ class SettingsEvent with _$SettingsEvent {
     required AppAccentColorType newValue,
   }) = _AccentColorChanged;
 
+  const factory SettingsEvent.userAccountTypeChanged({
+    required UserAccountType newValue,
+  }) = _UserAccountTypeChanged;
+
   const factory SettingsEvent.salaryTypeChanged({
     required SalaryType newValue,
   }) = _SalaryTypeChanged;

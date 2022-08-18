@@ -8,6 +8,7 @@ class SettingsState with _$SettingsState {
     required AppThemeType currentTheme,
     required AppLanguageType currentLanguage,
     required AppAccentColorType currentAccentColor,
+    required UserAccountType accountType,
     required SalaryType salaryType,
     required String appVersion,
     required bool doubleBackToClose,

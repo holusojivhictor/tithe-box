@@ -10,6 +10,7 @@ class AppSettings with _$AppSettings {
     required AppThemeType appTheme,
     required AppLanguageType appLanguage,
     required AppAccentColorType accentColor,
+    required UserAccountType accountType,
     required SalaryType salaryType,
     required bool useDarkMode,
     required bool isFirstInstall,
