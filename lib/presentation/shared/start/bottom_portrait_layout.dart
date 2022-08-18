@@ -44,7 +44,7 @@ class CurvedContainer extends CustomClipper<Path> {
   Path getClip(Size size) {
     final roundingHeight = size.height * 0.1;
     final filledRectangle = Rect.fromLTRB(0, 590, size.width, size.height);
-    final roundingRectangle = Rect.fromLTRB(-10, size.height - roundingHeight * 4.4, size.width + 10, size.height - roundingHeight * 2);
+    final roundingRectangle = Rect.fromLTRB(-10, size.height - roundingHeight * 4.3, size.width + 10, size.height - roundingHeight * 2);
 
     final path = Path();
     path.addRect(filledRectangle);
