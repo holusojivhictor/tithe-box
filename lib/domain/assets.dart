@@ -16,6 +16,17 @@ class Assets {
     return '$desc';
   }
 
+  static String getBannerSvgPath(AppAccentColorType accentColor) {
+    switch (accentColor) {
+      case AppAccentColorType.orange:
+        return getSvgPath('mask-vector-orange.svg');
+      case AppAccentColorType.grey:
+        return getSvgPath('mask-vector-grey.svg');
+      default:
+        throw Exception('Invalid accent color type = $accentColor');
+    }
+  }
+
   static String translateAppLanguageType(AppLanguageType language) {
     switch (language) {
       case AppLanguageType.english:

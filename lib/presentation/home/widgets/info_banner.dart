@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/assets.dart';
 import 'package:tithe_box/presentation/shared/custom_card.dart';
+import 'package:tithe_box/presentation/shared/loading.dart';
 import 'package:tithe_box/presentation/shared/svg_image.dart';
 import 'package:tithe_box/theme.dart';
 
@@ -24,13 +27,18 @@ class InfoBanner extends StatelessWidget {
       child: Stack(
         alignment: AlignmentDirectional.center,
         children: [
-          ClipRRect(
-            borderRadius: Styles.mainCardBorderRadius,
-            child: SvgImage(
-              label: 'Info banner svg',
-              image: Assets.getSvgPath('mask-vector.svg'),
-              fit: BoxFit.cover,
-              height: 135,
+          BlocBuilder<SettingsBloc, SettingsState>(
+            builder: (ctx, state) => state.map(
+              loading: (_) => const Loading(useScaffold: false),
+              loaded: (state) => ClipRRect(
+                borderRadius: Styles.mainCardBorderRadius,
+                child: SvgImage(
+                  label: 'Info banner svg',
+                  image: Assets.getBannerSvgPath(state.currentAccentColor),
+                  fit: BoxFit.cover,
+                  height: 135,
+                ),
+              ),
             ),
           ),
           Row(

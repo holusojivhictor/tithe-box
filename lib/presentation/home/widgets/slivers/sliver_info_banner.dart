@@ -107,13 +107,14 @@ class _SliverInfoBannerState extends State<SliverInfoBanner> {
   }
 
   AnimatedContainer buildDot({required int index}) {
+    final primaryColor = Theme.of(context).primaryColor;
     return AnimatedContainer(
       duration: kAnimationDuration,
       margin: const EdgeInsets.only(right: kPadding / 1.5),
       height: 3,
       width: _currentPage == index ? 20 : 10,
       decoration: BoxDecoration(
-        color: _currentPage == index ? kPrimary : kPrimary.withOpacity(0.5),
+        color: _currentPage == index ? primaryColor : primaryColor.withOpacity(0.5),
         borderRadius: BorderRadius.circular(2),
       ),
     );

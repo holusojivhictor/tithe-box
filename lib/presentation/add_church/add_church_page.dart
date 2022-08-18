@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tithe_box/presentation/shared/sliver_page_header.dart';
 import 'package:tithe_box/presentation/shared/sliver_scaffold_with_fab.dart';
-import 'package:tithe_box/theme.dart';
 
 import 'widgets/add_church_form.dart';
 
@@ -38,7 +37,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget{
       centerTitle: true,
       title: Text(
         "Church Information",
-        style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
+        style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: theme.primaryColor),
       ),
     );
   }

@@ -19,11 +19,12 @@ class ListTileChoice<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: Styles.edgeInsetHorizontal5,
       child: CheckboxListTile(
         dense: true,
-        activeColor: kPrimary,
+        activeColor: theme.primaryColor,
         contentPadding: Styles.edgeInsetHorizontal10,
         title: Text(
           valueText,

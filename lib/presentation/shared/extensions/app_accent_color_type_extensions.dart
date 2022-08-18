@@ -40,6 +40,7 @@ extension AppAccentColorTypeExtensions on AppAccentColorType {
           formBorder: Color(0x8A000000),
           categoryOverlay: Color(0xFFE0E0E0),
           altTextColor: Colors.black54,
+          baseTextColor: Colors.black,
         ),
       ],
     );
@@ -71,6 +72,7 @@ extension AppAccentColorTypeExtensions on AppAccentColorType {
           formBorder: Color(0xFFBDBDBD),
           categoryOverlay: Color(0xFF616161),
           altTextColor: Colors.white54,
+          baseTextColor: Colors.white,
         ),
       ],
     );

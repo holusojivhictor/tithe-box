@@ -15,7 +15,8 @@ class PageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
+    final theme = Theme.of(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: hasSpace ? 10 : 0),
       child: Column(
@@ -23,10 +24,10 @@ class PageHeader extends StatelessWidget {
         children: [
           hasSpace ? Text(
             header,
-            style: textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
+            style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: theme.primaryColor),
           ) : const SizedBox.shrink(),
           SizedBox(height: hasSpace ? 10 : 0),
-          Text(subHeader),
+          Text(subHeader, style: TextStyle(color: customTheme.baseTextColor)),
         ],
       ),
     );

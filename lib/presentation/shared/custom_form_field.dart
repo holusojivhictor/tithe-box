@@ -119,6 +119,7 @@ class FormFieldWithBorder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
     final theme = Theme.of(context);
 
     return Container(
@@ -136,6 +137,7 @@ class FormFieldWithBorder extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormField(
+            style: TextStyle(color: customTheme.baseTextColor),
             autovalidateMode: isSubmitted ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
             controller: textEditingController,
             obscureText: obscureText,

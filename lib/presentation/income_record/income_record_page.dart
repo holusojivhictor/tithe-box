@@ -20,6 +20,7 @@ class IncomeRecordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
     final theme = Theme.of(context);
 
     return BlocBuilder<IncomesBloc, IncomesState>(
@@ -32,7 +33,7 @@ class IncomeRecordPage extends StatelessWidget {
             const SliverIncomeChoiceBar(),
             SliverClickableTitle(
               title: 'Income Record - (${Assets.translateSalaryType(state.salaryType)})',
-              textStyle: theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+              textStyle: theme.textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: customTheme.baseTextColor),
             ),
             if (state.incomes.isNotEmpty)
               ...[
@@ -47,6 +48,7 @@ class IncomeRecordPage extends StatelessWidget {
   }
 
   Widget _buildGroupedList(BuildContext context, List<IncomeCardModel> incomes, {ScrollController? scrollController}) {
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
     return GroupedListView<IncomeCardModel, String>(
       shrinkWrap: true,
       elements: incomes,
@@ -55,7 +57,7 @@ class IncomeRecordPage extends StatelessWidget {
       itemBuilder: (context, element) => IncomeRecordCard.item(income: element),
       groupSeparatorBuilder: (type) => Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Text(type),
+        child: Text(type, style: TextStyle(color: customTheme.baseTextColor)),
       ),
     );
   }
@@ -74,7 +76,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget{
       centerTitle: true,
       title: Text(
         "Income Record",
-        style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
+        style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: theme.primaryColor),
       ),
     );
   }

@@ -16,7 +16,7 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
 
     return Scaffold(
       appBar: AuthAppBar(
@@ -36,7 +36,7 @@ class _SignInPageState extends State<SignInPage> {
                   children: [
                     Text(
                       'Log In',
-                      style: textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
+                      style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: theme.primaryColor),
                     ),
                     const SizedBox(height: 10),
                     Text(

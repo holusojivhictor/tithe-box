@@ -10,7 +10,6 @@ import 'package:tithe_box/presentation/shared/sliver_page_header.dart';
 import 'package:tithe_box/presentation/shared/sliver_scaffold_with_fab.dart';
 import 'package:tithe_box/presentation/shared/utils/size_utils.dart';
 import 'package:tithe_box/presentation/shared/utils/toast_utils.dart';
-import 'package:tithe_box/theme.dart';
 import 'package:waterfall_flow/waterfall_flow.dart';
 
 class PayTithePage extends StatelessWidget {
@@ -75,7 +74,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget{
       centerTitle: true,
       title: Text(
         "Pay Tithe",
-        style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
+        style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: theme.primaryColor),
       ),
     );
   }

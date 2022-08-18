@@ -59,7 +59,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget{
       centerTitle: true,
       title: Text(
         "Calculate Tithe",
-        style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: kPrimary),
+        style: theme.textTheme.displayMedium!.copyWith(fontSize: 20, color: theme.primaryColor),
       ),
     );
   }

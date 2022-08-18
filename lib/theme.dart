@@ -167,19 +167,22 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
   final Color? formBorder;
   final Color? categoryOverlay;
   final Color? altTextColor;
+  final Color? baseTextColor;
 
   const CustomTheme({
     required this.formBorder,
     required this.categoryOverlay,
     required this.altTextColor,
+    required this.baseTextColor,
   });
 
   @override
-  CustomTheme copyWith({Color? formBorder, Color? categoryOverlay, Color? altTextColor}) {
+  CustomTheme copyWith({Color? formBorder, Color? categoryOverlay, Color? altTextColor, Color? baseTextColor}) {
     return CustomTheme(
       formBorder: formBorder ?? this.formBorder,
       categoryOverlay: categoryOverlay ?? this.categoryOverlay,
       altTextColor: altTextColor ?? this.altTextColor,
+      baseTextColor: baseTextColor ?? this.baseTextColor,
     );
   }
 
@@ -192,7 +195,8 @@ class CustomTheme extends ThemeExtension<CustomTheme> {
     return CustomTheme(
       formBorder: Color.lerp(formBorder, other.formBorder, t),
       categoryOverlay: Color.lerp(categoryOverlay, other.categoryOverlay, t),
-        altTextColor: Color.lerp(altTextColor, other.altTextColor, t),
+      altTextColor: Color.lerp(altTextColor, other.altTextColor, t),
+      baseTextColor: Color.lerp(baseTextColor, other.baseTextColor, t),
     );
   }
 }
