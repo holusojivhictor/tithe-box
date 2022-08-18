@@ -75,21 +75,24 @@ class _AddChurchFormState extends State<AddChurchForm> {
               return null;
             },
           ),
-          FormFieldWithBorder(
-            text: "Account Name",
-            hintText: "e.g Assemblies of God Ministries",
-            textEditingController: accountNameController,
-            textInputType: TextInputType.name,
-            errorText: accountNameErrorText,
-            isSubmitted: submitted,
-            isBold: true,
-            onChanged: (_) => setState(() {}),
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Enter your church's bank account name";
-              }
-              return null;
-            },
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const FormFieldHeader(text: 'Bank'),
+              CustomFullDropdownButton<String>(
+                hasBorder: true,
+                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                title: 'Bank',
+                currentValue: selectedBank,
+                items: banks.map((e) => e["name"]!).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    selectedBank = value;
+                  });
+                },
+              ),
+            ],
           ),
           FormFieldWithBorder(
             text: "Account Number",
@@ -107,24 +110,21 @@ class _AddChurchFormState extends State<AddChurchForm> {
               return null;
             },
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const FormFieldHeader(text: 'Bank'),
-              CustomFullDropdownButton<String>(
-                hasBorder: true,
-                margin: Styles.formFieldMargin,
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                title: 'Bank',
-                currentValue: selectedBank,
-                items: banks.map((e) => e["name"]!).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedBank = value;
-                  });
-                },
-              ),
-            ],
+          FormFieldWithBorder(
+            text: "Account Name",
+            hintText: "e.g Assemblies of God Ministries",
+            textEditingController: accountNameController,
+            textInputType: TextInputType.name,
+            errorText: accountNameErrorText,
+            isSubmitted: submitted,
+            isBold: true,
+            onChanged: (_) => setState(() {}),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Enter your church's bank account name";
+              }
+              return null;
+            },
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,7 +132,7 @@ class _AddChurchFormState extends State<AddChurchForm> {
               const FormFieldHeader(text: 'Country'),
               CustomFullDropdownButton<String>(
                 hasBorder: true,
-                margin: Styles.formFieldMargin,
+                margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 title: 'Country',
                 currentValue: selectedCountryValue,
