@@ -83,7 +83,7 @@ class _SliverInfoBannerState extends State<SliverInfoBanner> {
                               _currentPage = value;
                             });
                           },
-                          itemCount: Data.homeBannerData.length,
+                          itemCount: homeBannerData.length,
                           itemBuilder: (context, index) => InfoBanner(
                             header: homeBannerData[index].header,
                             info: homeBannerData[index].info,

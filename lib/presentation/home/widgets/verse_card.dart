@@ -1,11 +1,43 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:tithe_box/domain/app_constants.dart';
 import 'package:tithe_box/domain/assets.dart';
 import 'package:tithe_box/presentation/shared/custom_card.dart';
 import 'package:tithe_box/theme.dart';
 
-class VerseCard extends StatelessWidget {
-  final String bibleVerse;
-  const VerseCard({Key? key, required this.bibleVerse}) : super(key: key);
+class VerseCard extends StatefulWidget {
+  const VerseCard({Key? key}) : super(key: key);
+
+  @override
+  State<VerseCard> createState() => _VerseCardState();
+}
+
+class _VerseCardState extends State<VerseCard> {
+  final PageController _controller = PageController();
+  int _currentVerse = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _animateSlider());
+  }
+
+  void _animateToPage() {
+    _controller.animateToPage(_currentVerse, duration: kAnimationDuration, curve: Curves.linear);
+  }
+
+  void _animateSlider() {
+    Timer.periodic(const Duration(seconds: 6), (timer) {
+      if (_currentVerse < Data.verseData.length - 1) {
+        _currentVerse++;
+        _animateToPage();
+      } else {
+        _currentVerse = 0;
+        _animateToPage();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +68,21 @@ class VerseCard extends StatelessWidget {
               ),
               child: Padding(
                 padding: Styles.edgeInsetAll10,
-                child: Text(
-                  bibleVerse,
-                  style: theme.textTheme.bodyLarge!.copyWith(color: kWhite),
+                child: SizedBox(
+                  child: PageView.builder(
+                    controller: _controller,
+                    physics: const NeverScrollableScrollPhysics(),
+                    onPageChanged: (value) {
+                      setState(() {
+                        _currentVerse = value;
+                      });
+                    },
+                    itemCount: Data.verseData.length,
+                    itemBuilder: (context, index) => Text(
+                      Data.verseData[index],
+                      style: theme.textTheme.bodyLarge!.copyWith(color: kWhite),
+                    ),
+                  ),
                 ),
               ),
             ),
