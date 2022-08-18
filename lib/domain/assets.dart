@@ -54,7 +54,7 @@ class Assets {
       case HomeContentType.addIncome:
         return 'Add Income';
       case HomeContentType.tithingSlider:
-        return 'Tithing Slider';
+        return 'Tithe %';
       case HomeContentType.progress:
         return 'Progress';
       default:

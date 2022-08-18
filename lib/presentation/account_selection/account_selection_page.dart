@@ -46,7 +46,7 @@ class AccountSelectionPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "Select a personal or a corporate account type according to which best describes your use of the app.",
+                  "Select an account type to access.",
                   style: textTheme.bodyMedium!.copyWith(color: customTheme.altTextColor),
                   textAlign: TextAlign.center,
                 ),
