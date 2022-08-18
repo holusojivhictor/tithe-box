@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/assets.dart';
+import 'package:tithe_box/domain/enums/enums.dart';
 import 'package:tithe_box/presentation/shared/custom_alert_dialog.dart';
 import 'package:tithe_box/presentation/shared/default_button.dart';
 import 'package:tithe_box/presentation/shared/start/bottom_portrait_layout.dart';
@@ -56,9 +57,8 @@ class AccountSelectionPage extends StatelessWidget {
                 isPrimary: true,
                 text: 'Personal Tithe',
                 elevation: 0,
-                onPressed: () {
-                  context.read<SessionBloc>().add(const SessionEvent.startAuthState());
-                },
+                backgroundColor: kPrimary,
+                onPressed: () => _startAuthState(context, AppAccentColorType.orange),
               ),
               const SizedBox(height: 10),
               DefaultButton(
@@ -66,7 +66,7 @@ class AccountSelectionPage extends StatelessWidget {
                 isPrimary: true,
                 elevation: 0,
                 backgroundColor: kSecondary,
-                onPressed: null,
+                onPressed: () => _startAuthState(context, AppAccentColorType.grey),
               ),
             ],
           ),
@@ -78,5 +78,10 @@ class AccountSelectionPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _startAuthState(BuildContext context, AppAccentColorType accentColor) {
+    context.read<SettingsBloc>().add(SettingsEvent.accentColorChanged(newValue: accentColor));
+    context.read<SessionBloc>().add(const SessionEvent.startAuthState());
   }
 }

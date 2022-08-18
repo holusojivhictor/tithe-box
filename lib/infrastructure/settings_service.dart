@@ -11,6 +11,7 @@ import 'package:tithe_box/domain/services/services.dart';
 class SettingsServiceImpl extends SettingsService {
   final _appThemeKey = 'AppTheme';
   final _appLanguageKey = 'AppLanguageKey';
+  final _appAccentColorKey = 'AppAccentColorKey';
   final _salaryKey = 'SalaryKey';
   final _isFirstInstallKey = 'FirstInstall';
   final _doubleBackToCloseKey = 'DoubleBackToCloseKey';
@@ -36,6 +37,12 @@ class SettingsServiceImpl extends SettingsService {
 
   @override
   set language(AppLanguageType lang) => _prefs.setInt(_appLanguageKey, lang.index);
+
+  @override
+  AppAccentColorType get accentColor => AppAccentColorType.values[_prefs.getInt(_appAccentColorKey)!];
+
+  @override
+  set accentColor(AppAccentColorType accentColor) => _prefs.setInt(_appAccentColorKey, accentColor.index);
 
   @override
   SalaryType get salaryType => SalaryType.values[_prefs.getInt(_salaryKey)!];
@@ -77,6 +84,7 @@ class SettingsServiceImpl extends SettingsService {
   AppSettings get appSettings => AppSettings(
     appTheme: appTheme,
     appLanguage: language,
+    accentColor: accentColor,
     salaryType: salaryType,
     useDarkMode: false,
     isFirstInstall: isFirstInstall,
@@ -111,6 +119,11 @@ class SettingsServiceImpl extends SettingsService {
 
     if (_prefs.get(_appLanguageKey) == null) {
       language = await _getDefaultLangToUse();
+    }
+
+    if (_prefs.get(_appAccentColorKey) == null) {
+      _logger.info(runtimeType, 'Setting orange as the default accent color');
+      accentColor = AppAccentColorType.orange;
     }
 
     if (_prefs.get(_salaryKey) == null) {

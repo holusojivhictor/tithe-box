@@ -8,6 +8,10 @@ class MainEvent with _$MainEvent {
     required AppThemeType newValue,
   }) = _ThemeChanged;
 
+  const factory MainEvent.accentColorChanged({
+    required AppAccentColorType newValue,
+  }) = _AccentColorChanged;
+
   const factory MainEvent.themeModeChanged({
     required AutoThemeModeType newValue,
   }) = _ThemeModeChanged;

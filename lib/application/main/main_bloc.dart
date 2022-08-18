@@ -19,18 +19,24 @@ class MainBloc extends Bloc<MainEvent, MainState> {
   MainBloc(this._logger, this._settingsService, this._deviceInfoService) : super(const _MainLoadingState()) {
     on<_Init>(_mapInitToState);
     on<_ThemeChanged>(_mapThemeChangedToState);
+    on<_AccentColorChanged>(_mapAccentColorChangedToState);
     on<_ThemeModeChanged>(_mapThemeModeChangedToState);
   }
 
-  MainState _loadedState(AppThemeType theme, AutoThemeModeType autoThemeMode, {bool isInitialized = true}) {
+  MainState _loadedState(AppThemeType theme, AutoThemeModeType autoThemeMode, AppAccentColorType accentColor, {bool isInitialized = true}) {
     return MainState.loaded(
       appTitle: _deviceInfoService.appName,
       initialized: isInitialized,
       theme: theme,
       autoThemeMode: autoThemeMode,
+      accentColor: accentColor,
       firstInstall: _settingsService.isFirstInstall,
       versionChanged: _deviceInfoService.versionChanged,
     );
+  }
+
+  void _logInfo() {
+    _logger.info(runtimeType, '_init: Is first install = ${_settingsService.isFirstInstall}' '-- versionChanged = ${_deviceInfoService.versionChanged}');
   }
 
   Future<void> _mapInitToState(_Init event, Emitter<MainState> emit, {bool init = true}) async {
@@ -38,22 +44,28 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
     final settings = _settingsService.appSettings;
 
-    _logger.info(runtimeType, '_init: Is first install = ${_settingsService.isFirstInstall}' '-- versionChanged = ${_deviceInfoService.versionChanged}');
+    _logInfo();
 
-    final state = _loadedState(settings.appTheme, settings.themeMode, isInitialized: init);
+    final state = _loadedState(settings.appTheme, settings.themeMode, settings.accentColor, isInitialized: init);
 
     emit(state);
   }
 
   Future<void> _mapThemeChangedToState(_ThemeChanged event, Emitter<MainState> emit) async {
-    _logger.info(runtimeType, '_init: Is first install = ${_settingsService.isFirstInstall}' '-- versionChanged = ${_deviceInfoService.versionChanged}');
+    _logInfo();
 
-    emit(_loadedState(event.newValue, _settingsService.autoThemeMode, isInitialized: true));
+    emit(_loadedState(event.newValue, _settingsService.autoThemeMode, _settingsService.accentColor, isInitialized: true));
   }
 
   Future<void> _mapThemeModeChangedToState(_ThemeModeChanged event, Emitter<MainState> emit) async {
-    _logger.info(runtimeType, '_init: Is first install = ${_settingsService.isFirstInstall}' '-- versionChanged = ${_deviceInfoService.versionChanged}');
+    _logInfo();
 
-    emit(_loadedState(_settingsService.appTheme, event.newValue, isInitialized: true));
+    emit(_loadedState(_settingsService.appTheme, event.newValue, _settingsService.accentColor, isInitialized: true));
+  }
+
+  Future<void> _mapAccentColorChangedToState(_AccentColorChanged event, Emitter<MainState> emit) async {
+    _logInfo();
+
+    emit(_loadedState(_settingsService.appTheme, _settingsService.autoThemeMode, event.newValue, isInitialized: true));
   }
 }

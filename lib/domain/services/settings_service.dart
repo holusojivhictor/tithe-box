@@ -10,6 +10,9 @@ abstract class SettingsService {
   AppLanguageType get language;
   set language(AppLanguageType lang);
 
+  AppAccentColorType get accentColor;
+  set accentColor(AppAccentColorType accentColor);
+
   SalaryType get salaryType;
   set salaryType(SalaryType salaryType);
 

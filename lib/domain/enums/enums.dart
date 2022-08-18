@@ -6,3 +6,4 @@ export 'user_account_type.dart';
 export 'salary_type.dart';
 export 'church_service_day.dart';
 export 'transaction_status.dart';
+export 'app_accent_color_type.dart';

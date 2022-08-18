@@ -1,0 +1,4 @@
+enum AppAccentColorType {
+  orange,
+  grey,
+}

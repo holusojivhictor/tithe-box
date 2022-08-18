@@ -7,6 +7,7 @@ class SettingsState with _$SettingsState {
   const factory SettingsState.loaded({
     required AppThemeType currentTheme,
     required AppLanguageType currentLanguage,
+    required AppAccentColorType currentAccentColor,
     required SalaryType salaryType,
     required String appVersion,
     required bool doubleBackToClose,

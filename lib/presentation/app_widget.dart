@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tithe_box/application/bloc.dart';
 import 'package:tithe_box/domain/enums/enums.dart';
-import 'package:tithe_box/presentation/shared/extensions/app_theme_type_extensions.dart';
+import 'package:tithe_box/presentation/shared/extensions/app_accent_color_type_extensions.dart';
 import 'package:tithe_box/session_wrapper.dart';
-import 'package:tithe_box/theme.dart';
 
 import 'shared/loading.dart';
 
@@ -18,7 +17,7 @@ class AppWidget extends StatelessWidget {
         loading: (_) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: TitheBoxTheme.light(),
+            theme: AppAccentColorType.orange.getLightTheme(),
             home: const Loading(),
           );
         },
@@ -27,8 +26,8 @@ class AppWidget extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: s.appTitle,
-            theme: autoThemeModeOn ? TitheBoxTheme.light() : s.theme.getThemeData(s.theme),
-            darkTheme: autoThemeModeOn ? TitheBoxTheme.dark() : null,
+            theme: autoThemeModeOn ? s.accentColor.getLightTheme() : s.accentColor.getThemeData(s.theme),
+            darkTheme: autoThemeModeOn ? s.accentColor.getDarkTheme() : null,
             home: BlocBuilder<SessionBloc, SessionState>(
               builder: (ctx, state) => const SessionWrapper(),
             ),

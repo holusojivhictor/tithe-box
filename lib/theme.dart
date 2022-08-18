@@ -160,64 +160,6 @@ class TitheBoxTheme {
     labelMedium: GoogleFonts.poppins(textStyle: lightText.labelMedium),
     labelSmall: GoogleFonts.poppins(textStyle: lightText.labelSmall),
   );
-
-  static ThemeData light() {
-    return ThemeData(
-      dividerColor: const Color(0xFFF9F9F9),
-      bottomAppBarColor: const Color(0xFFF1F1F1),
-      canvasColor: Colors.grey[50],
-      cardColor: Colors.white,
-      shadowColor: Colors.black,
-      indicatorColor: Colors.black,
-      textSelectionTheme: const TextSelectionThemeData(cursorColor: Colors.black),
-      brightness: Brightness.light,
-      scaffoldBackgroundColor: const Color(0xFFF1F1F1),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.black,
-      ),
-      typography: textTypography,
-      textTheme: lightTextTheme,
-      primaryColor: const Color(0xFFDF4903),
-      colorScheme: const ColorScheme.light(primary: Color(0xFFDF4903)).copyWith(secondary: const Color(0xFF505050)),
-      extensions: const <ThemeExtension<dynamic>>[
-        CustomTheme(
-          formBorder: Color(0x8A000000),
-          categoryOverlay: Color(0xFFE0E0E0),
-          altTextColor: Colors.black54,
-        ),
-      ],
-    );
-  }
-
-  static ThemeData dark() {
-    return ThemeData(
-      dividerColor: Colors.black,
-      bottomAppBarColor: const Color(0xFF272C2F),
-      canvasColor: Colors.black54,
-      cardColor: Colors.grey.shade900,
-      shadowColor: Colors.white,
-      indicatorColor: Colors.white,
-      textSelectionTheme: const TextSelectionThemeData(cursorColor: Colors.white),
-      brightness: Brightness.dark,
-      scaffoldBackgroundColor: const Color(0xFF000000),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
-      ),
-      typography: textTypography,
-      textTheme: darkTextTheme,
-      primaryColor: const Color(0xFFDF4903),
-      colorScheme: const ColorScheme.dark(primary: Color(0xFFDF4903)).copyWith(secondary: const Color(0xFF505050)),
-      extensions: const <ThemeExtension<dynamic>>[
-        CustomTheme(
-          formBorder: Color(0xFFBDBDBD),
-          categoryOverlay: Color(0xFF616161),
-          altTextColor: Colors.white54,
-        ),
-      ],
-    );
-  }
 }
 
 @immutable

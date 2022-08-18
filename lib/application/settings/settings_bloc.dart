@@ -23,6 +23,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<_Init>(_mapInitToState);
     on<_ThemeChanged>(_mapThemeChangedToState);
     on<_LanguageChanged>(_mapLanguageChangedToState);
+    on<_AccentColorChanged>(_mapAccentColorChangedToState);
     on<_SalaryTypeChanged>(_mapSalaryTypeChangedToState);
     on<_DoubleBackToCloseChanged>(_mapDoubleBackToCloseToState);
     on<_UseDemoProfilePictureChanged>(_mapUseDemoPictureToState);
@@ -38,6 +39,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(SettingsState.loaded(
       currentTheme: settings.appTheme,
       currentLanguage: settings.appLanguage,
+      currentAccentColor: settings.accentColor,
       salaryType: settings.salaryType,
       appVersion: _deviceInfoService.version,
       doubleBackToClose: settings.doubleBackToClose,
@@ -62,6 +64,15 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     }
     _settingsService.language = event.newValue;
     emit(currentState.copyWith.call(currentLanguage: event.newValue));
+  }
+
+  void _mapAccentColorChangedToState(_AccentColorChanged event, Emitter<SettingsState> emit) {
+    if (event.newValue == _settingsService.accentColor) {
+      emit(currentState);
+    }
+    _settingsService.accentColor = event.newValue;
+    _mainBloc.add(MainEvent.accentColorChanged(newValue: event.newValue));
+    emit(currentState.copyWith.call(currentAccentColor: event.newValue));
   }
 
   void _mapSalaryTypeChangedToState(_SalaryTypeChanged event, Emitter<SettingsState> emit) {
