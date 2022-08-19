@@ -24,7 +24,9 @@ class _VerseCardState extends State<VerseCard> {
   }
 
   void _animateToPage() {
-    _controller.animateToPage(_currentVerse, duration: kAnimationDuration, curve: Curves.linear);
+    if (_controller.hasClients) {
+      _controller.animateToPage(_currentVerse, duration: kAnimationDuration, curve: Curves.linear);
+    }
   }
 
   void _animateSlider() {

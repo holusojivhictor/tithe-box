@@ -58,7 +58,7 @@ class AccountSelectionPage extends StatelessWidget {
                 text: 'Personal Tithe',
                 elevation: 0,
                 backgroundColor: kPrimary,
-                onPressed: () => _startAuthState(context, AppAccentColorType.orange),
+                onPressed: () => _startAuthState(context, AppAccentColorType.orange, UserAccountType.personal),
               ),
               const SizedBox(height: 10),
               DefaultButton(
@@ -66,7 +66,7 @@ class AccountSelectionPage extends StatelessWidget {
                 isPrimary: true,
                 elevation: 0,
                 backgroundColor: kSecondary,
-                onPressed: () => _startAuthState(context, AppAccentColorType.grey),
+                onPressed: () => _startAuthState(context, AppAccentColorType.grey, UserAccountType.corporate),
               ),
             ],
           ),
@@ -80,8 +80,10 @@ class AccountSelectionPage extends StatelessWidget {
     );
   }
 
-  void _startAuthState(BuildContext context, AppAccentColorType accentColor) {
-    context.read<SettingsBloc>().add(SettingsEvent.accentColorChanged(newValue: accentColor));
+  void _startAuthState(BuildContext context, AppAccentColorType accentColor, UserAccountType accountType) {
+    final settingsBloc = context.read<SettingsBloc>();
+    settingsBloc.add(SettingsEvent.accentColorChanged(newValue: accentColor));
+    settingsBloc.add(SettingsEvent.userAccountTypeChanged(newValue: accountType));
     context.read<SessionBloc>().add(const SessionEvent.startAuthState());
   }
 }

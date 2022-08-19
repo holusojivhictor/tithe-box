@@ -77,14 +77,19 @@ class TitheBoxServiceImpl implements TitheBoxService {
     return _toIncomeForCard(income);
   }
 
+  List<IncomeFileModel> _incomesByAccountType() {
+    final accountType = _settingsService.accountType;
+    return _incomeFile.where((el) => el.type == accountType).toList();
+  }
+
   @override
   List<IncomeCardModel> getIncomesForCard() {
-    return _incomeFile.map((e) => _toIncomeForCard(e)).toList();
+    return _incomesByAccountType().map((e) => _toIncomeForCard(e)).toList();
   }
 
   @override
   double totalIncome() {
-    final List<double> amounts = _incomeFile.map((e) => e.amount).toList();
+    final List<double> amounts = _incomesByAccountType().map((e) => e.amount).toList();
     return amounts.fold(0, (previous, element) => previous + element);
   }
 
@@ -117,7 +122,9 @@ class TitheBoxServiceImpl implements TitheBoxService {
 
   @override
   List<TransactionCardModel> getTransactionsForCard() {
-    return _transactionFile.map((e) => _toTransactionForCard(e)).toList();
+    final incomeIds = _incomesByAccountType().map((e) => e.incomeId).toList();
+    final transactionFile = _transactionFile.where((el) => incomeIds.contains(el.incomeId)).toList();
+    return transactionFile.map((e) => _toTransactionForCard(e)).toList();
   }
 
   TransactionCardModel _toTransactionForCard(TransactionFileModel model) {
@@ -170,7 +177,7 @@ class TitheBoxServiceImpl implements TitheBoxService {
     final response = await _incomeService.recordIncome(
       token,
       userId,
-      UserAccountType.personal.name,
+      settings.accountType.name,
       currency,
       businessName,
       businessAddress,

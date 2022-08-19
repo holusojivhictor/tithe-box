@@ -85,7 +85,7 @@ class TitheBox extends StatelessWidget {
           create: (ctx) {
             final settingsService = getIt<SettingsService>();
             final deviceInfoService = getIt<DeviceInfoService>();
-            return SettingsBloc(settingsService, deviceInfoService, ctx.read<MainBloc>());
+            return SettingsBloc(settingsService, deviceInfoService, ctx.read<MainBloc>())..add(const SettingsEvent.init());
           },
         ),
       ],
