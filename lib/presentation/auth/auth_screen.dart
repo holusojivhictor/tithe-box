@@ -39,21 +39,22 @@ class AuthScreen extends StatelessWidget {
           ),
           BottomPortraitLayout(
             children: [
+              const SizedBox(height: 20),
               Text(
                 'Tithing has never been this easy',
                 style: theme.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20, color: theme.indicatorColor),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "Create an account or log in to an existing one to gain access to the app.",
+                  "Create an account or log in to an existing one.",
                   style: theme.textTheme.bodyMedium!.copyWith(color: customTheme.altTextColor),
                   textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               DefaultButton(
                 isPrimary: true,
                 text: 'Log In',

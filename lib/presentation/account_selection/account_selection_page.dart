@@ -38,12 +38,13 @@ class AccountSelectionPage extends StatelessWidget {
           ),
           BottomPortraitLayout(
             children: [
+              const SizedBox(height: 20),
               Text(
                 'Choose Tithe Type',
                 style: textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20, color: Theme.of(context).indicatorColor),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
@@ -52,7 +53,7 @@ class AccountSelectionPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               DefaultButton(
                 isPrimary: true,
                 text: 'Personal Tithe',

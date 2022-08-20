@@ -20,9 +20,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
-        fit: StackFit.passthrough,
+        fit: size.height > 750 ? StackFit.passthrough : StackFit.expand,
         children: [
           SizedBox(
             height: getTopHeightForOnboarding(context),

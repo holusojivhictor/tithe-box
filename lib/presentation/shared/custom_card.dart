@@ -36,7 +36,7 @@ class CustomCard extends StatelessWidget {
       child: Material(
         type: MaterialType.card,
         color: Colors.transparent,
-        shadowColor: shadowColor ?? Colors.transparent,
+        shadowColor: shadowColor ?? Colors.white12,
         borderOnForeground: false,
         elevation: elevation ?? 0,
         shape: shape ?? const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4))),

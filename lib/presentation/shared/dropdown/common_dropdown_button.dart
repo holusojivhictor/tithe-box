@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tithe_box/theme.dart';
 
 class CommonDropdownButton<T> extends StatelessWidget {
   final String hint;
@@ -20,15 +21,16 @@ class CommonDropdownButton<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
     return DropdownButton<T>(
       isExpanded: isExpanded,
-      hint: Text(hint),
+      hint: Text(hint, style: TextStyle(color: customTheme.baseTextColor)),
       value: currentValue,
       underline: withoutUnderline ? Container(height: 0, color: Colors.transparent) : null,
       onChanged: onChanged != null ? (v) => onChanged!(v as T, context) : null,
       selectedItemBuilder: (context) => values.map((value) => Align(
         alignment: Alignment.centerLeft,
-        child: Text(value.toString(), textAlign: TextAlign.center),
+        child: Text(value.toString(), textAlign: TextAlign.center, style: TextStyle(color: customTheme.baseTextColor)),
       )).toList(),
       items: values.map<DropdownMenuItem<T>>((value) => DropdownMenuItem<T>(
         value: value,
@@ -42,6 +44,7 @@ class CommonDropdownButton<T> extends StatelessWidget {
               child: Text(
                 value.toString(),
                 overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: customTheme.baseTextColor),
                 maxLines: 2,
               ),
             ),

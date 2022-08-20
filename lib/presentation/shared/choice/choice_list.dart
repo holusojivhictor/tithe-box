@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tithe_box/presentation/shared/utils/enum_utils.dart';
+import 'package:tithe_box/theme.dart';
 
 import 'list_tile_choice.dart';
 
@@ -41,8 +42,9 @@ class ChoiceList<TEnum> extends StatelessWidget {
   }
 
   Widget _buildChoiceTile(BuildContext context, TEnum value, String valueText) {
+    final customTheme = Theme.of(context).extension<CustomTheme>()!;
     final theme = Theme.of(context);
-    final textStyle = theme.textTheme.bodyMedium;
+    final textStyle = theme.textTheme.bodyMedium!.copyWith(color: customTheme.baseTextColor);
     final isSelected = selectedValues.isNotEmpty && selectedValues.contains(value);
     return ListTileChoice<TEnum>(
       value: value,

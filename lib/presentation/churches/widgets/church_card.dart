@@ -100,9 +100,10 @@ class ChurchCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      flex: 80,
+                      flex: 75,
                       child: Wrap(
                         runSpacing: 10,
                         spacing: 5,
@@ -110,7 +111,7 @@ class ChurchCard extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      flex: 13,
+                      flex: 15,
                       child: ContainerTag(
                         tagText: 'Active',
                         color: Colors.green.withOpacity(0.7),

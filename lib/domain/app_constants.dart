@@ -46,7 +46,6 @@ class Data {
   static List<String> verseData = [
     "PROV. 3:9–10 \nHonor the Lord with your wealth and with the first fruits of all your produce; then your barns will be filled with plenty, and your vats will be bursting with wine.",
     "Luke 6:38 \nGive, and it will be given to you. Good measure, pressed down, shaken together, running over, will be put into your lap. For with the measure you use it will be measured back to you.",
-    "Matthew 23:23 \nWoe to you, scribes and Pharisees, hypocrites! For you tithe mint and dill and cumin, and have neglected the weightier matters of the law: justice and mercy and faithfulness. These you ought to have done, without neglecting the others.",
     "Leviticus 27:30 \nEvery tithe of the land, whether of the seed of the land or of the fruit of the trees, is the Lord’s; it is holy to the Lord.",
     "1 Corinthians 16:2 \nOn the first day of every week, each of you is to put something aside and store it up, as he may prosper, so that there will be no collecting when I come.",
     "1 Timothy 5:8 \nBut if anyone does not provide for his relatives, and especially for members of his household, he has denied the faith and is worse than an unbeliever.",
@@ -55,7 +54,6 @@ class Data {
     "Acts 20:35 \nIn all things I have shown you that by working hard in this way we must help the weak and remember the words of the Lord Jesus, how he himself said, “It is more blessed to give than to receive.",
     "Deuteronomy 14:2 \nFor you are a people holy to the Lord your God, and the Lord has chosen you to be a people for his treasured possession, out of all the peoples who are on the face of the earth.",
     "Galatians 3:10 \nFor all who rely on works of the law are under a curse; for it is written, “Cursed be everyone who does not abide by all things written in the Book of the Law, and do them.",
-    "Malachi 3:10 \nBring the full tithe into the storehouse, that there may be food in my house. And thereby put me to the test,” says the Lord of hosts, “if I will not open the windows of heaven for you and pour down for you a blessing until there is no more need.",
   ];
 }
 
